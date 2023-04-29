@@ -6,6 +6,7 @@ MismoElementos
 UsuariosDeRelacionValidos
 RelacionesAsimetricas
 UsuariosDePublicacionSonUsuariosDeRed
+SonDeLaRed
 
 Dani:
 RedSocialValida
@@ -14,34 +15,17 @@ RelacionesValidas (Depende de: NoHayRelacionesRepetidas)
 PublicacionesValidas (Depende: NoHayPublicacionesRepetidas)
 
 Antu:
-NoHayIdsRepetidos
+noHayIdsRepetidos
 NoHayRelacionesRepetidas
 NoHayPublicacionesRepetidas
+CadenaDeAmigos 
+RelacionadosDirecto 
 
 Santi: 
 EmpiezaCon
 TerminaCon
 SinRepetidos
+UsuarioValido
 
+-------------------- 
 
-
---------------------
-pred Pertenece 
-pred MismosElementos 
-pred RedSocialValida
-pred UsuariosValidos 
-pred UsuarioValido
-pred noHayIdsRepetidos 
-pred RelacionesValidas 
-pred UsuariosDeRelacionValidos
-pred RelacionesAsimetricas
-pred NoHayRelacionesRepetidas 
-pred PublicacionesValidas
-pred UsuariosDePublicacionSonUsuariosDeRed 
-pred NoHayPublicacionesRepetidas 
-pred CadenaDeAmigos 
-pred RelacionadosDirecto 
-pred SonDeLaRed 
-pred EmpiezaCon 
-pred TerminaCon 
-pred SinRepetidos 
