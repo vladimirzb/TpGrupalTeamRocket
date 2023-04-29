@@ -1,0 +1,47 @@
+Si alguien necesita hacer algun predicado que depende de otro haganlo tranqui y escriban cual hicieron asi lo otro no lo hace repetido
+
+Vladi:
+Pertenece 
+MismoElementos
+UsuariosDeRelacionValidos
+RelacionesAsimetricas
+UsuariosDePublicacionSonUsuariosDeRed
+
+Dani:
+RedSocialValida
+UsuariosValidos (Depende de: NoHayIdsRepetidos)
+RelacionesValidas (Depende de: NoHayRelacionesRepetidas)
+PublicacionesValidas (Depende: NoHayPublicacionesRepetidas)
+
+Antu:
+NoHayIdsRepetidos
+NoHayRelacionesRepetidas
+NoHayPublicacionesRepetidas
+
+Santi: 
+EmpiezaCon
+TerminaCon
+SinRepetidos
+
+
+
+--------------------
+pred Pertenece 
+pred MismosElementos 
+pred RedSocialValida
+pred UsuariosValidos 
+pred UsuarioValido
+pred noHayIdsRepetidos 
+pred RelacionesValidas 
+pred UsuariosDeRelacionValidos
+pred RelacionesAsimetricas
+pred NoHayRelacionesRepetidas 
+pred PublicacionesValidas
+pred UsuariosDePublicacionSonUsuariosDeRed 
+pred NoHayPublicacionesRepetidas 
+pred CadenaDeAmigos 
+pred RelacionadosDirecto 
+pred SonDeLaRed 
+pred EmpiezaCon 
+pred TerminaCon 
+pred SinRepetidos 
