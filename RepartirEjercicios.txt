@@ -1,4 +1,15 @@
+----No importar librerias, no se puede
+
+--La fecha l ́ımite de entrega es el Viernes 19/5.
+---------------------------------------------------------------------------------
+Idealmente haber empezados todos los predicados asignados para el martes. Y tranqui si no llegas esta todo bien simplemente haberlos pensado
+Idealmente terminar predicados el viernes
+
+Martes nos podemos juntar. El finde llamada los que puedan
+------------------------------------------------------------------------------
 Si alguien necesita hacer algun predicado que depende de otro haganlo tranqui y escriban cual hicieron asi lo otro no lo hace repetido
+
+Para predicado poner arriba en comentarios los caso Test que utilizaron para verificar que cumple con la especificion
 
 Vladi:
 Pertenece 
@@ -28,4 +39,21 @@ SinRepetidos
 UsuarioValido
 
 -------------------- 
+Una vez Que estan los predicados hechos hagamos estos Ejercicios
+Vladi
+Ej 4
+Ej 8
 
+Dani
+Ej 5
+Ej 2
+
+Antu
+Ej 3 
+Ej 6
+
+Santi
+Ej 7
+Ej 1
+
+Los otros los vamos haciendo a medida que terminamos

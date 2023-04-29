@@ -1,9 +1,9 @@
+----No importar librerias, no se puede
 -- Completar con los datos del grupo
---
 -- Nombre de Grupo: Team Rocket
--- Integrante 1: Daniel Bulacio, db2166419@gmail.com, LU
+-- Integrante 1: Daniel Bulacio, db2166419@gmail.com, 41561111
 -- Integrante 2: Antú Gonzalo Eyaralar, antuelbolson@gmail.com, 38431966
--- Integrante 3: Nombre Apellido, email, LU
+-- Integrante 3: Vladimir Zantleifer Barreda, zantleifer.vladimir@gmail.com 
 -- Integrante 4: Nombre Apellido, email, LU
 
 type Usuario = (Integer, String) -- (id, nombre)
