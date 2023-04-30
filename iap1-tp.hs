@@ -4,7 +4,7 @@
 -- Integrante 1: Daniel Bulacio, db2166419@gmail.com, 41561111
 -- Integrante 2: Antú Gonzalo Eyaralar, antuelbolson@gmail.com, 38431966
 -- Integrante 3: Vladimir Zantleifer Barreda, zantleifer.vladimir@gmail.com 
--- Integrante 4: Nombre Apellido, email, LU
+-- Integrante 4: Santiago Agustín Oviedo, santyoviedo1@gmail.com, 44379544
 
 type Usuario = (Integer, String) -- (id, nombre)
 type Relacion = (Usuario, Usuario) -- usuarios que se relacionan
