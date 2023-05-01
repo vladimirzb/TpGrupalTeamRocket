@@ -74,3 +74,20 @@ tieneUnSeguidorFiel = undefined
 -- describir qué hace la función: .....
 existeSecuenciaDeAmigos :: RedSocial -> Usuario -> Usuario -> Bool
 existeSecuenciaDeAmigos = undefined
+
+
+--Predicados Auxiliares
+--Predicados Vladi
+pertenece :: (Eq t) => t -> [t] -> Bool
+pertenece x [] = False
+pertenece x (y:ys) | x==y = True
+                   |otherwise = pertenece x ys
+
+mismosElementos :: (Eq t) => [t] -> [t] -> Bool
+mismosElementos l1 l2 = mismosElementosAux l1 l2 && mismosElementosAux l2 l1
+
+mismosElementosAux :: (Eq t) => [t] -> [t] -> Bool
+mismosElementosAux [] _     = True
+mismosElementosAux (x:xs) ys | pertenece x ys == True = mismosElementosAux xs ys
+                             | otherwise=False
+
