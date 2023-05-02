@@ -91,6 +91,15 @@ mismosElementosAux [] _     = True
 mismosElementosAux (x:xs) ys | pertenece x ys == True = mismosElementosAux xs ys
                              | otherwise=False
 
+--La emepece a pensar, no usar en relacion de dependencia todavia
+usuariosDePublicacionSonUsuariosDeRed :: [Usuario] ->[Publicacion] -> Bool 
+usuariosDePublicacionSonUsuariosDeRed _ [] = True
+usuariosDePublicacionSonUsuariosDeRed usuarios (pub:publicaciones) 
+                        | pertenece (usuarioDePublicacion(pub)) usuarios  == True = usuariosDePublicacionSonUsuariosDeRed usuarios publicaciones
+                        | otherwise = False 
+
+
+
 --Predicados Dani
 usuarioValido :: Usuario -> Bool
 usuarioValido u = (idDeUsuario u) > 0 && longitud (nombreDeUsuario u) > 0
