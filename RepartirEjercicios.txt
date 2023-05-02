@@ -29,7 +29,7 @@ RedSocialValida
 Antu:
 OK - noHayIdsRepetidos
 OK - NoHayRelacionesRepetidas
-NoHayPublicacionesRepetidas
+OK - NoHayPublicacionesRepetidas
 CadenaDeAmigos 
 RelacionadosDirecto 
 

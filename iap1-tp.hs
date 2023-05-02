@@ -123,7 +123,18 @@ noHayRelacionesRepetidas (x:xs) | auxiliarRelacionesRepetidas x xs == True = noH
                                 | otherwise = False
 
 -- aux ((1,"Dani"),(4,"Vladi")) [((1,"Dani"),(2,"Antu")), ((1,"Dani"),(3,"Fer"))]
-auxiliarRelacionesRepetidas :: (Usuario, Usuario) -> [Relacion] -> Bool
+auxiliarRelacionesRepetidas :: Relacion -> [Relacion] -> Bool
 auxiliarRelacionesRepetidas (u1, u2) []     = True
 auxiliarRelacionesRepetidas (u1, u2) (x:xs) | x == (u1, u2) = False
                                             | otherwise = auxiliarRelacionesRepetidas (u1, u2) xs
+
+noHayPublicacionesRepetidas :: [Publicacion] -> Bool
+noHayPublicacionesRepetidas []     = True
+noHayPublicacionesRepetidas (x:xs) | auxiliarPublicacionesRepetidas x xs == True = noHayPublicacionesRepetidas xs
+                                   | otherwise = False
+
+-- auxiliarPublicacionesRepetidas ((1, "Daniel"), "Hola", []) [((1, "Daniel"), "Hola", []), ((2, "Antu"), "estas", [])]
+auxiliarPublicacionesRepetidas :: Publicacion -> [Publicacion] -> Bool
+auxiliarPublicacionesRepetidas (p1, p2, _) [] = True
+auxiliarPublicacionesRepetidas pub (x:xs) | pub == x = False
+                                          | otherwise = auxiliarPublicacionesRepetidas pub xs
