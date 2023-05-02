@@ -117,3 +117,13 @@ auxiliarIdsRepetidos x [] = False
 auxiliarIdsRepetidos x (y:ys) | x == idDeUsuario y = True
                       | otherwise = auxiliarIdsRepetidos x ys
 
+noHayRelacionesRepetidas :: [Relacion] -> Bool
+noHayRelacionesRepetidas []     = True
+noHayRelacionesRepetidas (x:xs) | auxiliarRelacionesRepetidas x xs == True = noHayRelacionesRepetidas xs
+                                | otherwise = False
+
+-- aux ((1,"Dani"),(4,"Vladi")) [((1,"Dani"),(2,"Antu")), ((1,"Dani"),(3,"Fer"))]
+auxiliarRelacionesRepetidas :: (Usuario, Usuario) -> [Relacion] -> Bool
+auxiliarRelacionesRepetidas (u1, u2) []     = True
+auxiliarRelacionesRepetidas (u1, u2) (x:xs) | x == (u1, u2) = False
+                                            | otherwise = auxiliarRelacionesRepetidas (u1, u2) xs

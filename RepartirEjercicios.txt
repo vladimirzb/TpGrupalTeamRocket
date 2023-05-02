@@ -28,7 +28,7 @@ RedSocialValida
 
 Antu:
 OK - noHayIdsRepetidos
-NoHayRelacionesRepetidas
+OK - NoHayRelacionesRepetidas
 NoHayPublicacionesRepetidas
 CadenaDeAmigos 
 RelacionadosDirecto 
