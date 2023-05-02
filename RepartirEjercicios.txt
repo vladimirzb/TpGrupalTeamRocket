@@ -21,7 +21,7 @@ SonDeLaRed
 
 Dani:
 OK - UsuarioValido
-UsuariosValidos (Depende de: NoHayIdsRepetidos)
+OK - UsuariosValidos (Depende de: NoHayIdsRepetidos)
 RelacionesValidas (Depende de: NoHayRelacionesRepetidas)
 PublicacionesValidas (Depende: NoHayPublicacionesRepetidas)
 RedSocialValida
