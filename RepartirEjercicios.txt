@@ -20,14 +20,14 @@ UsuariosDePublicacionSonUsuariosDeRed
 SonDeLaRed
 
 Dani:
-UsuarioValido - OK
-RedSocialValida
+OK - UsuarioValido
 UsuariosValidos (Depende de: NoHayIdsRepetidos)
 RelacionesValidas (Depende de: NoHayRelacionesRepetidas)
 PublicacionesValidas (Depende: NoHayPublicacionesRepetidas)
+RedSocialValida
 
 Antu:
-noHayIdsRepetidos
+OK - noHayIdsRepetidos
 NoHayRelacionesRepetidas
 NoHayPublicacionesRepetidas
 CadenaDeAmigos 

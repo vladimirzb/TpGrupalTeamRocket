@@ -95,7 +95,24 @@ mismosElementosAux (x:xs) ys | pertenece x ys == True = mismosElementosAux xs ys
 usuarioValido :: Usuario -> Bool
 usuarioValido u = (idDeUsuario u) > 0 && longitud (nombreDeUsuario u) > 0
 
+-- usuariosValidos :: [Usuario] -> Bool
+-- usuariosValidos []     = True
+-- usuariosValidos (u:us) | usuarioValido u 
+
+
 -- Función auxiliar para determinar la longitud de una sequencia.
-longitud :: [t] -> Int
+longitud :: [t] -> Integer
 longitud []     = 0
 longitud (x:xs) = 1 + longitud xs
+
+-- Predicados Antú
+noHayIdsRepetidos :: [Usuario] -> Bool
+noHayIdsRepetidos []     = True
+noHayIdsRepetidos (x:xs) | auxiliarIdsRepetidos (idDeUsuario x) xs == False = noHayIdsRepetidos xs
+                         | otherwise = False  
+
+auxiliarIdsRepetidos :: Integer -> [Usuario] -> Bool
+auxiliarIdsRepetidos x [] = False
+auxiliarIdsRepetidos x (y:ys) | x == idDeUsuario y = True
+                      | otherwise = auxiliarIdsRepetidos x ys
+
