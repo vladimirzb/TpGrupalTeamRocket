@@ -91,3 +91,11 @@ mismosElementosAux [] _     = True
 mismosElementosAux (x:xs) ys | pertenece x ys == True = mismosElementosAux xs ys
                              | otherwise=False
 
+--Predicados Dani
+usuarioValido :: Usuario -> Bool
+usuarioValido u = (idDeUsuario u) > 0 && longitud (nombreDeUsuario u) > 0
+
+-- Función auxiliar para determinar la longitud de una sequencia.
+longitud :: [t] -> Int
+longitud []     = 0
+longitud (x:xs) = 1 + longitud xs

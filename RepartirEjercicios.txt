@@ -20,6 +20,7 @@ UsuariosDePublicacionSonUsuariosDeRed
 SonDeLaRed
 
 Dani:
+UsuarioValido - OK
 RedSocialValida
 UsuariosValidos (Depende de: NoHayIdsRepetidos)
 RelacionesValidas (Depende de: NoHayRelacionesRepetidas)
@@ -36,7 +37,6 @@ Santi:
 EmpiezaCon
 TerminaCon
 SinRepetidos
-UsuarioValido
 
 -------------------- 
 Una vez Que estan los predicados hechos hagamos estos Ejercicios
