@@ -24,7 +24,7 @@ OK - UsuarioValido
 OK - UsuariosValidos (Depende de: NoHayIdsRepetidos)
 OK - UsuariosLikeValidos
 OK - UsuariosDeLikeDePublicacionSonUsuariosDeRed
-PublicacionesValidas (Depende: NoHayPublicacionesRepetidas)
+OK - PublicacionesValidas (Depende: NoHayPublicacionesRepetidas)
 RelacionesValidas (Depende de: NoHayRelacionesRepetidas)
 RedSocialValida
 

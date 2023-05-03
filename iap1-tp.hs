@@ -169,6 +169,11 @@ usuariosDeLikeDePublicacionSonUsuariosDeRed users []     = True
 usuariosDeLikeDePublicacionSonUsuariosDeRed users (x:xs) | usuariosLikeValidos users (likesDePublicacion x) == True = usuariosDeLikeDePublicacionSonUsuariosDeRed users xs
                                                          | otherwise = False
 
+-- Casos validos: Cualquier caso valido de las funciones que utilizo
+-- Casos falso: Cualquier caso INvalido de las funciones que utilizo
+publicacionesValidas :: [Usuario] -> [Publicacion] -> Bool
+publicacionesValidas users pubs = usuariosDePublicacionSonUsuariosDeRed users pubs && usuariosDeLikeDePublicacionSonUsuariosDeRed users pubs && noHayPublicacionesRepetidas pubs
+
 ----------------- Fin Predicados Dani-----------------
 
 -- Predicados Antú
