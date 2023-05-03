@@ -30,8 +30,8 @@ Antu:
 OK - noHayIdsRepetidos
 OK - NoHayRelacionesRepetidas
 OK - NoHayPublicacionesRepetidas
-CadenaDeAmigos 
-RelacionadosDirecto 
+ CadenaDeAmigos 
+OK -RelacionadosDirecto 
 
 Santi: 
 EmpiezaCon

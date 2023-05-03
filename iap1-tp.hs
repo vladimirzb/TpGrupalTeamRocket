@@ -150,6 +150,22 @@ noHayRelacionesRepetidas []     = True
 noHayRelacionesRepetidas (x:xs) | auxiliarRelacionesRepetidas x xs == True = noHayRelacionesRepetidas xs
                                 | otherwise = False
 
+
+--Test 
+--Caso valido: (1,"Dani") (2,"Antu") ([(1,"Dani"),(2,"Antu"),(4,"Vladi")], [((1,"Dani"),(4,"Vladi")), ((1,"Dani"),(2,"Antu")), ((2,"Antu"),(4,"Vladi"))], [])
+--Caso falso: (1,"Dani") (2,"Antu") ([(1,"Dani"),(2,"Antu"),(4,"Vladi")], [((1,"Dani"),(4,"Vladi")), ((2,"Antu"),(4,"Vladi"))], [])
+
+
+relacionadosDirecto :: Usuario -> Usuario -> RedSocial -> Bool
+relacionadosDirecto u1 u2 red = auxiliarRelacionadosDirecto u1 u2 (relaciones red)
+                              
+
+auxiliarRelacionadosDirecto :: Usuario -> Usuario -> [Relacion] -> Bool
+auxiliarRelacionadosDirecto u1 u2 []     = False
+auxiliarRelacionadosDirecto u1 u2 (x:xs) | (u1, u2) == x || (u2, u1) == x = True
+                                         |  otherwise = auxiliarRelacionadosDirecto u1 u2 xs
+                              
+
 -- aux ((1,"Dani"),(4,"Vladi")) [((1,"Dani"),(2,"Antu")), ((1,"Dani"),(3,"Fer"))]
 auxiliarRelacionesRepetidas :: Relacion -> [Relacion] -> Bool
 auxiliarRelacionesRepetidas (u1, u2) []     = True
