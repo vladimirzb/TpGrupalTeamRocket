@@ -134,7 +134,28 @@ longitud :: [t] -> Integer
 longitud []     = 0
 longitud (x:xs) = 1 + longitud xs
 
+
+-- aux ((1,"Dani"),(4,"Vladi")) [((1,"Dani"),(2,"Antu")), ((1,"Dani"),(3,"Fer"))]
+auxiliarRelacionesRepetidas :: Relacion -> [Relacion] -> Bool
+auxiliarRelacionesRepetidas (u1, u2) []     = True
+auxiliarRelacionesRepetidas (u1, u2) (x:xs) | x == (u1, u2) = False
+                                            | otherwise = auxiliarRelacionesRepetidas (u1, u2) xs
+
+noHayPublicacionesRepetidas :: [Publicacion] -> Bool
+noHayPublicacionesRepetidas []     = True
+noHayPublicacionesRepetidas (x:xs) | auxiliarPublicacionesRepetidas x xs == True = noHayPublicacionesRepetidas xs
+                                   | otherwise = False
+
+-- auxiliarPublicacionesRepetidas ((1, "Daniel"), "Hola", []) [((1, "Daniel"), "Hola", []), ((2, "Antu"), "estas", [])]
+auxiliarPublicacionesRepetidas :: Publicacion -> [Publicacion] -> Bool
+auxiliarPublicacionesRepetidas (p1, p2, _) [] = True
+auxiliarPublicacionesRepetidas pub (x:xs) | pub == x = False
+                                          | otherwise = auxiliarPublicacionesRepetidas pub xs
+
+----------------- Fin Predicados Dani-----------------
+
 -- Predicados Antú
+
 noHayIdsRepetidos :: [Usuario] -> Bool
 noHayIdsRepetidos []     = True
 noHayIdsRepetidos (x:xs) | auxiliarIdsRepetidos (idDeUsuario x) xs == False = noHayIdsRepetidos xs
@@ -164,21 +185,18 @@ auxiliarRelacionadosDirecto :: Usuario -> Usuario -> [Relacion] -> Bool
 auxiliarRelacionadosDirecto u1 u2 []     = False
 auxiliarRelacionadosDirecto u1 u2 (x:xs) | (u1, u2) == x || (u2, u1) == x = True
                                          |  otherwise = auxiliarRelacionadosDirecto u1 u2 xs
+
+
+--Test
+-- Caso valido: [(1,"Dani"),(2,"Antu"),(3, "Santi")] ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [((1,"Dani"),(2,"Antu")), ((2,"Antu"),(3,"Santi"))], [])
+-- Caso falso: [(1,"Dani"),(2,"Antu"),(3, "Santi")] ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [((1,"Dani"),(2,"Antu")), ((2,"Antu"),(4,"Vladi"))], []) 
+-- Caso verdadero [(1,"Dani"),(2,"Antu"),(3, "Santi"),(4, "Vladi")] ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [((1,"Dani"),(2,"Antu")), ((2,"Antu"),(3,"Santi")), ((3,"Santi"),(4, "Vladi"))], [])
+-- Caso falso: [(1,"Dani"),(2,"Antu"),(3, "Santi"),(4, "Vladi")] ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [((1,"Dani"),(2,"Antu")), ((2,"Antu"),(3,"Santi")), ((1,"Dani"),(4, "Vladi"))], [])
+
+cadenaDeAmigos :: [Usuario] -> RedSocial -> Bool
+cadenaDeAmigos [x] red     = True
+cadenaDeAmigos (x:xs) red | relacionadosDirecto x (head xs) red == True = cadenaDeAmigos xs red
+                          | otherwise = False
                               
+----------------- Fin Predicados Antu-----------------
 
--- aux ((1,"Dani"),(4,"Vladi")) [((1,"Dani"),(2,"Antu")), ((1,"Dani"),(3,"Fer"))]
-auxiliarRelacionesRepetidas :: Relacion -> [Relacion] -> Bool
-auxiliarRelacionesRepetidas (u1, u2) []     = True
-auxiliarRelacionesRepetidas (u1, u2) (x:xs) | x == (u1, u2) = False
-                                            | otherwise = auxiliarRelacionesRepetidas (u1, u2) xs
-
-noHayPublicacionesRepetidas :: [Publicacion] -> Bool
-noHayPublicacionesRepetidas []     = True
-noHayPublicacionesRepetidas (x:xs) | auxiliarPublicacionesRepetidas x xs == True = noHayPublicacionesRepetidas xs
-                                   | otherwise = False
-
--- auxiliarPublicacionesRepetidas ((1, "Daniel"), "Hola", []) [((1, "Daniel"), "Hola", []), ((2, "Antu"), "estas", [])]
-auxiliarPublicacionesRepetidas :: Publicacion -> [Publicacion] -> Bool
-auxiliarPublicacionesRepetidas (p1, p2, _) [] = True
-auxiliarPublicacionesRepetidas pub (x:xs) | pub == x = False
-                                          | otherwise = auxiliarPublicacionesRepetidas pub xs
