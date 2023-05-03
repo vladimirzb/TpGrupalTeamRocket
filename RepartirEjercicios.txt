@@ -12,11 +12,11 @@ Si alguien necesita hacer algun predicado que depende de otro haganlo tranqui y 
 Para predicado poner arriba en comentarios los caso Test que utilizaron para verificar que cumple con la especificion
 
 Vladi:
-Pertenece -
-MismoElementos-
+Pertenece - OK
+MismoElementos - OK
 UsuariosDeRelacionValidos
-RelacionesAsimetricas
-UsuariosDePublicacionSonUsuariosDeRed -
+RelacionesAsimetricas - OK
+UsuariosDePublicacionSonUsuariosDeRed - OK
 SonDeLaRed
 
 Dani:

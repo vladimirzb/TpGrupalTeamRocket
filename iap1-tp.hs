@@ -107,9 +107,9 @@ usuariosDePublicacionSonUsuariosDeRed usuarios (pub:publicaciones)
 
 --Desarmo la tupla para poder usar los usuarios
 {-Inputs de prueba
-usuariosDeRelacionValidos [(1, "Vladi"), (2, "Santi"), (3, "Antu"), (4, "Dani")] [((1, "Vladi"), (2, "Santi")), ((2, "Santi"), (3, "Antu")), ((3, "Antu"), (4, "Dani"))]
-usuariosDeRelacionValidos [(1, "Vladi"), (2, "Santi"), (3, "Antu"), (4, "Dani")] [((1, "Vladi"), (2, "Santi")), ((2, "Santi"), (3, "Antu")), ((3, "Antu"), (3, "Antu"))]
-usuariosDeRelacionValidos [(1, "Vladi"), (2, "Santi"), (3, "Antu"), (4, "Dani")] [((1, "Vladi"), (2, "Santi")), ((2, "Santi"), (3, "Antu")), ((5, "Extra"), (4, "Dani"))]
+Valor esperado true = usuariosDeRelacionValidos [(1, "Vladi"), (2, "Santi"), (3, "Antu"), (4, "Dani")] [((1, "Vladi"), (2, "Santi")), ((2, "Santi"), (3, "Antu")), ((3, "Antu"), (4, "Dani"))]
+Valor esperado false = usuariosDeRelacionValidos [(1, "Vladi"), (2, "Santi"), (3, "Antu"), (4, "Dani")] [((1, "Vladi"), (2, "Santi")), ((2, "Santi"), (3, "Antu")), ((3, "Antu"), (3, "Antu"))]
+Valor esperado false = usuariosDeRelacionValidos [(1, "Vladi"), (2, "Santi"), (3, "Antu"), (4, "Dani")] [((1, "Vladi"), (2, "Santi")), ((2, "Santi"), (3, "Antu")), ((5, "Extra"), (4, "Dani"))]
 
 -}
 usuariosDeRelacionValidos :: [Usuario] -> [Relacion] -> Bool
@@ -117,6 +117,16 @@ usuariosDeRelacionValidos _ [] = True
 usuariosDeRelacionValidos usuarios (((us1, us2):relaciones))
                         | pertenece us1 usuarios && pertenece us2 usuarios && us1/=us2 = usuariosDeRelacionValidos usuarios relaciones
                         | otherwise = False 
+
+{- inputs de prueba
+Valor esperado true = relacionesAsimetricas [((1, "A"), (2, "B")), ((2, "B"), (3, "C")), ((3, "C"), (4, "D"))]
+Valor esperado false = relacionesAsimetricas [((1, "A"), (2, "B")), ((2, "B"), (1, "A")), ((3, "C"), (4, "D"))]
+
+-}
+relacionesAsimetricas :: [Relacion] -> Bool
+relacionesAsimetricas [] = True
+relacionesAsimetricas (((us1, us2):relaciones)) |  not (pertenece (us2,us1) relaciones) == True = relacionesAsimetricas relaciones 
+                                                | otherwise = False
 ----------------- Fin Predicados Vladi-----------------
 
 --Predicados Dani
