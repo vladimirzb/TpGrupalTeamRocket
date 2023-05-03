@@ -162,6 +162,12 @@ usuariosLikeValidos users []     = True
 usuariosLikeValidos users (x:xs) | pertenece x users == True = usuariosLikeValidos users xs
                                  | otherwise = False
 
+-- Caso valido: usuariosDeLikeDePublicacionSonUsuariosDeRed [(1, "Vladi"), (2, "Santi"), (3, "Antu"), (4, "Dani"), (5, "Eve")] [((1, "Vladi"), "Publicación 1", [(3, "Antu"), (4, "Dani"), (5, "Eve")]), ((2, "Santi"), "Publicación 2", [(1, "Vladi"), (2, "Santi"), (3, "Antu")]), ((3, "Antu"), "Publicación 3", [])]
+-- Caso falso: usuariosDeLikeDePublicacionSonUsuariosDeRed [(1, "Vladi"), (2, "Santi"), (3, "Antu"), (4, "Dani"), (5, "Eve")] [((1, "Vladi"), "Publicación 1", [(3, "Antu"), (4, "Dani"), (5, "Eve")]), ((2, "Santi"), "Publicación 2", [(1, "Vladi"), (2, "Santi"), (3, "Antu")]), ((3, "Antu"), "Publicación 3", [(69, "bot")])]
+usuariosDeLikeDePublicacionSonUsuariosDeRed :: [Usuario] -> [Publicacion] -> Bool
+usuariosDeLikeDePublicacionSonUsuariosDeRed users []     = True
+usuariosDeLikeDePublicacionSonUsuariosDeRed users (x:xs) | usuariosLikeValidos users (likesDePublicacion x) == True = usuariosDeLikeDePublicacionSonUsuariosDeRed users xs
+                                                         | otherwise = False
 
 ----------------- Fin Predicados Dani-----------------
 

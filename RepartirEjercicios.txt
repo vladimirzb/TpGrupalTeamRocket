@@ -23,7 +23,7 @@ Dani:
 OK - UsuarioValido
 OK - UsuariosValidos (Depende de: NoHayIdsRepetidos)
 OK - UsuariosLikeValidos
-UsuariosDeLikeDePublicacionSonUsuariosDeRed
+OK - UsuariosDeLikeDePublicacionSonUsuariosDeRed
 PublicacionesValidas (Depende: NoHayPublicacionesRepetidas)
 RelacionesValidas (Depende de: NoHayRelacionesRepetidas)
 RedSocialValida
