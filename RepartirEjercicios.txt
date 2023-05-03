@@ -22,8 +22,10 @@ SonDeLaRed
 Dani:
 OK - UsuarioValido
 OK - UsuariosValidos (Depende de: NoHayIdsRepetidos)
-RelacionesValidas (Depende de: NoHayRelacionesRepetidas)
+OK - UsuariosLikeValidos
+UsuariosDeLikeDePublicacionSonUsuariosDeRed
 PublicacionesValidas (Depende: NoHayPublicacionesRepetidas)
+RelacionesValidas (Depende de: NoHayRelacionesRepetidas)
 RedSocialValida
 
 Antu:

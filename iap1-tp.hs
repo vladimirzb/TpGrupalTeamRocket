@@ -152,6 +152,17 @@ auxiliarPublicacionesRepetidas (p1, p2, _) [] = True
 auxiliarPublicacionesRepetidas pub (x:xs) | pub == x = False
                                           | otherwise = auxiliarPublicacionesRepetidas pub xs
 
+-- Casos validos:
+-- usuariosLikeValidos [(1,"Dani"),(2,"Antu"),(3, "Santi"),(4, "Vladi")] []
+-- usuariosLikeValidos [(1,"Dani"),(2,"Antu"),(3, "Santi"),(4, "Vladi")] [((2,"Antu")),(3,"Santi")]
+-- Casos falsos:
+-- usuariosLikeValidos [(1,"Dani"),(2,"Antu"),(3, "Santi"),(4, "Vladi")] [(2,"Antu"),(4,"Santi")] 
+usuariosLikeValidos :: [Usuario] -> [Usuario] -> Bool
+usuariosLikeValidos users []     = True
+usuariosLikeValidos users (x:xs) | pertenece x users == True = usuariosLikeValidos users xs
+                                 | otherwise = False
+
+
 ----------------- Fin Predicados Dani-----------------
 
 -- Predicados Antú
