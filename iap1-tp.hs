@@ -127,6 +127,14 @@ relacionesAsimetricas :: [Relacion] -> Bool
 relacionesAsimetricas [] = True
 relacionesAsimetricas (((us1, us2):relaciones)) |  not (pertenece (us2,us1) relaciones) == True = relacionesAsimetricas relaciones 
                                                 | otherwise = False
+
+
+sonDeLaRed :: RedSocial -> [Usuario] -> Bool
+sonDeLaRed _ [] = True
+sonDeLaRed red (u:us) | pertenece u (usuarios(red)) = sonDeLaRed red us
+                      | otherwise = False
+
+
 ----------------- Fin Predicados Vladi-----------------
 
 --Predicados Dani
