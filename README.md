@@ -9,6 +9,6 @@ TP Grupal de Haskell para la materia Algoritmos1/Intro a la programacion
 - [ ] Predicados
 - [ ] Predicados probados con casos Test (Terminar para el viernes)
 - [ ] Problemas del 1 al 5 hechos
-- [ ] Problemas del 1 al 5 hechos pasaron los test
+- [ ] Problemas del 1 al 5 hechos pasaron los test (Terminar para el miercoles 10 de mayo)
 - [ ] Problemas del 6 al 10 hechos
 - [ ] Problemas del 6 al 10 hechos pasaron los test
