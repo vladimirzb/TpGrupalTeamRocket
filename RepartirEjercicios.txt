@@ -14,7 +14,7 @@ Para predicado poner arriba en comentarios los caso Test que utilizaron para ver
 Vladi:
 Pertenece - OK
 MismoElementos - OK
-UsuariosDeRelacionValidos
+UsuariosDeRelacionValidos ok
 RelacionesAsimetricas - OK
 UsuariosDePublicacionSonUsuariosDeRed - OK
 SonDeLaRed
@@ -41,21 +41,33 @@ TerminaCon
 SinRepetidos
 
 -------------------- 
+Problema 1 
+-No depende de nadie
+
+Problema 2
+-No depende de nadie
+
+Problema 3
+-Depende de 2
+
+Problema 4 
+-Depende del 3 (y del 2)
+
+Problema 5
+-Depende del 3 (y del 2) 
+--------------------
 Una vez Que estan los predicados hechos hagamos estos Ejercicios
 Vladi
-Ej 4
-Ej 8
-
-Dani
-Ej 5
+Ej 3
 Ej 2
 
+Dani
+Ej 1
+
 Antu
-Ej 3 
-Ej 6
+Ej 4
 
 Santi
-Ej 7
-Ej 1
+Ej 5
 
 Los otros los vamos haciendo a medida que terminamos
