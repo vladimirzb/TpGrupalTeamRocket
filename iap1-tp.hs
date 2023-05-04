@@ -6,7 +6,7 @@
 -- Integrante 3: Vladimir Zantleifer Barreda, zantleifer.vladimir@gmail.com 
 -- Integrante 4: Santiago Agustín Oviedo, santyoviedo1@gmail.com, 44379544
 
-type Usuario = (Integer, String) -- (id, nombre)
+type Usuario = (Integer, String) -- (id, nombre/user)
 type Relacion = (Usuario, Usuario) -- usuarios que se relacionan
 type Publicacion = (Usuario, String, [Usuario]) -- (usuario que publica, texto publicacion, likes)
 type RedSocial = ([Usuario], [Relacion], [Publicacion])
@@ -180,7 +180,7 @@ usuariosDeLikeDePublicacionSonUsuariosDeRed users (x:xs) | usuariosLikeValidos u
                                                          | otherwise = False
 
 -- Casos validos: Cualquier caso valido de las funciones que utilizo
--- Casos falso: Cualquier caso INvalido de las funciones que utilizo
+-- Casos falso: Cualquier caso invalido de las funciones que utilizo
 publicacionesValidas :: [Usuario] -> [Publicacion] -> Bool
 publicacionesValidas users pubs = usuariosDePublicacionSonUsuariosDeRed users pubs && usuariosDeLikeDePublicacionSonUsuariosDeRed users pubs && noHayPublicacionesRepetidas pubs
 
@@ -232,3 +232,30 @@ cadenaDeAmigos (x:xs) red | relacionadosDirecto x (head xs) red == True = cadena
                               
 ----------------- Fin Predicados Antu-----------------
 
+-- Predicados Santi
+
+--Función que dada una lista, devuelve su primer elemento.
+empiezaCon :: [t] -> t
+empiezaCon (x:xs) = x
+
+--Test
+--Caso de prueba --[(1,"Santi"),(2,"Antu")]--, --["a","b","c"]--, --[1,2,3]--
+
+--Función que dada una lista, devuelve otra lista con su último elemento.
+terminaCon :: [t] -> [t]
+terminaCon [x] = [x]
+terminaCon (x:xs) = terminaCon xs
+
+--Test
+--Caso de prueba --[(1,"Santi"),(2,"Antu")]--, --["a","b","c"]--, --[1,2,3]--
+
+--Función que decide si una función tiene repetidos o no.
+
+sinRepetidos :: (Eq t) => [t] -> Bool
+sinRepetidos [] = True
+sinRepetidos (x:xs) | pertenece x xs == True = False
+                    | pertenece x xs == False = sinRepetidos xs
+
+--Test
+--Casos válidos --[(1,"Santi"),(2,"Antu")]--, --["a","b","c"]--, --[1,2,3]--
+--Casos falsos --[(1,"Santi"),(2,"Antu"),(2,"Antu")]--, --["a","b","a"]--, --[2,2,3]--
