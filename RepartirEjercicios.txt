@@ -14,10 +14,10 @@ Para predicado poner arriba en comentarios los caso Test que utilizaron para ver
 Vladi:
 Pertenece - OK
 MismoElementos - OK
-UsuariosDeRelacionValidos ok
+UsuariosDeRelacionValidos - OK
 RelacionesAsimetricas - OK
 UsuariosDePublicacionSonUsuariosDeRed - OK
-SonDeLaRed
+SonDeLaRed - OK
 
 Dani:
 OK - UsuarioValido
