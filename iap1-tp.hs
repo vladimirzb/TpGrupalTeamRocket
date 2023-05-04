@@ -192,6 +192,14 @@ usuariosDeLikeDePublicacionSonUsuariosDeRed users (x:xs) | usuariosLikeValidos u
 publicacionesValidas :: [Usuario] -> [Publicacion] -> Bool
 publicacionesValidas users pubs = usuariosDePublicacionSonUsuariosDeRed users pubs && usuariosDeLikeDePublicacionSonUsuariosDeRed users pubs && noHayPublicacionesRepetidas pubs
 
+-- Falta testear
+relacionesValidas :: [Usuario] -> [Relacion] -> Bool
+relacionesValidas users rel = usuariosDeRelacionValidos users rel && relacionesAsimetricas rel && noHayRelacionesRepetidas rel
+
+-- Falta testear
+redSocialValida :: RedSocial -> Bool
+redSocialValida red = usuariosValidos (usuarios red) && relacionesValidas (usuarios red) (relaciones red) && publicacionesValidas (usuarios red) (publicaciones red)
+
 ----------------- Fin Predicados Dani-----------------
 
 -- Predicados Antú
