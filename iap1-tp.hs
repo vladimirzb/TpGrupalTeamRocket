@@ -69,8 +69,18 @@ filtrarPublicacionesPorUsuario (x:xs) u | u == usuarioDePublicacion x = x : filt
                                         | otherwise = filtrarPublicacionesPorUsuario xs u
 
 -- describir qué hace la función: .....
+-- publicacionesQueLeGustanA ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [((1,"Dani"),(2,"Antu")), ((2,"Antu"),(3,"Santi"))], [((3, "Santi"), "Publicacion 1", [(1, "Dani"), (2, "Antu"), (4, "Vladi")]), ((2, "Antu"), "Publicacion 2", [(2, "Antu"), (3, "Santi")]), ((3, "Santi"), "Publicacion 3", [(1, "Dani"), (2, "Antu"), (3, "Santi")])]) (1, "Dani")
+-- publicacionesQueLeGustanA ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [((1,"Dani"),(2,"Antu")), ((2,"Antu"),(3,"Santi"))], [((3, "Santi"), "Publicacion 1", [(1, "Dani"), (2, "Antu"), (4, "Vladi")]), ((2, "Antu"), "Publicacion 2", [(2, "Antu"), (3, "Santi")]), ((3, "Santi"), "Publicacion 3", [(1, "Dani"), (2, "Antu"), (3, "Santi")])]) (4, "Vladi")
 publicacionesQueLeGustanA :: RedSocial -> Usuario -> [Publicacion]
-publicacionesQueLeGustanA = undefined
+publicacionesQueLeGustanA red user = publicacionesConLikesDe (publicaciones red) user
+
+publicacionesConLikesDe :: [Publicacion] -> Usuario -> [Publicacion]
+publicacionesConLikesDe [] u = []
+publicacionesConLikesDe (x:xs) u | usuarioPerteneceALikes (likesDePublicacion x) u == True = x : publicacionesConLikesDe xs u
+                                           | otherwise = publicacionesConLikesDe xs u
+
+usuarioPerteneceALikes :: [Usuario] -> Usuario -> Bool
+usuarioPerteneceALikes users u = pertenece u users
 
 -- describir qué hace la función: .....
 lesGustanLasMismasPublicaciones :: RedSocial -> Usuario -> Usuario -> Bool
