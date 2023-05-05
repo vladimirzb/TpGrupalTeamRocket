@@ -56,8 +56,17 @@ estaRobertoCarlos :: RedSocial -> Bool
 estaRobertoCarlos = undefined
 
 -- describir qué hace la función: .....
+-- Casos que deberían funcionar
+-- publicacionesDe ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [((1,"Dani"),(2,"Antu")), ((2,"Antu"),(3,"Santi"))], [((3, "Santi"), "Publicacion 1", []), ((2, "Antu"), "Publicacion 2", []), ((3, "Santi"), "Publicacion 3", [])]) (3, "Santi")
+-- publicacionesDe ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [((1,"Dani"),(2,"Antu")), ((2,"Antu"),(3,"Santi"))], [((3, "Santi"), "Publicacion 1", []), ((2, "Antu"), "Publicacion 2", []), ((3, "Santi"), "Publicacion 3", [])]) (2, "Antu")
+-- publicacionesDe ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [((1,"Dani"),(2,"Antu")), ((2,"Antu"),(3,"Santi"))], [((3, "Santi"), "Publicacion 1", []), ((2, "Antu"), "Publicacion 2", []), ((3, "Santi"), "Publicacion 3", [])]) (1, "Dani")
 publicacionesDe :: RedSocial -> Usuario -> [Publicacion]
-publicacionesDe = undefined
+publicacionesDe red user = filtrarPublicacionesPorUsuario (publicaciones red) user
+
+filtrarPublicacionesPorUsuario :: [Publicacion] -> Usuario -> [Publicacion]
+filtrarPublicacionesPorUsuario [] u     = []
+filtrarPublicacionesPorUsuario (x:xs) u | u == usuarioDePublicacion x = x : filtrarPublicacionesPorUsuario xs u
+                                        | otherwise = filtrarPublicacionesPorUsuario xs u
 
 -- describir qué hace la función: .....
 publicacionesQueLeGustanA :: RedSocial -> Usuario -> [Publicacion]
