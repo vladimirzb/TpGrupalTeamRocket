@@ -1,3 +1,4 @@
+--Comentario de vladi: Hay que instalar hunit por ahi despues suben la guia de como instalarlo
 import Test.HUnit
 import Solucion
 
