@@ -92,8 +92,29 @@ lesGustanLasMismasPublicaciones :: RedSocial -> Usuario -> Usuario -> Bool
 lesGustanLasMismasPublicaciones red u1 u2 = mismosElementos (publicacionesQueLeGustanA red u1) (publicacionesQueLeGustanA red u2)
 
 -- describir qué hace la función: .....
+--CASO F
+-- tieneUnSeguidorFiel ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [((1,"Dani"),(2,"Antu")), ((2,"Antu"),(3,"Santi"))], [((3, "Santi"), "Publicacion 1", [(1, "Dani"), (2, "Antu"), (4, "Vladi")]), ((3, "Santi"), "Publicacion 2", [(3, "Santi")]), ((3, "Santi"), "Publicacion 3", [(2, "Antu"), (3, "Santi")])]) (3, "Santi")
+--CASO V
+-- tieneUnSeguidorFiel ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [((1,"Dani"),(2,"Antu")), ((2,"Antu"),(3,"Santi"))], [((3, "Santi"), "Publicacion 1", [(1, "Dani"), (2, "Antu"), (4, "Vladi")]), ((3, "Santi"), "Publicacion 2", [(2, "Antu"), (3, "Santi")]), ((3, "Santi"), "Publicacion 3", [(2, "Antu"), (3, "Santi")])]) (3, "Santi")
 tieneUnSeguidorFiel :: RedSocial -> Usuario -> Bool
-tieneUnSeguidorFiel = undefined
+tieneUnSeguidorFiel red u = aux (publicacionesDe red u)
+
+aux :: [Publicacion] ->  Bool
+aux []     = True
+aux (x:xs) | 
+           | aux2 (head (likesDePublicacion x)) xs == False = aux xs
+           | otherwise = False
+          
+aux2 :: Usuario -> [Publicacion] -> Bool
+aux2 u []     = True
+aux2 u (x:xs) | usuarioPerteneceALikes (likesDePublicacion x) u == True = aux2 u xs
+              | otherwise = False
+
+-- Traigo publicacion de un usuario de red
+-- Busco el primer like de la primer publicación
+-- Evaluo si ese like está en todo el resto de pubs
+-- Si está, cool
+-- Si no está, Vuelvo al paso 2 con el siguiente user de like
 
 -- describir qué hace la función: .....
 existeSecuenciaDeAmigos :: RedSocial -> Usuario -> Usuario -> Bool
