@@ -36,8 +36,22 @@ likesDePublicacion (_, _, us) = us
 
 -- Ejercicios
 
+-- Función: nombresDeUsuario, dada una red social, devuelve una lista con los nombres de usuario de todos los usuarios en la red.
+-- Función: proyectarNombres, dada una lista de usuarios, devuelve una lista con los nombres de usuarios correspondientes.
+
+proyectarNombres :: [Usuario] -> [ [String] ]
+proyectarNombres l = [auxNombres l]
+
+auxNombres :: [Usuario] -> [String]
+auxNombres [] = []
+auxNombres (x:xs) | sinRepetidos (x:xs) == True = [nombreDeUsuario x] ++ auxNombres xs
+
 nombresDeUsuarios :: RedSocial -> [String]
-nombresDeUsuarios = undefined
+nombresDeUsuarios red | redSocialValida red = auxNombres (usuarios red) 
+
+--Preguntar sobre la salida de la función proyectarNombres, y probablemente cambiarle el código.
+--Falta testear mejor
+
 
 -- describir qué hace la función: .....
 amigosDe :: RedSocial -> Usuario -> [Usuario]
@@ -96,14 +110,19 @@ lesGustanLasMismasPublicaciones red u1 u2 = mismosElementos (publicacionesQueLeG
 -- tieneUnSeguidorFiel ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [((1,"Dani"),(2,"Antu")), ((2,"Antu"),(3,"Santi"))], [((3, "Santi"), "Publicacion 1", [(1, "Dani"), (2, "Antu"), (4, "Vladi")]), ((3, "Santi"), "Publicacion 2", [(3, "Santi")]), ((3, "Santi"), "Publicacion 3", [(2, "Antu"), (3, "Santi")])]) (3, "Santi")
 --CASO V
 -- tieneUnSeguidorFiel ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [((1,"Dani"),(2,"Antu")), ((2,"Antu"),(3,"Santi"))], [((3, "Santi"), "Publicacion 1", [(1, "Dani"), (2, "Antu"), (4, "Vladi")]), ((3, "Santi"), "Publicacion 2", [(2, "Antu"), (3, "Santi")]), ((3, "Santi"), "Publicacion 3", [(2, "Antu"), (3, "Santi")])]) (3, "Santi")
-tieneUnSeguidorFiel :: RedSocial -> Usuario -> Bool
-tieneUnSeguidorFiel red u = aux (publicacionesDe red u)
 
-aux :: [Publicacion] ->  Bool
-aux []     = True
-aux (x:xs) | 
-           | aux2 (head (likesDePublicacion x)) xs == False = aux xs
-           | otherwise = False
+                    --Te lo puse como comentario ya que no me dejaba correr las funciones anteriores
+                    --Mil disculpas por no preguntar primero! 
+                    --                                              -Santi
+
+                    --tieneUnSeguidorFiel :: RedSocial -> Usuario -> Bool
+                    --tieneUnSeguidorFiel red u = aux (publicacionesDe red u)
+
+                    --aux :: [Publicacion] ->  Bool
+                    --aux []     = True
+                    --aux (x:xs) | 
+                    --           | aux2 (head (likesDePublicacion x)) xs == False = aux xs
+                    --           | otherwise = False
           
 aux2 :: Usuario -> [Publicacion] -> Bool
 aux2 u []     = True
@@ -320,3 +339,5 @@ sinRepetidos (x:xs) | pertenece x xs == True = False
 --Test
 --Casos válidos --[(1,"Santi"),(2,"Antu")]--, --["a","b","c"]--, --[1,2,3]--
 --Casos falsos --[(1,"Santi"),(2,"Antu"),(2,"Antu")]--, --["a","b","a"]--, --[2,2,3]--
+
+----------------- Fin Predicados Santi -----------------
