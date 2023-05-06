@@ -36,6 +36,7 @@ likesDePublicacion (_, _, us) = us
 
 -- Ejercicios
 
+--Hecha por Santi
 -- Función: nombresDeUsuario, dada una red social, devuelve una lista con los nombres de usuario de todos los usuarios en la red.
 -- Función: proyectarNombres, dada una lista de usuarios, devuelve una lista con los nombres de usuarios correspondientes.
 
@@ -53,6 +54,9 @@ nombresDeUsuarios red | redSocialValida red = auxNombres (usuarios red)
 --Falta testear mejor
 
 
+--Hecha por Vladimir
+--Paso test de la catedra sin errores: Pendiente 
+--Paso test extras: Pendiente
 -- describir qué hace la función: .....
 amigosDe :: RedSocial -> Usuario -> [Usuario]
 amigosDe = undefined
