@@ -76,11 +76,8 @@ publicacionesQueLeGustanA red user = publicacionesConLikesDe (publicaciones red)
 
 publicacionesConLikesDe :: [Publicacion] -> Usuario -> [Publicacion]
 publicacionesConLikesDe [] u = []
-publicacionesConLikesDe (x:xs) u | usuarioPerteneceALikes (likesDePublicacion x) u == True = x : publicacionesConLikesDe xs u
+publicacionesConLikesDe (x:xs) u | pertenece u (likesDePublicacion x) == True = x : publicacionesConLikesDe xs u
                                            | otherwise = publicacionesConLikesDe xs u
-
-usuarioPerteneceALikes :: [Usuario] -> Usuario -> Bool
-usuarioPerteneceALikes users u = pertenece u users
 
 -- describir qué hace la función: .....
 -- CASOS QUE DAN FALSE
@@ -97,18 +94,25 @@ lesGustanLasMismasPublicaciones red u1 u2 = mismosElementos (publicacionesQueLeG
 --CASO V
 -- tieneUnSeguidorFiel ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [((1,"Dani"),(2,"Antu")), ((2,"Antu"),(3,"Santi"))], [((3, "Santi"), "Publicacion 1", [(1, "Dani"), (2, "Antu"), (4, "Vladi")]), ((3, "Santi"), "Publicacion 2", [(2, "Antu"), (3, "Santi")]), ((3, "Santi"), "Publicacion 3", [(2, "Antu"), (3, "Santi")])]) (3, "Santi")
 tieneUnSeguidorFiel :: RedSocial -> Usuario -> Bool
-tieneUnSeguidorFiel red u = aux (publicacionesDe red u)
+tieneUnSeguidorFiel red u = auxSFielPasoLikesDePrimeraPublicacion (publicacionesDe red u)
 
-aux :: [Publicacion] ->  Bool
-aux []     = True
-aux (x:xs) | 
-           | aux2 (head (likesDePublicacion x)) xs == False = aux xs
-           | otherwise = False
+-- Recibe todas las publicaciones que hizo el usuario ingresado (inputUser). Le pasa a auxSFielDioLikeAPrimeraPublicacion el array de likes de la primer publicación y todo el resto de publicaciones.
+-- Esto es porque si el inputUser tiene un seguidor fiel (sf) me basta con chequear que los likes de la primer publicación, ya que un usuario no puede ser sf de otro si no likeo todas las publicaciones, incluida la primera.
+auxSFielPasoLikesDePrimeraPublicacion :: [Publicacion] ->  Bool
+auxSFielPasoLikesDePrimeraPublicacion (x:xs) | auxSFielDioLikeAPrimeraPublicacion (likesDePublicacion x) (x:xs) == False = False
+                                             | otherwise = True
+
+-- auxSFielDioLikeAPrimeraPublicacion itera sobre los usuarios que le dieron like a la primer publicación y le pasa uno por uno a auxSFielLeDioLikeATodasLasPublicaciones, junto con el array de publicaciones.
+auxSFielDioLikeAPrimeraPublicacion :: [Usuario] -> [Publicacion] -> Bool
+auxSFielDioLikeAPrimeraPublicacion [] _ = False
+auxSFielDioLikeAPrimeraPublicacion (x:xs) pubs | auxSFielLeDioLikeATodasLasPublicaciones x pubs == False = auxSFielDioLikeAPrimeraPublicacion xs pubs
+                                               | otherwise = True
           
-aux2 :: Usuario -> [Publicacion] -> Bool
-aux2 u []     = True
-aux2 u (x:xs) | usuarioPerteneceALikes (likesDePublicacion x) u == True = aux2 u xs
-              | otherwise = False
+-- auxSFielLeDioLikeATodasLasPublicaciones itera sobre las likes de todas las publicaciones menos la primera, y devuelve True si uno de los usuarios que le dio like a la primera, le dio like también a todo el resto.
+auxSFielLeDioLikeATodasLasPublicaciones :: Usuario -> [Publicacion] -> Bool
+auxSFielLeDioLikeATodasLasPublicaciones u []     = True
+auxSFielLeDioLikeATodasLasPublicaciones u (x:xs) | pertenece u (likesDePublicacion x) == True = auxSFielLeDioLikeATodasLasPublicaciones u xs
+                                                 | otherwise = False
 
 -- Traigo publicacion de un usuario de red
 -- Busco el primer like de la primer publicación
