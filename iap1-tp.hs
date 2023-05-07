@@ -3,7 +3,7 @@
 -- Nombre de Grupo: Team Rocket
 -- Integrante 1: Daniel Bulacio, db2166419@gmail.com, 41561111
 -- Integrante 2: Antú Gonzalo Eyaralar, antuelbolson@gmail.com, 38431966
--- Integrante 3: Vladimir Zantleifer Barreda, zantleifer.vladimir@gmail.com 
+-- Integrante 3: Vladimir Zantleifer Barreda, zantleifer.vladimir@gmail.com 44599438
 -- Integrante 4: Santiago Agustín Oviedo, santyoviedo1@gmail.com, 44379544
 
 type Usuario = (Integer, String) -- (id, nombre/user)
@@ -57,9 +57,22 @@ nombresDeUsuarios red | redSocialValida red = auxNombres (usuarios red)
 --Hecha por Vladimir
 --Paso test de la catedra sin errores: Pendiente 
 --Paso test extras: Pendiente
--- describir qué hace la función: .....
+-- AmigosDe: Dada la red y un usuario(x) devuelve una secuencia que contiene todos los amigos del usuario(x)
+--Estaba pensando lo siguiente con RedSocial consigo todas las relaciones, entonces primero busco en cuales relaciones aparece el usuario dado y luego las filtro y devuelvo esa secuencia de relaciones (que seria el usuario con su amigo en una tupla)
 amigosDe :: RedSocial -> Usuario -> [Usuario]
 amigosDe = undefined
+
+
+---Me armo una lista desde cero con las relaciones que esta el usuario
+obtenerRelacionesConUsuario :: RedSocial -> Usuario -> [Relacion]
+obtenerRelacionesConUsuario red u = auxObtenerRelacionesConUsuario (relaciones(red)) u
+
+auxObtenerRelacionesConUsuario :: [Relacion] -> Usuario -> [Relacion]
+auxObtenerRelacionesConUsuario [] _ = []
+auxObtenerRelacionesConUsuario (r:rs) u
+                                | usuarioEstaEnRelacion u r = r : auxObtenerRelacionesConUsuario rs u
+                                | otherwise= auxObtenerRelacionesConUsuario rs u
+                                    where usuarioEstaEnRelacion u (r1, r2) = u==r1 || u==r2
 
 -- describir qué hace la función: .....
 cantidadDeAmigos :: RedSocial -> Usuario -> Int
