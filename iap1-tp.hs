@@ -3,7 +3,7 @@
 -- Nombre de Grupo: Team Rocket
 -- Integrante 1: Daniel Bulacio, db2166419@gmail.com, 41561111
 -- Integrante 2: Antú Gonzalo Eyaralar, antuelbolson@gmail.com, 38431966
--- Integrante 3: Vladimir Zantleifer Barreda, zantleifer.vladimir@gmail.com 
+-- Integrante 3: Vladimir Zantleifer Barreda, zantleifer.vladimir@gmail.com 44599438
 -- Integrante 4: Santiago Agustín Oviedo, santyoviedo1@gmail.com, 44379544
 
 type Usuario = (Integer, String) -- (id, nombre/user)
@@ -36,12 +36,52 @@ likesDePublicacion (_, _, us) = us
 
 -- Ejercicios
 
-nombresDeUsuarios :: RedSocial -> [String]
-nombresDeUsuarios = undefined
+--Hecha por Santi
+-- Función: nombresDeUsuario, dada una red social, devuelve una lista con los nombres de usuario de todos los usuarios en la red.
+-- Función: proyectarNombres, dada una lista de usuarios, devuelve una lista con los nombres de usuarios correspondientes.
 
--- describir qué hace la función: .....
+proyectarNombres :: [Usuario] -> [ [String] ]
+proyectarNombres l = [auxNombres l]
+
+auxNombres :: [Usuario] -> [String]
+auxNombres [] = []
+auxNombres (x:xs) | sinRepetidos (x:xs) == True = [nombreDeUsuario x] ++ auxNombres xs
+
+nombresDeUsuarios :: RedSocial -> [String]
+nombresDeUsuarios red | redSocialValida red = auxNombres (usuarios red) 
+
+--Preguntar sobre la salida de la función proyectarNombres, y probablemente cambiarle el código.
+--Falta testear mejor
+
+
+--Hecha por Vladimir
+--Paso test de la catedra sin errores: Pendiente 
+--Paso test extras: Pendiente
+-- AmigosDe: Dada la red y un usuario(x) devuelve una secuencia que contiene todos los amigos del usuario(x)
+--Estaba pensando lo siguiente con RedSocial consigo todas las relaciones, entonces primero busco en cuales relaciones aparece el usuario dado y luego las filtro y devuelvo esa secuencia de relaciones (que seria el usuario con su amigo en una tupla)
+
+--con la lista de relaciones filtrada con solo las relaciones que contienen al usuario, voy a recorrer recurisvamente las tuplas en relaciones y agarrar el elemento que no es el usuario
 amigosDe :: RedSocial -> Usuario -> [Usuario]
-amigosDe = undefined
+amigosDe red u = auxAmigosDe (obtenerRelacionesConUsuario red u) u
+
+auxAmigosDe :: [Relacion] -> Usuario -> [Usuario]
+auxAmigosDe [] _ = []
+auxAmigosDe (r:rs) u
+    |u == fst r = snd r : auxAmigosDe rs u 
+    |u == snd r = fst r : auxAmigosDe rs u 
+
+
+
+---Me armo una lista desde cero con las relaciones que esta el usuario
+obtenerRelacionesConUsuario :: RedSocial -> Usuario -> [Relacion]
+obtenerRelacionesConUsuario red u = auxObtenerRelacionesConUsuario (relaciones(red)) u
+
+auxObtenerRelacionesConUsuario :: [Relacion] -> Usuario -> [Relacion]
+auxObtenerRelacionesConUsuario [] _ = []
+auxObtenerRelacionesConUsuario (r:rs) u
+                                | usuarioEstaEnRelacion u r = r : auxObtenerRelacionesConUsuario rs u
+                                | otherwise= auxObtenerRelacionesConUsuario rs u
+                                    where usuarioEstaEnRelacion u (r1, r2) = u==r1 || u==r2
 
 -- describir qué hace la función: .....
 cantidadDeAmigos :: RedSocial -> Usuario -> Int
@@ -113,12 +153,6 @@ auxSFielLeDioLikeATodasLasPublicaciones :: Usuario -> [Publicacion] -> Bool
 auxSFielLeDioLikeATodasLasPublicaciones u []     = True
 auxSFielLeDioLikeATodasLasPublicaciones u (x:xs) | pertenece u (likesDePublicacion x) == True = auxSFielLeDioLikeATodasLasPublicaciones u xs
                                                  | otherwise = False
-
--- Traigo publicacion de un usuario de red
--- Busco el primer like de la primer publicación
--- Evaluo si ese like está en todo el resto de pubs
--- Si está, cool
--- Si no está, Vuelvo al paso 2 con el siguiente user de like
 
 -- describir qué hace la función: .....
 existeSecuenciaDeAmigos :: RedSocial -> Usuario -> Usuario -> Bool
@@ -324,3 +358,5 @@ sinRepetidos (x:xs) | pertenece x xs == True = False
 --Test
 --Casos válidos --[(1,"Santi"),(2,"Antu")]--, --["a","b","c"]--, --[1,2,3]--
 --Casos falsos --[(1,"Santi"),(2,"Antu"),(2,"Antu")]--, --["a","b","a"]--, --[2,2,3]--
+
+----------------- Fin Predicados Santi -----------------
