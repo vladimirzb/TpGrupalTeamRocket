@@ -1,4 +1,5 @@
 --Comentario de vladi: Hay que instalar hunit por ahi despues suben la guia de como instalarlo
+--IMPORTANTE CAMBIE LOS NOMBRES DEL ARCHIVO PARA QUE FUNCIONEN LOS TEST 
 -- Va a tirar error la primera vez que lo ejecutes y despues copia este codigo :set -package base
 import Test.HUnit
 import Iap1tp
