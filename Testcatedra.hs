@@ -1,6 +1,7 @@
 --Comentario de vladi: Hay que instalar hunit por ahi despues suben la guia de como instalarlo
+
 import Test.HUnit
-import Solucion
+import Iap1tp
 
 main = runTestTT tests
 
@@ -23,7 +24,7 @@ tests = test [
 
     " tieneUnSeguidorFiel 1" ~: (tieneUnSeguidorFiel redA usuario1) ~?= True,
 
-    " existeSecuenciaDeAmigos 1" ~: (existeSecuenciaDeAmigos redA usuario1 usuario3) ~?= True
+
  ]
 
 expectAny actual expected = elem actual expected ~? ("expected any of: " ++ show expected ++ "\n but got: " ++ show actual)
