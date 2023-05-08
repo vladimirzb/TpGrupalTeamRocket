@@ -1,5 +1,5 @@
 --Comentario de vladi: Hay que instalar hunit por ahi despues suben la guia de como instalarlo
-
+-- Va a tirar error la primera vez que lo ejecutes y despues copia este codigo :set -package base
 import Test.HUnit
 import Iap1tp
 
@@ -23,7 +23,8 @@ tests = test [
     " lesGustanLasMismasPublicaciones 2" ~: (lesGustanLasMismasPublicaciones redB usuario1 usuario3) ~?= True,
 
     " tieneUnSeguidorFiel 1" ~: (tieneUnSeguidorFiel redA usuario1) ~?= True,
-
+    
+    " existeSecuenciaDeAmigos 1" ~: (existeSecuenciaDeAmigos redA usuario1 usuario3) ~?= True
 
  ]
 
