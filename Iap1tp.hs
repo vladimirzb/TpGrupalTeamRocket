@@ -8,7 +8,7 @@ module Iap1tp where
 -- Integrante 4: Santiago Agustín Oviedo, santyoviedo1@gmail.com, 44379544
 
 type Usuario = (Integer, String) -- (id, nombre/user)
-type Relacion = (Usuario, Usuario) -- usuarios que se relacionan
+type Relacion = (Usuario, Usuario) -- (usuarios que se relacionan)
 type Publicacion = (Usuario, String, [Usuario]) -- (usuario que publica, texto publicacion, likes)
 type RedSocial = ([Usuario], [Relacion], [Publicacion])
 
@@ -41,18 +41,19 @@ likesDePublicacion (_, _, us) = us
 -- Función: nombresDeUsuario, dada una red social, devuelve una lista con los nombres de usuario de todos los usuarios en la red.
 -- Función: proyectarNombres, dada una lista de usuarios, devuelve una lista con los nombres de usuarios correspondientes.
 
-proyectarNombres :: [Usuario] -> [ [String] ]
-proyectarNombres l = [auxNombres l]
-
-auxNombres :: [Usuario] -> [String]
-auxNombres [] = []
-auxNombres (x:xs) | sinRepetidos (x:xs) == True = [nombreDeUsuario x] ++ auxNombres xs
+proyectarNombres :: [Usuario] ->  [String] 
+proyectarNombres [] = []
+proyectarNombres (x:xs) | sinRepetidos (x:xs) = [nombreDeUsuario x] ++ proyectarNombres xs
 
 nombresDeUsuarios :: RedSocial -> [String]
-nombresDeUsuarios red | redSocialValida red = auxNombres (usuarios red) 
+nombresDeUsuarios red | redSocialValida red = proyectarNombres (usuarios red) 
 
---Preguntar sobre la salida de la función proyectarNombres, y probablemente cambiarle el código.
---Falta testear mejor
+--proyectarNombres: Dada una lista de usuarios -users-, creo una lista con el nombre de usuario del primer elemento de users y lo voy concatenando con los nombres de usuarios siguientes.  
+--nombresDeUsuarios: Dada una red social valida -red- llama a la funcion proyectarNombres utilizando la lista de usuarios de red. 
+
+--Test de la catedra: aprobado.
+--Faltan tests extras.
+
 
 
 --Hecha por Vladimir

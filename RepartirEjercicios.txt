@@ -12,12 +12,12 @@ Si alguien necesita hacer algun predicado que depende de otro haganlo tranqui y 
 Para predicado poner arriba en comentarios los caso Test que utilizaron para verificar que cumple con la especificion
 
 Vladi:
-Pertenece - OK
-MismoElementos - OK
-UsuariosDeRelacionValidos - OK
-RelacionesAsimetricas - OK
-UsuariosDePublicacionSonUsuariosDeRed - OK
-SonDeLaRed - OK
+OK - Pertenece
+OK - MismoElementos
+OK - UsuariosDeRelacionValidos
+OK - RelacionesAsimetricas
+OK - UsuariosDePublicacionSonUsuariosDeRed
+OK - SonDeLaRed
 
 Dani:
 OK - UsuarioValido
@@ -36,9 +36,9 @@ OK - CadenaDeAmigos
 OK - RelacionadosDirecto 
 
 Santi: 
-EmpiezaCon
-TerminaCon
-SinRepetidos
+OK - EmpiezaCon
+OK - TerminaCon
+OK - SinRepetidos
 
 -------------------- 
 Problema 1 
@@ -74,7 +74,7 @@ OK - Ej 6
 
 Santi
 Ej 5
-Ej 1
+OK -Ej 1
 
 Termiar del 1 al 5 para el miercoles
 
