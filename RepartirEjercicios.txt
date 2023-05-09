@@ -1,6 +1,6 @@
 ----No importar librerias, no se puede
 
---La fecha l ́ımite de entrega es el Viernes 19/5.
+--La fecha límite de entrega es el Viernes 19/5.
 ---------------------------------------------------------------------------------
 Idealmente haber empezados todos los predicados asignados para el martes. Y tranqui si no llegas esta todo bien simplemente haberlos pensado
 Idealmente terminar predicados el viernes
