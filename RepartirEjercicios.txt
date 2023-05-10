@@ -60,8 +60,8 @@ Problema
 --------------------
 Una vez Que estan los predicados hechos hagamos estos Ejercicios
 Vladi
-Ej 3
-Ej 2
+OK - Ej 3
+OK - Ej 2
 
 Dani
 OK - Ej 7
@@ -73,8 +73,8 @@ Ej 4
 OK - Ej 6
 
 Santi
-Ej 5
-OK -Ej 1
+OK - Ej 5
+OK - Ej 1
 
 Termiar del 1 al 5 para el miercoles
 

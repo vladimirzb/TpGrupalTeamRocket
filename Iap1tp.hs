@@ -100,10 +100,23 @@ cantidadDeAmigosAux (u:us)= cantidadDeAmigosAux(us) + 1
 usuarioConMasAmigos :: RedSocial -> Usuario
 usuarioConMasAmigos = undefined
 
--- describir qué hace la función: .....
-estaRobertoCarlos :: RedSocial -> Bool
-estaRobertoCarlos = undefined
+--Hecha por Santi
 
+--Función: estaRobertoCarlos, dada una red social válida, decide si existe un usuario con más de un millón de amigos en ella.
+--Función: estaRobertoCarlosAux, dada una red social y una lista de usuarios, decide si uno de los usuarios tiene más de un millón de amigos en esa red.
+estaRobertoCarlos :: RedSocial -> Bool
+estaRobertoCarlos red | redSocialValida red = estaRobertoCarlosAux red (usuarios red)
+
+estaRobertoCarlosAux :: RedSocial -> [Usuario] -> Bool
+estaRobertoCarlosAux red [] = False
+estaRobertoCarlosAux red (x:xs) | cantidadDeAmigos red x > 1000000 = True
+                                | otherwise = estaRobertoCarlosAux red xs
+
+--Test de la cátedra: aprobado.
+--Faltan test extras.
+
+        
+                                    
 -- describir qué hace la función: .....
 -- Casos que deberían funcionar
 -- publicacionesDe ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [((1,"Dani"),(2,"Antu")), ((2,"Antu"),(3,"Santi"))], [((3, "Santi"), "Publicacion 1", []), ((2, "Antu"), "Publicacion 2", []), ((3, "Santi"), "Publicacion 3", [])]) (3, "Santi")
