@@ -93,8 +93,7 @@ cantidadDeAmigos red u = cantidadDeAmigosAux (amigosDe red u)
 
 cantidadDeAmigosAux :: [Usuario] -> Int
 cantidadDeAmigosAux []  = 0
-cantidadDeAmigosAux [u]  = 1
-cantidadDeAmigosAux (u:us)= cantidadDeAmigosAux(us)
+cantidadDeAmigosAux (u:us)= cantidadDeAmigosAux(us) +1
 
 
 -- describir qué hace la función: .....
