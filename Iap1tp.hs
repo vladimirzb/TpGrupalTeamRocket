@@ -57,7 +57,7 @@ nombresDeUsuarios red | redSocialValida red = proyectarNombres (usuarios red)
 
 
 --Hecha por Vladimir
---Paso test de la catedra sin errores: Pendiente 
+--Paso test de la catedra sin errores: Paso el test 
 --Paso test extras: Pendiente
 -- AmigosDe: Dada la red y un usuario(x) devuelve una secuencia que contiene todos los amigos del usuario(x)
 --Estaba pensando lo siguiente con RedSocial consigo todas las relaciones, entonces primero busco en cuales relaciones aparece el usuario dado y luego las filtro y devuelvo esa secuencia de relaciones (que seria el usuario con su amigo en una tupla)
@@ -84,10 +84,18 @@ auxObtenerRelacionesConUsuario (r:rs) u
                                 | usuarioEstaEnRelacion u r = r : auxObtenerRelacionesConUsuario rs u
                                 | otherwise= auxObtenerRelacionesConUsuario rs u
                                     where usuarioEstaEnRelacion u (r1, r2) = u==r1 || u==r2
-
--- describir qué hace la función: .....
+--Hecha por Vladimir
+--Paso test de la catedra sin errores: Paso el test 
+--Paso test extras: Pendiente
+-- describir qué hace la función: Dada la redsocial y un usuario devuelvo la cantidad de amigos del usuario. Utilizo la funcion amigosDe para obtener directamente la secuencia con los amigos del usuario y con una funcion axuliar cuento los elementos de la secuencia
 cantidadDeAmigos :: RedSocial -> Usuario -> Int
-cantidadDeAmigos = undefined
+cantidadDeAmigos red u = cantidadDeAmigosAux (amigosDe red u)
+
+cantidadDeAmigosAux :: [Usuario] -> Int
+cantidadDeAmigosAux []  = 0
+cantidadDeAmigosAux [u]  = 1
+cantidadDeAmigosAux (u:us)= cantidadDeAmigosAux(us)
+
 
 -- describir qué hace la función: .....
 usuarioConMasAmigos :: RedSocial -> Usuario
