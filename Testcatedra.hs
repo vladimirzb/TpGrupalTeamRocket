@@ -43,43 +43,40 @@ Los factores en este caso son los parámetros del problema:
     u: Usuario
 Paso 4: Determinar categorías
 Para cada parámetro, determinamos las siguientes características:
-    red: RedSocial
-        RedSocialVálida
-        Presencia de relaciones
+    red: 
+        Tiene usuarios?
+        Tiene relaciones?
+        Tiene publicaciones? (NO SON RELEVANTES PERO LO PONGO PORQUE HAY QUE PONERLO, NO LAS UTILIZO PARA NADA)
     u: Usuario
-        UsuarioVálido
-        Pertenencia a la red
+        Tiene relacion?
+        No tiene relacion?
 Paso 5: Determinar elecciones
 Para cada categoría, determinamos sus elecciones o choices:
-    red: RedSocial
-        RedSocialVálida
-            Sí
-            Presencia de relaciones
-                Con relaciones
-                Sin relaciones
+    red: 
+        Tiene usuarios? (Si,no)
+        Tiene relaciones?(Si,no) 
     u: Usuario
-        UsuarioVálido
-            Sí
-    Pertenencia a la red
-        Pertenece a la red
-        No pertenece a la red (ERROR)
+        Tiene relacion? (Si,no)
+            -Tiene 3
+            -Tiene 1
+            -Tiene 0
 Paso 6: Clasificar las elecciones
 Consideraremos las siguientes clasificaciones:
-red: RedSocial
-    RedSocialVálida Sí
-        Presencia de relaciones
-            Con relaciones
-            Sin relaciones
-u: Usuario
-    UsuarioVálido Sí
-        Pertenencia a la red
-            Pertenece a la red
-            No pertenece a la red (ERROR)
+    red: 
+        Tiene usuarios? (Si,no)
+        Tiene relaciones?(Si,no)
+    u: Usuario
+        Tiene relacion? (Si,no)
+            -Tiene 3
+            -Tiene 1
+            -Tiene 0
 Paso 7: Armar los casos de test
-Combinamos las elecciones para crear los casos de prueba:
-Red social válida, con relaciones, usuario válido, usuario pertenece a la red
-Red social válida, sin relaciones, usuario válido, usuario pertenece a la red
-Red social válida, con relaciones, usuario válido, usuario no pertenece a la red (ERROR)
+Red con usuarios, sin relaciones, usuario sin relación.
+Red con usuarios, con relaciones, usuario sin relación.
+Red con usuarios, con relaciones, usuario con una relación.
+Red con usuarios, con relaciones, usuario con tres relaciones.
+Red sin usuarios, sin relaciones, usuario sin relación. (Este caso no es válido debido a que el usuario debe pertenecer a la red, pero lo menciono para completar las combinaciones)
+
 -}
 
 --Caso de prueba 1:Red social válida, Con relaciones, Usuario válido,Usuario pertenece a la red
