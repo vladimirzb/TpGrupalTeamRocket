@@ -2,14 +2,14 @@
 --IMPORTANTE CAMBIE LOS NOMBRES DEL ARCHIVO PARA QUE FUNCIONEN LOS TEST 
 -- Va a tirar error la primera vez que lo ejecutes y despues copia este codigo :set -package base y luego volver a loadear el archivo para que funcione y correr main
 import Test.HUnit
-import Iap1tp
+import Solucion
 
-main = runTestTT tests
-
+main = runTestTT testsAmigosDe
+--Vamos a hacer una secuencia de test para cada ejercicios y luegos vamos a poner estas secuencias en el main para que corran todos los test para todos los ejercios
 tests = test [
     " nombresDeUsuarios 1" ~: (nombresDeUsuarios redA) ~?= ["Juan","Natalia","Pedro","Mariela"],
 
-    " amigosDe 1" ~: (amigosDe redA usuario1) ~?= [usuario2, usuario4],
+    testsSuiteAmigosDe,
 
     " cantidadDeAmigos 1" ~: (cantidadDeAmigos redA usuario1) ~?= 2,
 
@@ -29,6 +29,10 @@ tests = test [
 
  ]
 
+testsSuiteAmigosDe = test [
+    " amigosDe 1" ~: (amigosDe redA usuario1) ~?= [usuario2, usuario4]
+
+ ]
 expectAny actual expected = elem actual expected ~? ("expected any of: " ++ show expected ++ "\n but got: " ++ show actual)
 
 -- Ejemplos

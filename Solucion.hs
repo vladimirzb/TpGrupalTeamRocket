@@ -1,4 +1,4 @@
-module Iap1tp where
+module Solucion where
 ----No importar librerias, no se puede
 -- Completar con los datos del grupo
 -- Nombre de Grupo: Team Rocket
