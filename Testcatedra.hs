@@ -4,7 +4,7 @@
 import Test.HUnit
 import Solucion
 
-main = runTestTT testsAmigosDe
+main = runTestTT tests
 --Vamos a hacer una secuencia de test para cada ejercicios y luegos vamos a poner estas secuencias en el main para que corran todos los test para todos los ejercios
 tests = test [
     " nombresDeUsuarios 1" ~: (nombresDeUsuarios redA) ~?= ["Juan","Natalia","Pedro","Mariela"],
