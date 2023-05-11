@@ -98,8 +98,13 @@ cantidadDeAmigosAux (u:us)= cantidadDeAmigosAux(us) + 1
 
 -- describir qué hace la función: .....
 usuarioConMasAmigos :: RedSocial -> Usuario
-usuarioConMasAmigos = undefined
+usuarioConMasAmigos red = usuarioConMasAmigosAux red (usuarios red)
 
+usuarioConMasAmigosAux :: RedSocial -> [Usuario] -> Usuario
+usuarioConMasAmigosAux _ [x] = x
+usuarioConMasAmigosAux red (x:xs) | cantidadDeAmigos red x > cantidadDeAmigos red (head xs) = usuarioConMasAmigosAux red (x:(tail xs))
+                                  | cantidadDeAmigos red x == cantidadDeAmigos red (head xs) = usuarioConMasAmigosAux red xs
+                                  | otherwise = usuarioConMasAmigosAux red xs
 --Hecha por Santi
 
 --Función: estaRobertoCarlos, dada una red social válida, decide si existe un usuario con más de un millón de amigos en ella.
