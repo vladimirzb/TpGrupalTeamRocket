@@ -1,11 +1,9 @@
---Comentario de vladi: Hay que instalar hunit por ahi despues suben la guia de como instalarlo
---IMPORTANTE CAMBIE LOS NOMBRES DEL ARCHIVO PARA QUE FUNCIONEN LOS TEST 
--- Va a tirar error la primera vez que lo ejecutes y despues copia este codigo :set -package base y luego volver a loadear el archivo para que funcione y correr main
+-- Vladi: Va a tirar error la primera vez que lo ejecutes y despues copia este codigo :set -package base y luego volver a loadear el archivo para que funcione y correr main
 import Test.HUnit
 import Solucion
 
 main = runTestTT tests
---Vamos a hacer una secuencia de test para cada ejercicios y luegos vamos a poner estas secuencias en el main para que corran todos los test para todos los ejercios
+--Vladi: Vamos a hacer una secuencia de test para cada ejercicios y luegos vamos a poner estas secuencias en el main para que corran todos los test para todos los ejercios
 tests = test [
     " nombresDeUsuarios 1" ~: (nombresDeUsuarios redA) ~?= ["Juan","Natalia","Pedro","Mariela"],
 
@@ -28,9 +26,67 @@ tests = test [
     " existeSecuenciaDeAmigos 1" ~: (existeSecuenciaDeAmigos redA usuario1 usuario3) ~?= True
 
  ]
+--Comentario Vladi: Ya prepare todo para que funcionen los suit cases
 
+--Test de vladi: amigosDe
+
+{- 
+Paso 1: Descomponer la solución informática en unidades funcionales
+En este caso, tenemos una única unidad funcional:
+    amigosDe
+Paso 2: Elegir una unidad funcional
+La unidad funcional a testear será:
+    amigosDe
+Paso 3: Identificar factores
+Los factores en este caso son los parámetros del problema:
+    red: RedSocial
+    u: Usuario
+Paso 4: Determinar categorías
+Para cada parámetro, determinamos las siguientes características:
+    red: RedSocial
+        RedSocialVálida
+        Presencia de relaciones
+    u: Usuario
+        UsuarioVálido
+        Pertenencia a la red
+Paso 5: Determinar elecciones
+Para cada categoría, determinamos sus elecciones o choices:
+    red: RedSocial
+        RedSocialVálida
+            Sí
+            Presencia de relaciones
+                Con relaciones
+                Sin relaciones
+    u: Usuario
+        UsuarioVálido
+            Sí
+    Pertenencia a la red
+        Pertenece a la red
+        No pertenece a la red (ERROR)
+Paso 6: Clasificar las elecciones
+Consideraremos las siguientes clasificaciones:
+red: RedSocial
+    RedSocialVálida Sí
+        Presencia de relaciones
+            Con relaciones
+            Sin relaciones
+u: Usuario
+    UsuarioVálido Sí
+        Pertenencia a la red
+            Pertenece a la red
+            No pertenece a la red (ERROR)
+Paso 7: Armar los casos de test
+Combinamos las elecciones para crear los casos de prueba:
+Red social válida, con relaciones, usuario válido, usuario pertenece a la red
+Red social válida, sin relaciones, usuario válido, usuario pertenece a la red
+Red social válida, con relaciones, usuario válido, usuario no pertenece a la red (ERROR)
+-}
+
+--Caso de prueba 1:Red social válida, Con relaciones, Usuario válido,Usuario pertenece a la red
+red1 = [(1, [2, 3]), (2, [1]), (3, [1])]
+u1 = 1
 testsSuiteAmigosDe = test [
-    " amigosDe 1" ~: (amigosDe redA usuario1) ~?= [usuario2, usuario4]
+    " amigosDe 1" ~: (amigosDe redA usuario1) ~?= [usuario2, usuario4], --Test de la catedra
 
  ]
 expectAny actual expected = elem actual expected ~? ("expected any of: " ++ show expected ++ "\n but got: " ++ show actual)
