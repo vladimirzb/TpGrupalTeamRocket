@@ -66,6 +66,7 @@ nombresDeUsuarios red | redSocialValida red = proyectarNombres (usuarios red)
 amigosDe :: RedSocial -> Usuario -> [Usuario]
 amigosDe red u = auxAmigosDe (obtenerRelacionesConUsuario red u) u
 
+--Desarmo tupla con fst
 auxAmigosDe :: [Relacion] -> Usuario -> [Usuario]
 auxAmigosDe [] _ = []
 auxAmigosDe (r:rs) u
@@ -181,10 +182,27 @@ auxSFielLeDioLikeATodasLasPublicaciones u []     = True
 auxSFielLeDioLikeATodasLasPublicaciones u (x:xs) | pertenece u (likesDePublicacion x) == True = auxSFielLeDioLikeATodasLasPublicaciones u xs
                                                  | otherwise = False
 
+--Hecho por Vladi
 -- describir qué hace la función: .....
+--busco al u2
 existeSecuenciaDeAmigos :: RedSocial -> Usuario -> Usuario -> Bool
-existeSecuenciaDeAmigos = undefined
+existeSecuenciaDeAmigos red u1 u2 = esAmigoQueBuscamos red u2 (amigosDe red u1) []
 
+--comparo ids
+-- RedSocial -> usuario que buscamos -> lista de amigos de ux donde buscamos -> lista de usuarios que ya revisamos amigos
+esAmigoQueBuscamos :: RedSocial  -> Usuario -> [Usuario] -> [Usuario]  -> Bool
+esAmigoQueBuscamos red u2 [] _ = False
+esAmigoQueBuscamos red u2 (u1:amigosU1) visitados | fst u2 == fst u1 = True
+                                                  | usuarioYaVisitado u1 visitados = esAmigoQueBuscamos red u2 amigosU1 visitados
+                                                  | otherwise = esAmigoQueBuscamos red u2 (amigosU1 ++ amigosDe red u1) (u1:visitados)
+                                                  --En la ultima linea voy ampliando la profundidad, BFS
+                                                  --
+--comparo ids
+usuarioYaVisitado :: Usuario -> [Usuario] -> Bool
+usuarioYaVisitado _ [] = False
+usuarioYaVisitado usAChequear (usuarioVisitado:secuenciaUsuariosVisitados) 
+    | fst usAChequear == fst usuarioVisitado = True
+    | otherwise = usuarioYaVisitado usAChequear secuenciaUsuariosVisitados
 
 --Predicados Auxiliares
 
