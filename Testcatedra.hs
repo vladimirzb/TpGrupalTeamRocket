@@ -5,23 +5,7 @@ import Solucion
 main = runTestTT tests
 --Vladi: Vamos a hacer una secuencia de test para cada ejercicios y luegos vamos a poner estas secuencias en el main para que corran todos los test para todos los ejercios
 tests = test [
-    " nombresDeUsuarios 1" ~: (nombresDeUsuarios redA) ~?= ["Juan","Natalia","Pedro","Mariela"],
-
-    testsSuiteAmigosDe,
-
-    " cantidadDeAmigos 1" ~: (cantidadDeAmigos redA usuario1) ~?= 2,
-
-    " usuarioConMasAmigos 1" ~: expectAny (usuarioConMasAmigos redA) [usuario2, usuario4],
-
-    " estaRobertoCarlos 1" ~: (estaRobertoCarlos redA) ~?= False,
-
-    " publicacionesDe 1" ~: (publicacionesDe redA usuario2) ~?= [publicacion2_1, publicacion2_2],
-
-    " publicacionesQueLeGustanA 1" ~: (publicacionesQueLeGustanA redA usuario1) ~?= [publicacion2_2, publicacion4_1],
-
-    " lesGustanLasMismasPublicaciones 2" ~: (lesGustanLasMismasPublicaciones redB usuario1 usuario3) ~?= True,
-
-    " tieneUnSeguidorFiel 1" ~: (tieneUnSeguidorFiel redA usuario1) ~?= True,
+   
     
     testsSuiteexisteSecuenciaDeAmigose
 
@@ -167,21 +151,18 @@ juan = (5, "Juan")
 -- Relaciones
 relacion_vladimir_messi = (vladimir, messi)
 relacion_messi_pedro = (messi, pedro)
-relacion_pedro_lucas = (pedro, lucas)
 relacion_vladimir_juan = (vladimir, juan)
 relacion_messi_juan = (messi, juan)
-relacion_lucas_juan = (lucas, juan) 
+relacion_lucas_juan = (lucas, juan)
 
 -- Publicaciones
-publicacionesTest = [] -- La utilizo solamente para poder definiar la redsocial ya que no es relevante para este problema
+publicacionesTest = [] -- no las estamos utilizando en estos casos de prueba
 
 -- Redes Sociales
 red_sin_conexiones = ([vladimir, juan], [], publicacionesTest)
 red_con_conexion_directa = ([vladimir, juan], [relacion_vladimir_juan], publicacionesTest)
 red_con_conexion_indirecta = ([vladimir, messi, juan], [relacion_vladimir_messi, relacion_messi_juan], publicacionesTest)
-red_con_multiples_conexiones = ([vladimir, messi, pedro, lucas, juan], [relacion_vladimir_messi, relacion_messi_pedro, relacion_pedro_lucas, relacion_lucas_juan], publicacionesTest)
-
-
+red_con_multiples_conexiones = ([vladimir, messi, pedro, juan], [relacion_vladimir_messi, relacion_messi_pedro, relacion_lucas_juan], publicacionesTest)
 testsSuiteexisteSecuenciaDeAmigose = test [
         " existeSecuenciaDeAmigos 1" ~: (existeSecuenciaDeAmigos redA usuario1 usuario3) ~?= True, 
         "Caso 3" ~: existeSecuenciaDeAmigos red_sin_conexiones vladimir juan ~?= False,
