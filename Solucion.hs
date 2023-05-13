@@ -194,9 +194,10 @@ esAmigoQueBuscamos :: RedSocial  -> Usuario -> [Usuario] -> [Usuario]  -> Bool
 esAmigoQueBuscamos red u2 [] _ = False
 esAmigoQueBuscamos red u2 (u1:amigosU1) visitados | fst u2 == fst u1 = True
                                                   | usuarioYaVisitado u1 visitados = esAmigoQueBuscamos red u2 amigosU1 visitados
-                                                  | otherwise = esAmigoQueBuscamos red u2 (amigosU1 ++ amigosDe red u1) (u1:visitados)
+                                                  | otherwise = esAmigoQueBuscamos red u2 (amigosU1 ++ amigosDe red u1) (u1:visitados) --Reviso los amigos de u1 y los agrego a una lista con todos los amigos de los usuarios
                                                   --En la ultima linea voy ampliando la profundidad, BFS
 --comparo ids
+--evita loop
 usuarioYaVisitado :: Usuario -> [Usuario] -> Bool
 usuarioYaVisitado _ [] = False
 usuarioYaVisitado usAChequear (usuarioVisitado:secuenciaUsuariosVisitados) 
