@@ -23,12 +23,12 @@ tests = test [
 
     " tieneUnSeguidorFiel 1" ~: (tieneUnSeguidorFiel redA usuario1) ~?= True,
     
-    " existeSecuenciaDeAmigos 1" ~: (existeSecuenciaDeAmigos redA usuario1 usuario3) ~?= True
+    testsSuiteexisteSecuenciaDeAmigose
 
  ]
 --Comentario Vladi: Ya prepare todo para que funcionen los suit cases
 
---Test de vladi: amigosDe
+------------------------------------Test de vladi: amigosDe--------------------------------------------------
 
 {- 
 Paso 1: Descomponer la solución informática en unidades funcionales
@@ -83,9 +83,114 @@ Red sin usuarios, sin relaciones, usuario sin relación. (Este caso no es válid
 red1 = [(1, [2, 3]), (2, [1]), (3, [1])]
 u1 = 1
 testsSuiteAmigosDe = test [
-    " amigosDe 1" ~: (amigosDe redA usuario1) ~?= [usuario2, usuario4], --Test de la catedra
+    " amigosDe 1" ~: (amigosDe redA usuario1) ~?= [usuario2, usuario4] --Test de la catedra
 
  ]
+
+
+-------------------------------Test de vladi: existeSecuenciaDeAmigos-----------------------------------------
+{-
+Paso 1: Descomponer la solución informática en unidades funcionales
+Tenemos varias unidades funcionales en este caso:
+- existeSecuenciaDeAmigos
+- esAmigoQueBuscamos
+- usuarioYaVisitado
+
+Paso 2: Elegir una unidad funcional
+La unidad funcional a testear será:
+- existeSecuenciaDeAmigos
+
+Paso 3: Identificar factores
+Los factores en este caso son los parámetros del problema:
+- red: RedSocial
+- u1: Usuario
+- u2: Usuario
+
+Paso 4: Determinar categorías
+Para cada parámetro, determinamos las siguientes características:
+- red:
+- Tiene usuarios?
+- Tiene relaciones?
+- u1: Usuario
+- Tiene relaciones?
+- u2: Usuario
+- Tiene relaciones?
+- Relación entre Usuario1 y Usuario2?
+
+Paso 5: Determinar elecciones
+Para cada categoría, determinamos sus elecciones:
+- red:
+- Tiene usuarios? (Si, no)
+- Tiene relaciones? (Si, no)
+- u1: Usuario
+- Tiene relaciones? (Si, no)
+- u2: Usuario
+- Tiene relaciones? (Si, no)
+- Relación entre Usuario1 y Usuario2? (Están conectados directamente, Están conectados a través de un amigo en común, No están conectados)
+
+Paso 6: Clasificar las elecciones
+Las clasificaciones son las mismas que las elecciones detalladas en el Paso 5.
+
+Paso 7: Armar los casos de test
+
+Caso 1: Esto no cumple con el requisito porque la red no es válida, ya que no tiene usuarios.
+Red sin usuarios, sin relaciones.
+Usuario1 y Usuario2 sin relaciones.
+Resultado esperado: False.
+Caso 2: Esto no cumple con el requisito ya que los usuarios no están en la red.
+Red con usuarios pero sin relaciones.
+Usuario1 y Usuario2 sin relaciones.
+Resultado esperado: False.
+Caso 3:False.
+Red con usuarios y relaciones.
+Usuario1 con relaciones, Usuario2 sin relaciones.
+Caso 4: False.
+Red con usuarios y relaciones.
+Usuario1 con una relación, Usuario2 con una relación, pero no están conectados.
+Caso 5:True.
+Red con usuarios y relaciones.
+Usuario1 con una relación, Usuario2 con una relación, y están conectados directamente. 
+Caso 6:True.
+Red con usuarios y relaciones.
+Usuario1 con varias relaciones, Usuario2 con una relación, y están conectados a través de un amigo en común.
+Caso 7: True.
+Red con usuarios y relaciones.
+Usuario1 y Usuario2 son la misma persona. 
+-}
+-- Usuarios
+vladimir = (1, "Vladimir")
+messi = (2, "Messi")
+pedro = (3, "Pedro")
+lucas = (4, "Lucas")
+juan = (5, "Juan")
+
+-- Relaciones
+relacion_vladimir_messi = (vladimir, messi)
+relacion_messi_pedro = (messi, pedro)
+relacion_pedro_lucas = (pedro, lucas)
+relacion_vladimir_juan = (vladimir, juan)
+relacion_messi_juan = (messi, juan)
+relacion_lucas_juan = (lucas, juan) 
+
+-- Publicaciones
+publicacionesTest = [] -- La utilizo solamente para poder definiar la redsocial ya que no es relevante para este problema
+
+-- Redes Sociales
+red_sin_conexiones = ([vladimir, juan], [], publicacionesTest)
+red_con_conexion_directa = ([vladimir, juan], [relacion_vladimir_juan], publicacionesTest)
+red_con_conexion_indirecta = ([vladimir, messi, juan], [relacion_vladimir_messi, relacion_messi_juan], publicacionesTest)
+red_con_multiples_conexiones = ([vladimir, messi, pedro, lucas, juan], [relacion_vladimir_messi, relacion_messi_pedro, relacion_pedro_lucas, relacion_lucas_juan], publicacionesTest)
+
+
+testsSuiteexisteSecuenciaDeAmigose = test [
+        " existeSecuenciaDeAmigos 1" ~: (existeSecuenciaDeAmigos redA usuario1 usuario3) ~?= True, 
+        "Caso 3" ~: existeSecuenciaDeAmigos red_sin_conexiones vladimir juan ~?= False,
+        "Caso 4" ~: existeSecuenciaDeAmigos red_con_multiples_conexiones vladimir lucas ~?= False,
+        "Caso 5" ~: existeSecuenciaDeAmigos red_con_conexion_directa vladimir juan ~?= True,
+        "Caso 6" ~: existeSecuenciaDeAmigos red_con_conexion_indirecta vladimir juan ~?= True,
+        "Caso 7" ~: existeSecuenciaDeAmigos red_con_conexion_directa vladimir vladimir ~?= True
+ ]
+
 expectAny actual expected = elem actual expected ~? ("expected any of: " ++ show expected ++ "\n but got: " ++ show actual)
 
 -- Ejemplos

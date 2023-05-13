@@ -183,7 +183,7 @@ auxSFielLeDioLikeATodasLasPublicaciones u (x:xs) | pertenece u (likesDePublicaci
                                                  | otherwise = False
 
 --Hecho por Vladi
--- describir qué hace la función: .....
+-- describir: Dada la red social y dos usuarios devuelve verdadero si es posible trazar un camino entre amigos para ir de un usuario al otro
 --busco al u2
 existeSecuenciaDeAmigos :: RedSocial -> Usuario -> Usuario -> Bool
 existeSecuenciaDeAmigos red u1 u2 = esAmigoQueBuscamos red u2 (amigosDe red u1) []
