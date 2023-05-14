@@ -6,7 +6,23 @@ main = runTestTT tests
 --Vladi: Vamos a hacer una secuencia de test para cada ejercicios y luegos vamos a poner estas secuencias en el main para que corran todos los test para todos los ejercios
 tests = test [
    
-    
+    " nombresDeUsuarios 1" ~: (nombresDeUsuarios redA) ~?= ["Juan","Natalia","Pedro","Mariela"],
+
+    testsSuiteAmigosDe,
+
+    " cantidadDeAmigos 1" ~: (cantidadDeAmigos redA usuario1) ~?= 2,
+
+    " usuarioConMasAmigos 1" ~: expectAny (usuarioConMasAmigos redA) [usuario2, usuario4],
+
+    " estaRobertoCarlos 1" ~: (estaRobertoCarlos redA) ~?= False,
+
+    " publicacionesDe 1" ~: (publicacionesDe redA usuario2) ~?= [publicacion2_1, publicacion2_2],
+
+    " publicacionesQueLeGustanA 1" ~: (publicacionesQueLeGustanA redA usuario1) ~?= [publicacion2_2, publicacion4_1],
+
+    " lesGustanLasMismasPublicaciones 2" ~: (lesGustanLasMismasPublicaciones redB usuario1 usuario3) ~?= True,
+
+    " tieneUnSeguidorFiel 1" ~: (tieneUnSeguidorFiel redA usuario1) ~?= True,
     
     testsSuiteexisteSecuenciaDeAmigose
 
@@ -56,20 +72,33 @@ Consideraremos las siguientes clasificaciones:
             -Tiene 1
             -Tiene 0
 Paso 7: Armar los casos de test
-Red con usuarios, sin relaciones, usuario sin relación.
-Red con usuarios, con relaciones, usuario sin relación.
-Red con usuarios, con relaciones, usuario con una relación.
-Red con usuarios, con relaciones, usuario con tres relaciones.
-Red sin usuarios, sin relaciones, usuario sin relación. (Este caso no es válido debido a que el usuario debe pertenecer a la red, pero lo menciono para completar las combinaciones)
+Caso 1:Red con usuarios, sin relaciones, usuario sin relación.
+Caso 2:Red con usuarios, con relaciones, usuario sin relación.
+Caso 3:Red con usuarios, con relaciones, usuario con una relación.
+Caso 4:Red con usuarios, con relaciones, usuario con tres relaciones.
+Caso 5:Red sin usuarios, sin relaciones, usuario sin relación. (Este caso no es válido debido a que el usuario debe pertenecer a la red, pero lo menciono para completar las combinaciones)
 
 -}
+--Definimos usuarios
+usuario1 = (1, "Juan")
+usuario2 = (2, "Lionel Messi")
+usuario3 = (3, "Sergio Agüero")
+usuario4 = (4, "Paulo Dybala")
+usuario5 = (5, "Ángel Di Maria") -- Este usuario no pertenece a ninguna red
 
---Caso de prueba 1:Red social válida, Con relaciones, Usuario válido,Usuario pertenece a la red
-red1 = [(1, [2, 3]), (2, [1]), (3, [1])]
-u1 = 1
+--Definimos redes
+red1 = ([usuario1, usuario2, usuario3], [(usuario1, usuario2), (usuario1, usuario3)], []) -- Red con relaciones
+red2 = ([usuario2], [], []) -- Red sin relaciones
+red3 = ([usuario2, usuario3], [(usuario2, usuario3)], []) -- Red con una relacion
+red4 = ([usuario1, usuario2, usuario3, usuario4], [(usuario1, usuario2), (usuario1, usuario3), (usuario1, usuario4)], []) -- Red con tres relaciones
+red5 = ([usuario2], [], []) -- Red sin el usuario que se prueba
 testsSuiteAmigosDe = test [
-    " amigosDe 1" ~: (amigosDe redA usuario1) ~?= [usuario2, usuario4] --Test de la catedra
-
+    "amigosDe 1" ~: (amigosDe redA usuario1) ~?= [usuario2, usuario4], --Test de la catedra
+     "amigosDe - Caso 1: Red con relaciones, usuario con dos relaciones" ~: (amigosDe red1 usuario1) ~?= [usuario2, usuario3],
+    "amigosDe - Caso 2: Red sin relaciones, usuario sin relaciones" ~: (amigosDe red2 usuario2) ~?= [],
+    "amigosDe - Caso 3: Red con una relacion, usuario con una relacion" ~: (amigosDe red3 usuario2) ~?= [usuario3],
+    "amigosDe - Caso 4: Red con tres relaciones, usuario con tres relaciones" ~: (amigosDe red4 usuario1) ~?= [usuario2, usuario3, usuario4],
+    "amigosDe - Caso 5: Red sin usuario en prueba, usuario no existente en la red" ~: (amigosDe red5 usuario5) ~?= []
  ]
 
 
