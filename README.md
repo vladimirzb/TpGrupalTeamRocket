@@ -5,9 +5,10 @@ TP Grupal de Haskell para la materia Algoritmos1/Intro a la programacion
 </p>
 ### Progreso
 
-- [x] Predicados
-- [X] Predicados probados con casos Test (Terminar para el viernes)
-- [ ] Problemas del 1 al 5 hechos
-- [ ] Problemas del 1 al 5 hechos pasaron los test (Terminar para el miercoles 10 de mayo)
-- [ ] Problemas del 6 al 10 hechos
-- [ ] Problemas del 6 al 10 hechos pasaron los test
+- [x] Vladi: Problemas hechos, test de la catedra pasaron con exitos, testsuite extras agreados y pasaron con exito y explicados 
+
+- [] Santi: Problemas hechos, test de la catedra pasaron con exitos, testsuite extras agreados y pasaron con exito y explicados 
+
+- [] Antu: Problemas hechos, test de la catedra pasaron con exitos, testsuite extras agreados y pasaron con exito y explicados 
+
+- [] Dani: Problemas hechos, test de la catedra pasaron con exitos, testsuite extras agreados y pasaron con exito y explicados 
