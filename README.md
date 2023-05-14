@@ -7,8 +7,8 @@ TP Grupal de Haskell para la materia Algoritmos1/Intro a la programacion
 
 - [x] Vladi: Problemas hechos, test de la catedra pasaron con exitos, testsuite extras agreados y pasaron con exito y explicados 
 
-- [] Santi: Problemas hechos, test de la catedra pasaron con exitos, testsuite extras agreados y pasaron con exito y explicados 
+- [ ] Santi: Problemas hechos, test de la catedra pasaron con exitos, testsuite extras agreados y pasaron con exito y explicados 
 
-- [] Antu: Problemas hechos, test de la catedra pasaron con exitos, testsuite extras agreados y pasaron con exito y explicados 
+- [ ] Antu: Problemas hechos, test de la catedra pasaron con exitos, testsuite extras agreados y pasaron con exito y explicados 
 
-- [] Dani: Problemas hechos, test de la catedra pasaron con exitos, testsuite extras agreados y pasaron con exito y explicados 
+- [ ] Dani: Problemas hechos, test de la catedra pasaron con exitos, testsuite extras agreados y pasaron con exito y explicados 
