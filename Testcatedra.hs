@@ -80,26 +80,28 @@ Caso 5:Red sin usuarios, sin relaciones, usuario sin relación. (Este caso no es
 
 -}
 --Definimos usuarios
-usuario1 = (1, "Juan")
-usuario2 = (2, "Lionel Messi")
-usuario3 = (3, "Sergio Agüero")
-usuario4 = (4, "Paulo Dybala")
-usuario5 = (5, "Ángel Di Maria") -- Este usuario no pertenece a ninguna red
+amigosDe_usuario1 = (1, "Vladimir")
+amigosDe_usuario2 = (2, "Lionel Messi")
+amigosDe_usuario3 = (3, "Sergio Agüero")
+amigosDe_usuario4 = (4, "Paulo Dybala")
+amigosDe_usuario5 = (5, "Ángel Di Maria") -- Este usuario no pertenece a ninguna red
 
 --Definimos redes
-red1 = ([usuario1, usuario2, usuario3], [(usuario1, usuario2), (usuario1, usuario3)], []) -- Red con relaciones
-red2 = ([usuario2], [], []) -- Red sin relaciones
-red3 = ([usuario2, usuario3], [(usuario2, usuario3)], []) -- Red con una relacion
-red4 = ([usuario1, usuario2, usuario3, usuario4], [(usuario1, usuario2), (usuario1, usuario3), (usuario1, usuario4)], []) -- Red con tres relaciones
-red5 = ([usuario2], [], []) -- Red sin el usuario que se prueba
+amigosDe_red1 = ([amigosDe_usuario1, amigosDe_usuario2, amigosDe_usuario3], [(amigosDe_usuario1, amigosDe_usuario2), (amigosDe_usuario1, amigosDe_usuario3)], []) -- Red con relaciones
+amigosDe_red2 = ([amigosDe_usuario2], [], []) -- Red sin relaciones
+amigosDe_red3 = ([amigosDe_usuario2, amigosDe_usuario3], [(amigosDe_usuario2, amigosDe_usuario3)], []) -- Red con una relacion
+amigosDe_red4 = ([amigosDe_usuario1, amigosDe_usuario2, amigosDe_usuario3, amigosDe_usuario4], [(amigosDe_usuario1, amigosDe_usuario2), (amigosDe_usuario1, amigosDe_usuario3), (amigosDe_usuario1, amigosDe_usuario4)], []) -- Red con tres relaciones
+amigosDe_red5 = ([amigosDe_usuario2], [], []) -- Red sin el usuario que se prueba
+
 testsSuiteAmigosDe = test [
     "amigosDe 1" ~: (amigosDe redA usuario1) ~?= [usuario2, usuario4], --Test de la catedra
-     "amigosDe - Caso 1: Red con relaciones, usuario con dos relaciones" ~: (amigosDe red1 usuario1) ~?= [usuario2, usuario3],
-    "amigosDe - Caso 2: Red sin relaciones, usuario sin relaciones" ~: (amigosDe red2 usuario2) ~?= [],
-    "amigosDe - Caso 3: Red con una relacion, usuario con una relacion" ~: (amigosDe red3 usuario2) ~?= [usuario3],
-    "amigosDe - Caso 4: Red con tres relaciones, usuario con tres relaciones" ~: (amigosDe red4 usuario1) ~?= [usuario2, usuario3, usuario4],
-    "amigosDe - Caso 5: Red sin usuario en prueba, usuario no existente en la red" ~: (amigosDe red5 usuario5) ~?= []
+   "amigosDe - Caso 1: Red con relaciones, usuario con dos relaciones" ~: (amigosDe amigosDe_red1 amigosDe_usuario1) ~?= [amigosDe_usuario2, amigosDe_usuario3],
+    "amigosDe - Caso 2: Red sin relaciones, usuario sin relaciones" ~: (amigosDe amigosDe_red2 amigosDe_usuario2) ~?= [],
+    "amigosDe - Caso 3: Red con una relacion, usuario con una relacion" ~: (amigosDe amigosDe_red3 amigosDe_usuario2) ~?= [amigosDe_usuario3],
+    "amigosDe - Caso 4: Red con tres relaciones, usuario con tres relaciones" ~: (amigosDe amigosDe_red4 amigosDe_usuario1) ~?= [amigosDe_usuario2, amigosDe_usuario3, amigosDe_usuario4],
+    "amigosDe - Caso 5: Red sin usuario en prueba, usuario no existente en la red" ~: (amigosDe amigosDe_red5 amigosDe_usuario5) ~?= []
  ]
+------------------------------------Test de vladi: cantidadDeAmigos--------------------------------------------------
 
 
 -------------------------------Test de vladi: existeSecuenciaDeAmigos-----------------------------------------
