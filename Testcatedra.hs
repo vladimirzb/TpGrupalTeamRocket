@@ -147,6 +147,9 @@ Usuario1 y Usuario2 son la misma persona.
 Caso 8: La red social es un grafo no conectado. No hay un camino entre el Usuario1 y Usuario2.
 
 Caso 9: Hay múltiples caminos posibles entre el Usuario1 y Usuario2.
+Caso 10: False.
+Red con usuarios y relaciones.
+Usuario1 y Usuario2 están en la misma red, pero están en subgrafos separados, lo que significa que no hay un camino que conecte directamente a Usuario1 con Usuario2.
 -}
 -- Usuarios
 vladimir = (1, "Vladimir")
@@ -238,7 +241,7 @@ testsSuiteexisteSecuenciaDeAmigose = test [
         "Caso 7" ~: existeSecuenciaDeAmigos red_con_conexion_directa vladimir vladimir ~?= True,
         "Caso 8" ~: existeSecuenciaDeAmigos red_no_conectada vladimir diego ~?= False,
         "Caso 9" ~: existeSecuenciaDeAmigos red_con_multiples_caminos vladimir juan ~?= True,
-        "Caso 10" ~: existeSecuenciaDeAmigos red_seleccion_argentina vladimir dimaria ~?= True
+        "Caso 10" ~: existeSecuenciaDeAmigos red_seleccion_argentina vladimir dimaria ~?= False
 
  ]
 
