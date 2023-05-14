@@ -172,7 +172,15 @@ otamendi = (15, "Otamendi")
 tagliafico = (16, "Tagliafico")
 paredes = (17, "Paredes")
 dimaria = (18, "Di Maria")
-
+-- Usuarios adicionales para el caso 11
+mbappe = (19, "Mbappe")
+pogba = (20, "Pogba")
+kante = (21, "Kante")
+varane = (22, "Varane")
+giroud = (23, "Giroud")
+lloris = (24, "Lloris")
+dembele = (25, "Dembele")
+griezmann = (26, "Griezmann")
 -- Relaciones
 relacion_vladimir_messi = (vladimir, messi)
 relacion_messi_pedro = (messi, pedro)
@@ -196,6 +204,17 @@ relacion_papu_otamendi = (papu, otamendi)
 relacion_otamendi_tagliafico = (otamendi, tagliafico)
 relacion_tagliafico_paredes = (tagliafico, paredes)
 relacion_paredes_dimaria = (paredes, dimaria)
+
+-- Relaciones adicionales para el caso 11
+relacion_mbappe_pogba = (mbappe, pogba)
+relacion_pogba_kante = (pogba, kante)
+relacion_kante_varane = (kante, varane)
+relacion_kante_giroud = (kante, giroud)
+relacion_varane_lloris = (varane, lloris)
+relacion_varane_giroud = (varane, giroud)
+relacion_lloris_dembele = (lloris, dembele)
+relacion_giroud_dembele = (giroud, dembele)
+relacion_dembele_griezmann = (dembele, griezmann)
 -- Publicaciones
 publicacionesTest = [] -- no las estamos utilizando en estos casos de prueba asi que no es relevante las publicaciones
 
@@ -230,7 +249,21 @@ red_seleccion_argentina =
     ]
   , publicacionesTest
   )
-
+-- Red social adicional para el caso 11
+red_francia = 
+  ( [mbappe, pogba, kante, varane, giroud, lloris, dembele, griezmann]
+  , [ relacion_mbappe_pogba
+    , relacion_pogba_kante
+    , relacion_kante_varane
+    , relacion_kante_giroud
+    , relacion_varane_lloris
+    , relacion_varane_giroud
+    , relacion_lloris_dembele
+    , relacion_giroud_dembele
+    , relacion_dembele_griezmann
+    ]
+  , publicacionesTest
+  )
 
 testsSuiteexisteSecuenciaDeAmigose = test [
         " existeSecuenciaDeAmigos 1" ~: (existeSecuenciaDeAmigos redA usuario1 usuario3) ~?= True, 
@@ -241,7 +274,9 @@ testsSuiteexisteSecuenciaDeAmigose = test [
         "Caso 7" ~: existeSecuenciaDeAmigos red_con_conexion_directa vladimir vladimir ~?= True,
         "Caso 8" ~: existeSecuenciaDeAmigos red_no_conectada vladimir diego ~?= False,
         "Caso 9" ~: existeSecuenciaDeAmigos red_con_multiples_caminos vladimir juan ~?= True,
-        "Caso 10" ~: existeSecuenciaDeAmigos red_seleccion_argentina vladimir dimaria ~?= False
+        "Caso 10" ~: existeSecuenciaDeAmigos red_seleccion_argentina vladimir dimaria ~?= False,
+        "Caso 11" ~: existeSecuenciaDeAmigos red_francia mbappe griezmann ~?= True
+
 
  ]
 
