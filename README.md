@@ -4,7 +4,7 @@ TP Grupal de Haskell para la materia Algoritmos1/Intro a la programacion
   <img src="https://user-images.githubusercontent.com/55926702/234432835-cee3b28a-a5b1-4f15-9a8f-c78ea48dc673.gif" alt="team-rocket-pokemon">
 </p>
 ### Progreso
-
+- <span style="color:green">[x]</span> Task 1
 - [x] Vladi: Problemas hechos, test de la catedra pasaron con exitos, testsuite extras agreados y pasaron con exito y explicados 
 
 - [ ] Santi: Problemas hechos, test de la catedra pasaron con exitos, testsuite extras agreados y pasaron con exito y explicados 
