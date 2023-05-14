@@ -101,7 +101,85 @@ testsSuiteAmigosDe = test [
     "amigosDe - Caso 4: Red con tres relaciones, usuario con tres relaciones" ~: (amigosDe amigosDe_red4 amigosDe_usuario1) ~?= [amigosDe_usuario2, amigosDe_usuario3, amigosDe_usuario4],
     "amigosDe - Caso 5: Red sin usuario en prueba, usuario no existente en la red" ~: (amigosDe amigosDe_red5 amigosDe_usuario5) ~?= []
  ]
+ ------------------------------------Fin Test de vladi: amigosDe--------------------------------------------------
+
 ------------------------------------Test de vladi: cantidadDeAmigos--------------------------------------------------
+{-Paso 1: Descomponer la solución informática en unidades funcionales
+En este caso, tenemos una única unidad funcional:
+cantidadDeAmigos
+Paso 2: Elegir una unidad funcional
+La unidad funcional a testear será:
+cantidadDeAmigos
+Paso 3: Identificar factores
+Los factores en este caso son los parámetros del problema:
+red: RedSocial
+u: Usuario
+Paso 4: Determinar categorías
+Para cada parámetro, determinamos las siguientes características:
+red:
+Tiene usuarios?
+Tiene relaciones?
+u: Usuario
+Tiene relacion?
+No tiene relacion?
+Paso 5: Determinar elecciones
+Para cada categoría, determinamos sus elecciones o choices:
+red:
+Tiene usuarios? (Si, no)
+Tiene relaciones?(Si, no)
+u: Usuario
+Tiene relacion? (Si, no)
+-Tiene 5
+-Tiene 3
+-Tiene 1
+-Tiene 0
+Paso 6: Clasificar las elecciones
+Consideraremos las siguientes clasificaciones:
+red:
+Tiene usuarios? (Si, no)
+Tiene relaciones? (Si, no)
+u: Usuario
+Tiene relacion? (Si, no)
+-Tiene 5
+-Tiene 3
+-Tiene 1
+-Tiene 0
+Paso 7: Armar los casos de test
+Caso 1: Red con usuarios, sin relaciones, usuario sin relación.
+Caso 2: Red con usuarios, con relaciones, usuario sin relación.
+Caso 3: Red con usuarios, con relaciones, usuario con una relación.
+Caso 4: Red con usuarios, con relaciones, usuario con tres relaciones.
+Caso 5: Red con usuarios, con relaciones, usuario con cinco relaciones.
+Caso 6: Red sin usuarios, sin relaciones, usuario sin relación. (Este caso no es válido debido a que el usuario debe pertenecer a la red, pero se menciona para completar las combinaciones)
+-}
+
+------------------------------------Fin Test de vladi: cantidadDeAmigos--------------------------------------------------
+--Definimos usuarios
+cantidadDeAmigos_usuario1 = (1, "Vladimir")
+cantidadDeAmigos_usuario2 = (2, "Lionel Messi")
+cantidadDeAmigos_usuario3 = (3, "Sergio Agüero")
+cantidadDeAmigos_usuario4 = (4, "Paulo Dybala")
+cantidadDeAmigos_usuario5 = (5, "Ángel Di Maria") 
+cantidadDeAmigos_usuario6 = (6, "Neymar") 
+
+--Definimos redes
+cantidadDeAmigos_red1 = ([cantidadDeAmigos_usuario1, cantidadDeAmigos_usuario2, cantidadDeAmigos_usuario3], [(cantidadDeAmigos_usuario1, cantidadDeAmigos_usuario2), (cantidadDeAmigos_usuario1, cantidadDeAmigos_usuario3)], []) -- Red con relaciones
+cantidadDeAmigos_red2 = ([cantidadDeAmigos_usuario2], [], []) -- Red sin relaciones
+cantidadDeAmigos_red3 = ([cantidadDeAmigos_usuario2, cantidadDeAmigos_usuario3], [(cantidadDeAmigos_usuario2, cantidadDeAmigos_usuario3)], []) -- Red con una relacion
+cantidadDeAmigos_red4 = ([cantidadDeAmigos_usuario1, cantidadDeAmigos_usuario2, cantidadDeAmigos_usuario3, cantidadDeAmigos_usuario4], [(cantidadDeAmigos_usuario1, cantidadDeAmigos_usuario2), (cantidadDeAmigos_usuario1, cantidadDeAmigos_usuario3), (cantidadDeAmigos_usuario1, cantidadDeAmigos_usuario4)], []) -- Red con tres relaciones
+cantidadDeAmigos_red5 = ([cantidadDeAmigos_usuario1, cantidadDeAmigos_usuario2, cantidadDeAmigos_usuario3, cantidadDeAmigos_usuario4, cantidadDeAmigos_usuario5, cantidadDeAmigos_usuario6], [(cantidadDeAmigos_usuario1, cantidadDeAmigos_usuario2), (cantidadDeAmigos_usuario1, cantidadDeAmigos_usuario3), (cantidadDeAmigos_usuario1, cantidadDeAmigos_usuario4), (cantidadDeAmigos_usuario1, cantidadDeAmigos_usuario5), (cantidadDeAmigos_usuario1, cantidadDeAmigos_usuario6)], []) -- Red con cinco relaciones
+cantidadDeAmigos_red6 = ([], [], []) -- Red sin el usuario que se prueba
+
+
+testsSuiteCantidadDeAmigos  = test [
+    " cantidadDeAmigos 1" ~: (cantidadDeAmigos redA usuario1) ~?= 2, --Test de la catedra
+   "cantidadDeAmigos - Caso 1: Red con relaciones, usuario con dos relaciones" ~: (cantidadDeAmigos cantidadDeAmigos_red1 cantidadDeAmigos_usuario1) ~?= 2,
+    "cantidadDeAmigos - Caso 2: Red sin relaciones, usuario sin relaciones" ~: (cantidadDeAmigos cantidadDeAmigos_red2 cantidadDeAmigos_usuario2) ~?= 0,
+    "cantidadDeAmigos - Caso 3: Red con una relacion, usuario con una relacion" ~: (cantidadDeAmigos cantidadDeAmigos_red3 cantidadDeAmigos_usuario2) ~?= 1,
+    "cantidadDeAmigos - Caso 4: Red con tres relaciones, usuario con tres relaciones" ~: (cantidadDeAmigos cantidadDeAmigos_red4 cantidadDeAmigos_usuario1) ~?= 3,
+    "cantidadDeAmigos - Caso 5: Red con cinco relaciones, usuario con cinco relaciones" ~: (cantidadDeAmigos cantidadDeAmigos_red5 cantidadDeAmigos_usuario1) ~?= 5
+ ]
+
 
 
 -------------------------------Test de vladi: existeSecuenciaDeAmigos-----------------------------------------
