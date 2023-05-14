@@ -10,7 +10,7 @@ tests = test [
 
     testsSuiteAmigosDe,
 
-    " cantidadDeAmigos 1" ~: (cantidadDeAmigos redA usuario1) ~?= 2,
+    testsSuiteCantidadDeAmigos,
 
     " usuarioConMasAmigos 1" ~: expectAny (usuarioConMasAmigos redA) [usuario2, usuario4],
 
