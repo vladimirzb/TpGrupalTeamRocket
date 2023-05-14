@@ -181,6 +181,25 @@ giroud = (23, "Giroud")
 lloris = (24, "Lloris")
 dembele = (25, "Dembele")
 griezmann = (26, "Griezmann")
+-- Usuarios adicionales para el caso 12
+modric = (27, "Modric")
+rakitic = (28, "Rakitic")
+perisic = (29, "Perisic")
+rebic = (30, "Rebic")
+mandzukic = (31, "Mandzukic")
+vida = (32, "Vida")
+lovren = (33, "Lovren")
+brozovic = (34, "Brozovic")
+kovacic = (35, "Kovacic")
+kramaric = (36, "Kramaric")
+vrsaljko = (37, "Vrsaljko")
+jedvaj = (38, "Jedvaj")
+brekalo = (39, "Brekalo")
+barisic = (40, "Barisic")
+-- Usuarios adicionales para el caso 13
+badelj = (41, "Badelj")
+pjaca = (42, "Pjaca")
+kalinic = (43, "Kalinic")
 -- Relaciones
 relacion_vladimir_messi = (vladimir, messi)
 relacion_messi_pedro = (messi, pedro)
@@ -215,6 +234,27 @@ relacion_varane_giroud = (varane, giroud)
 relacion_lloris_dembele = (lloris, dembele)
 relacion_giroud_dembele = (giroud, dembele)
 relacion_dembele_griezmann = (dembele, griezmann)
+-- Relaciones adicionales para el caso 12
+relacion_modric_rakitic = (modric, rakitic)
+relacion_modric_perisic = (modric, perisic)
+relacion_rakitic_rebic = (rakitic, rebic)
+relacion_rakitic_mandzukic = (rakitic, mandzukic)
+relacion_perisic_vida = (perisic, vida)
+relacion_perisic_lovren = (perisic, lovren)
+relacion_rebic_brozovic = (rebic, brozovic)
+relacion_rebic_kovacic = (rebic, kovacic)
+relacion_mandzukic_kramaric = (mandzukic, kramaric)
+relacion_mandzukic_vrsaljko = (mandzukic, vrsaljko)
+relacion_kovacic_jedvaj = (kovacic, jedvaj)
+relacion_kovacic_brekalo = (kovacic, brekalo)
+relacion_vrsaljko_barisic = (vrsaljko, barisic)
+-- Relaciones adicionales para el caso 13
+relacion_modric_badelj = (modric, badelj)
+relacion_mandzukic_pjaca = (mandzukic, pjaca)
+relacion_kovacic_kalinic = (kovacic, kalinic)
+relacion_lovren_brozovic = (lovren, brozovic)
+relacion_badelj_kramaric = (badelj, kramaric)
+relacion_brekalo_mandzukic = (brekalo, mandzukic)
 -- Publicaciones
 publicacionesTest = [] -- no las estamos utilizando en estos casos de prueba asi que no es relevante las publicaciones
 
@@ -264,7 +304,50 @@ red_francia =
     ]
   , publicacionesTest
   )
-
+  -- Red social adicional para el caso 12
+red_croacia = 
+  ( [modric, rakitic, perisic, rebic, mandzukic, vida, lovren, brozovic, kovacic, kramaric, vrsaljko, jedvaj, brekalo, barisic]
+  , [ relacion_modric_rakitic
+    , relacion_modric_perisic
+    , relacion_rakitic_rebic
+    , relacion_rakitic_mandzukic
+    , relacion_perisic_vida
+    , relacion_perisic_lovren
+    , relacion_rebic_brozovic
+    , relacion_rebic_kovacic
+    , relacion_mandzukic_kramaric
+    , relacion_mandzukic_vrsaljko
+    , relacion_kovacic_jedvaj
+    , relacion_kovacic_brekalo
+    , relacion_vrsaljko_barisic
+    ]
+  , publicacionesTest
+  )
+-- Red social adicional para el caso 13
+red_croacia_compleja = 
+  ( [modric, rakitic, perisic, rebic, mandzukic, vida, lovren, brozovic, kovacic, kramaric, vrsaljko, jedvaj, brekalo, barisic, badelj, pjaca, kalinic]
+  , [ relacion_modric_rakitic
+    , relacion_modric_perisic
+    , relacion_modric_badelj
+    , relacion_rakitic_rebic
+    , relacion_rakitic_mandzukic
+    , relacion_perisic_vida
+    , relacion_perisic_lovren
+    , relacion_rebic_brozovic
+    , relacion_rebic_kovacic
+    , relacion_mandzukic_kramaric
+    , relacion_mandzukic_vrsaljko
+    , relacion_mandzukic_pjaca
+    , relacion_kovacic_jedvaj
+    , relacion_kovacic_brekalo
+    , relacion_kovacic_kalinic
+    , relacion_vrsaljko_barisic
+    , relacion_lovren_brozovic
+    , relacion_badelj_kramaric
+    , relacion_brekalo_mandzukic
+    ]
+  , publicacionesTest
+  )
 testsSuiteexisteSecuenciaDeAmigose = test [
         " existeSecuenciaDeAmigos 1" ~: (existeSecuenciaDeAmigos redA usuario1 usuario3) ~?= True, 
         "Caso 3" ~: existeSecuenciaDeAmigos red_sin_conexiones vladimir juan ~?= False,
@@ -275,7 +358,9 @@ testsSuiteexisteSecuenciaDeAmigose = test [
         "Caso 8" ~: existeSecuenciaDeAmigos red_no_conectada vladimir diego ~?= False,
         "Caso 9" ~: existeSecuenciaDeAmigos red_con_multiples_caminos vladimir juan ~?= True,
         "Caso 10" ~: existeSecuenciaDeAmigos red_seleccion_argentina vladimir dimaria ~?= False,
-        "Caso 11" ~: existeSecuenciaDeAmigos red_francia mbappe griezmann ~?= True
+        "Caso 11" ~: existeSecuenciaDeAmigos red_francia mbappe griezmann ~?= True,
+        "Caso 12" ~: existeSecuenciaDeAmigos red_croacia modric barisic ~?= True,
+        "Caso 13" ~: existeSecuenciaDeAmigos red_croacia_compleja modric kalinic ~?= True
 
 
  ]
