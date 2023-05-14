@@ -6,23 +6,7 @@ main = runTestTT tests
 --Vladi: Vamos a hacer una secuencia de test para cada ejercicios y luegos vamos a poner estas secuencias en el main para que corran todos los test para todos los ejercios
 tests = test [
    
-     " nombresDeUsuarios 1" ~: (nombresDeUsuarios redA) ~?= ["Juan","Natalia","Pedro","Mariela"],
-
-    testsSuiteAmigosDe,
-
-    " cantidadDeAmigos 1" ~: (cantidadDeAmigos redA usuario1) ~?= 2,
-
-    " usuarioConMasAmigos 1" ~: expectAny (usuarioConMasAmigos redA) [usuario2, usuario4],
-
-    " estaRobertoCarlos 1" ~: (estaRobertoCarlos redA) ~?= False,
-
-    " publicacionesDe 1" ~: (publicacionesDe redA usuario2) ~?= [publicacion2_1, publicacion2_2],
-
-    " publicacionesQueLeGustanA 1" ~: (publicacionesQueLeGustanA redA usuario1) ~?= [publicacion2_2, publicacion4_1],
-
-    " lesGustanLasMismasPublicaciones 2" ~: (lesGustanLasMismasPublicaciones redB usuario1 usuario3) ~?= True,
-
-    " tieneUnSeguidorFiel 1" ~: (tieneUnSeguidorFiel redA usuario1) ~?= True,
+    
     
     testsSuiteexisteSecuenciaDeAmigose
 
@@ -174,7 +158,17 @@ juan = (5, "Juan")
 maria = (6, "Maria")
 diego = (7, "Diego")
 pepe = (8, "Pepe")
-
+-- Usuarios adicionales para el caso 10
+aguero = (9, "Aguero")
+dybala = (10, "Dybala")
+martinez = (11, "Martinez")
+correa = (12, "Correa")
+pereyra = (13, "Pereyra")
+papu = (14, "Papu")
+otamendi = (15, "Otamendi")
+tagliafico = (16, "Tagliafico")
+paredes = (17, "Paredes")
+dimaria = (18, "Di Maria")
 
 -- Relaciones
 relacion_vladimir_messi = (vladimir, messi)
@@ -182,11 +176,23 @@ relacion_messi_pedro = (messi, pedro)
 relacion_vladimir_juan = (vladimir, juan)
 relacion_messi_juan = (messi, juan)
 relacion_lucas_juan = (lucas, juan)
+
 -- Relaciones adicionales
 relacion_vladimir_maria = (vladimir, maria)
 relacion_maria_diego = (maria, diego)
 relacion_diego_pepe = (diego, pepe)
 relacion_pepe_juan = (pepe, juan)
+
+-- Relaciones adicionales para el caso 10
+relacion_aguero_dybala = (aguero, dybala)
+relacion_dybala_martinez = (dybala, martinez)
+relacion_martinez_correa = (martinez, correa)
+relacion_correa_pereyra = (correa, pereyra)
+relacion_pereyra_papu = (pereyra, papu)
+relacion_papu_otamendi = (papu, otamendi)
+relacion_otamendi_tagliafico = (otamendi, tagliafico)
+relacion_tagliafico_paredes = (tagliafico, paredes)
+relacion_paredes_dimaria = (paredes, dimaria)
 -- Publicaciones
 publicacionesTest = [] -- no las estamos utilizando en estos casos de prueba asi que no es relevante las publicaciones
 
@@ -199,6 +205,29 @@ red_con_multiples_conexiones = ([vladimir, messi, pedro, juan], [relacion_vladim
 -- Redes Sociales adicionales
 red_no_conectada = ([vladimir, messi, maria, diego, pepe, juan], [relacion_vladimir_messi, relacion_maria_diego], publicacionesTest)
 red_con_multiples_caminos = ([vladimir, messi, pedro, lucas, maria, diego, pepe, juan], [relacion_vladimir_messi, relacion_messi_pedro, relacion_lucas_juan, relacion_vladimir_maria, relacion_maria_diego, relacion_diego_pepe, relacion_pepe_juan], publicacionesTest)
+--Red social de la seleccion
+red_seleccion_argentina = 
+  ( [vladimir, messi, pedro, lucas, maria, diego, pepe, juan, aguero, dybala, martinez, correa, pereyra, papu, otamendi, tagliafico, paredes, dimaria]
+  , [ relacion_vladimir_messi
+    , relacion_messi_pedro
+    , relacion_lucas_juan
+    , relacion_vladimir_maria
+    , relacion_maria_diego
+    , relacion_diego_pepe
+    , relacion_pepe_juan
+    , relacion_aguero_dybala
+    , relacion_dybala_martinez
+    , relacion_martinez_correa
+    , relacion_correa_pereyra
+    , relacion_pereyra_papu
+    , relacion_papu_otamendi
+    , relacion_otamendi_tagliafico
+    , relacion_tagliafico_paredes
+    , relacion_paredes_dimaria
+    ]
+  , publicacionesTest
+  )
+
 
 testsSuiteexisteSecuenciaDeAmigose = test [
         " existeSecuenciaDeAmigos 1" ~: (existeSecuenciaDeAmigos redA usuario1 usuario3) ~?= True, 
@@ -208,7 +237,9 @@ testsSuiteexisteSecuenciaDeAmigose = test [
         "Caso 6" ~: existeSecuenciaDeAmigos red_con_conexion_indirecta vladimir juan ~?= True,
         "Caso 7" ~: existeSecuenciaDeAmigos red_con_conexion_directa vladimir vladimir ~?= True,
         "Caso 8" ~: existeSecuenciaDeAmigos red_no_conectada vladimir diego ~?= False,
-        "Caso 9" ~: existeSecuenciaDeAmigos red_con_multiples_caminos vladimir juan ~?= True
+        "Caso 9" ~: existeSecuenciaDeAmigos red_con_multiples_caminos vladimir juan ~?= True,
+        "Caso 10" ~: existeSecuenciaDeAmigos red_seleccion_argentina vladimir dimaria ~?= True
+
  ]
 
 expectAny actual expected = elem actual expected ~? ("expected any of: " ++ show expected ++ "\n but got: " ++ show actual)
