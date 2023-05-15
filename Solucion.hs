@@ -96,7 +96,12 @@ cantidadDeAmigosAux []  = 0
 cantidadDeAmigosAux (u:us)= cantidadDeAmigosAux(us) + 1
 
 
--- describir qué hace la función: .....
+-- Función usuarioConMasAmigos recibe una red válida y la pasa a usuarioConMasAmigosAux
+-- Funcion usuarioConMasAmigosAux recibe una red y un array de Usuarios de la red, itera con el primer usuario de la lista
+-- evaluando si tiene mayor o igual amigos que el resto y devuelve el primer usuario que cumpla
+
+--Test verdadero
+--([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [((1,"Dani"),(2,"Antu")), ((2,"Antu"),(3,"Santi"))], [((3, "Santi"), "Publicacion 1", []), ((2, "Antu"), "Publicacion 2", []), ((3, "Santi"), "Publicacion 3", [])])
 usuarioConMasAmigos :: RedSocial -> Usuario
 usuarioConMasAmigos red = usuarioConMasAmigosAux red (usuarios red)
 
