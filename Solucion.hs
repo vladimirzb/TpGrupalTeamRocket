@@ -40,17 +40,22 @@ likesDePublicacion (_, _, us) = us
 --Hecha por Santi
 -- Función: nombresDeUsuario, dada una red social, devuelve una lista con los nombres de usuario de la red.
 -- Función: proyectarNombres, dada una lista de usuarios, devuelve una lista con los nombres de usuarios y sin repetidos.
---proyectarNombres :: [Usuario] ->  [String] 
---proyectarNombres users = sinRepetidos(proyectarNombresAux users)
+proyectarNombres :: [Usuario] ->  [String] 
+proyectarNombres users = eliminaRepetidos(proyectarNombresAux users)
+
+eliminaRepetidos :: (Eq t) => [t] -> [t]
+eliminaRepetidos [] = []
+eliminaRepetidos (x:xs) | pertenece x xs = eliminaRepetidos xs
+                        | not(pertenece x xs) = x : eliminaRepetidos xs
 
 proyectarNombresAux :: [Usuario] ->  [String] 
 proyectarNombresAux [] = []
-proyectarNombresAux (x:xs) = [nombreDeUsuario x] ++ proyectarNombresAux xs
+proyectarNombresAux (x:xs) = nombreDeUsuario x : proyectarNombresAux xs
 
---nombresDeUsuarios :: RedSocial -> [String]
---nombresDeUsuarios red = proyectarNombres (usuarios red)  
+nombresDeUsuarios :: RedSocial -> [String]
+nombresDeUsuarios red = proyectarNombres (usuarios red)  
 
---proyectarNombres: Dada una lista de usuarios -users-, creo una lista con el nombre de usuario del primer elemento de users y lo voy concatenando con los nombres de usuarios siguientes.  
+--proyectarNombres: Dada una lista de usuarios -users-, creo una lista con el nombre de usuario del primer elemento de users y lo voy concatenando con los nombres de usuarios siguientes. Luego, a esa lista le saco los repetidos.  
 --nombresDeUsuarios: Dada una red social valida -red- llama a la funcion proyectarNombres utilizando la lista de usuarios de red. 
 
 --Test de la catedra: aprobado.
