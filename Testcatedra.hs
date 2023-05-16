@@ -1,4 +1,4 @@
--- Vladi: Va a tirar error la primera vez que lo ejecutes y despues copia este codigo :set -package base y luego volver a loadear el archivo para que funcione y correr main
+-- Vladi: Va a tirar error la primera vez que lo ejecutes y despues copia este codigo :set -package bse y luego volver a loadear el archivo para que funcione y correr main
 import Test.HUnit
 import Solucion
 
@@ -14,7 +14,7 @@ tests = test [
 
     " usuarioConMasAmigos 1" ~: expectAny (usuarioConMasAmigos redA) [usuario2, usuario4],
 
-    " estaRobertoCarlos 1" ~: (estaRobertoCarlos redA) ~?= False,
+    testsSuiteEstaRobertoCarlos,
 
     " publicacionesDe 1" ~: (publicacionesDe redA usuario2) ~?= [publicacion2_1, publicacion2_2],
 
@@ -28,6 +28,138 @@ tests = test [
 
  ]
 --Comentario Vladi: Ya prepare todo para que funcionen los suit cases
+
+------------------------------------Test de Santi: estaRobertoCarlos--------------------------------------------------
+{-Paso 1: Descomponer la solución informática en unidades funcionales
+En este caso, tenemos una única unidad funcional:
+estaRobertoCarlos
+Paso 2: Elegir una unidad funcional
+La unidad funcional a testear será:
+  estaRobertoCarlos
+Paso 3: Identificar factores
+Los factores en este caso son los parámetros del problema:
+  red: RedSocial
+Paso 4: Determinar categorías
+Para cada parámetro, determinamos las siguientes características:
+  red:
+    Tiene usuarios?
+    Tiene relaciones?
+Paso 5: Determinar elecciones
+Para cada categoría, determinamos sus elecciones o choices:
+  red:
+    Tiene usuarios?
+      -Tiene 0
+      -Tiene 2
+      -Tiene 12
+    Tiene relaciones?
+      -Tiene 0
+      -Tiene 1
+      -Tiene 11
+Paso 6: Clasificar las elecciones
+Consideraremos las siguientes clasificaciones:
+  red:
+    Tiene usuarios? 
+      -Tiene 0, tipo único
+      -Tiene 2, tipo único
+      -Tiene 12, tipo combinable
+    Tiene relaciones?
+      -Tiene 0, tipo único
+      -Tiene 2, tipo único
+      -Tiene 12, tipo combinable
+        Entre quienes son la relaciones?
+          -12 relaciones de diferentes usuarios
+          -11 relaciones del mismo usuario, una de otro usuario
+Paso 7: Armar los casos de test
+Caso 1: Red sin usuarios.
+Caso 2: Red con 2 usuarios.
+Caso 3: Red con 12 usuarios, con 0 relaciones.
+Caso 4: Red con 12 usuarios, con 2 relaciones.
+Caso 5: Red con 12 usuarios, con 12 relaciones de diferentes usuarios.
+Caso 6: Red con 12 usuarios, con 12 relaciones y 11 realciones del mismo usuario.
+-}
+
+--e_r_c es abreviación de estaRobertoCarlos
+--Defino los usuarios:
+e_r_c_usuario1 = (1,"Santi")
+e_r_c_usuario2 = (2,"Vladi")
+e_r_c_usuario3 = (3,"Dani")
+e_r_c_usuario4 = (4,"Vladi")
+e_r_c_usuario5 = (5,"Santi")
+e_r_c_usuario6 = (6,"Roberto Carlos")
+e_r_c_usuario7 = (7,"Messi")
+e_r_c_usuario8 = (8,"Scaloni")
+e_r_c_usuario9 = (9,"Palermo")
+e_r_c_usuario10 = (10,"Riquelme")
+e_r_c_usuario11 = (11,"Maradona")
+e_r_c_usuario12 = (12,"Bianchi")
+
+--Defino las relaciones:
+e_r_c_relacion_6_1 = (e_r_c_usuario6, e_r_c_usuario1)
+e_r_c_relacion_6_2 = (e_r_c_usuario6, e_r_c_usuario2)
+e_r_c_relacion_6_3 = (e_r_c_usuario6, e_r_c_usuario3)
+e_r_c_relacion_6_4 = (e_r_c_usuario6, e_r_c_usuario4)
+e_r_c_relacion_6_5 = (e_r_c_usuario6, e_r_c_usuario5)
+e_r_c_relacion_6_7 = (e_r_c_usuario6, e_r_c_usuario7)
+e_r_c_relacion_6_8 = (e_r_c_usuario6, e_r_c_usuario8)
+e_r_c_relacion_6_9 = (e_r_c_usuario6, e_r_c_usuario9)
+e_r_c_relacion_6_10 = (e_r_c_usuario6, e_r_c_usuario10)
+e_r_c_relacion_6_11 = (e_r_c_usuario6, e_r_c_usuario11)
+e_r_c_relacion_6_12 = (e_r_c_usuario6, e_r_c_usuario12)
+e_r_c_relacion_7_9 = (e_r_c_usuario7, e_r_c_usuario9)
+e_r_c_relacion_10_12 = (e_r_c_usuario10, e_r_c_usuario12)
+
+
+--Defino las redes, una por cada caso:
+estaRobertoCarlos_red_1 = ([],[],[])
+estaRobertoCarlos_red_2 = ([e_r_c_usuario1,e_r_c_usuario3],[],[])
+estaRobertoCarlos_red_3 =
+    ([e_r_c_usuario1, e_r_c_usuario2, e_r_c_usuario3, e_r_c_usuario4,
+      e_r_c_usuario5, e_r_c_usuario6, e_r_c_usuario7, e_r_c_usuario8,
+      e_r_c_usuario9, e_r_c_usuario10, e_r_c_usuario11, e_r_c_usuario12],
+
+      [],
+      
+      [])
+estaRobertoCarlos_red_4 =
+    ([e_r_c_usuario1, e_r_c_usuario2, e_r_c_usuario3, e_r_c_usuario4,
+      e_r_c_usuario5, e_r_c_usuario6, e_r_c_usuario7, e_r_c_usuario8,
+      e_r_c_usuario9, e_r_c_usuario10, e_r_c_usuario11, e_r_c_usuario12],
+
+     [e_r_c_relacion_6_5,e_r_c_relacion_10_12],
+
+      [])
+estaRobertoCarlos_red_5 =
+    ([e_r_c_usuario1, e_r_c_usuario2, e_r_c_usuario3, e_r_c_usuario4,
+      e_r_c_usuario5, e_r_c_usuario6, e_r_c_usuario7, e_r_c_usuario8,
+      e_r_c_usuario9, e_r_c_usuario10, e_r_c_usuario11, e_r_c_usuario12],
+
+     [e_r_c_relacion_6_1, e_r_c_relacion_6_2, e_r_c_relacion_6_3, e_r_c_relacion_6_4,
+      e_r_c_relacion_6_5, e_r_c_relacion_6_7, e_r_c_relacion_6_8, e_r_c_relacion_6_9,
+      e_r_c_relacion_6_10, e_r_c_relacion_6_11, e_r_c_relacion_7_9, e_r_c_relacion_10_12],
+
+      []) 
+estaRobertoCarlos_red_6 = 
+    ([e_r_c_usuario1, e_r_c_usuario2, e_r_c_usuario3, e_r_c_usuario4,
+      e_r_c_usuario5, e_r_c_usuario6, e_r_c_usuario7, e_r_c_usuario8,
+      e_r_c_usuario9, e_r_c_usuario10, e_r_c_usuario11, e_r_c_usuario12],
+
+     [e_r_c_relacion_6_1, e_r_c_relacion_6_2, e_r_c_relacion_6_3, e_r_c_relacion_6_4,
+      e_r_c_relacion_6_5, e_r_c_relacion_6_7, e_r_c_relacion_6_8, e_r_c_relacion_6_9,
+      e_r_c_relacion_6_10, e_r_c_relacion_6_11, e_r_c_relacion_6_12, e_r_c_relacion_10_12],
+
+      []) 
+
+testsSuiteEstaRobertoCarlos = test [
+    "estaRobertoCarlos - Caso 0" ~: (estaRobertoCarlos redA) ~?= False, --Test de la catedra
+    "estaRobertoCarlos - Caso 1: Red sin usuarios" ~: (estaRobertoCarlos estaRobertoCarlos_red_1) ~?= False,
+    "estaRobertoCarlos - Caso 2: Red con dos usuarios" ~: (estaRobertoCarlos estaRobertoCarlos_red_2) ~?= False,
+    "estaRobertoCarlos - Caso 3: Red con doce usuarios, cero relaciones" ~: (estaRobertoCarlos estaRobertoCarlos_red_3) ~?= False,
+    "estaRobertoCarlos - Caso 4: Red con doce usuarios, dos relaciones" ~: (estaRobertoCarlos estaRobertoCarlos_red_4) ~?= False,
+    "estaRobertoCarlos - Caso 5: Red con doce usuarios, doce relaciones de diferentes usuarios" ~: (estaRobertoCarlos estaRobertoCarlos_red_5) ~?= False,
+    "estaRobertoCarlos - Caso 6: Red con doce usuarios, doce relaciones del mismo usuario" ~: (estaRobertoCarlos estaRobertoCarlos_red_6) ~?= True
+ ]
+
+------------------------------------Fin Test de Santi: estaRobertoCarlos--------------------------------------------------
 
 ------------------------------------Test de vladi: amigosDe--------------------------------------------------
 
@@ -101,7 +233,7 @@ testsSuiteAmigosDe = test [
     "amigosDe - Caso 4: Red con tres relaciones, usuario con tres relaciones" ~: (amigosDe amigosDe_red4 amigosDe_usuario1) ~?= [amigosDe_usuario2, amigosDe_usuario3, amigosDe_usuario4],
     "amigosDe - Caso 5: Red sin usuario en prueba, usuario no existente en la red" ~: (amigosDe amigosDe_red5 amigosDe_usuario5) ~?= []
  ]
- ------------------------------------Fin Test de vladi: amigosDe--------------------------------------------------
+-------------------------------------Fin Test de vladi: amigosDe--------------------------------------------------
 
 ------------------------------------Test de vladi: cantidadDeAmigos--------------------------------------------------
 {-Paso 1: Descomponer la solución informática en unidades funcionales
@@ -155,6 +287,7 @@ Caso 6: Red sin usuarios, sin relaciones, usuario sin relación. (Este caso no e
 
 ------------------------------------Fin Test de vladi: cantidadDeAmigos--------------------------------------------------
 --Definimos usuarios
+cantidadDeAmigos_usuario1 :: (Integer, String)
 cantidadDeAmigos_usuario1 = (1, "Vladimir")
 cantidadDeAmigos_usuario2 = (2, "Lionel Messi")
 cantidadDeAmigos_usuario3 = (3, "Sergio Agüero")
