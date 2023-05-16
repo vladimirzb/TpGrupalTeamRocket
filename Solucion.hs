@@ -40,15 +40,15 @@ likesDePublicacion (_, _, us) = us
 --Hecha por Santi
 -- Función: nombresDeUsuario, dada una red social, devuelve una lista con los nombres de usuario de la red.
 -- Función: proyectarNombres, dada una lista de usuarios, devuelve una lista con los nombres de usuarios y sin repetidos.
-proyectarNombres :: [Usuario] ->  [String] 
-proyectarNombres users = sinRepetidos(proyectarNombresAux users)
+--proyectarNombres :: [Usuario] ->  [String] 
+--proyectarNombres users = sinRepetidos(proyectarNombresAux users)
 
 proyectarNombresAux :: [Usuario] ->  [String] 
 proyectarNombresAux [] = []
 proyectarNombresAux (x:xs) = [nombreDeUsuario x] ++ proyectarNombresAux xs
 
-nombresDeUsuarios :: RedSocial -> [String]
-nombresDeUsuarios red = proyectarNombres (usuarios red)  
+--nombresDeUsuarios :: RedSocial -> [String]
+--nombresDeUsuarios red = proyectarNombres (usuarios red)  
 
 --proyectarNombres: Dada una lista de usuarios -users-, creo una lista con el nombre de usuario del primer elemento de users y lo voy concatenando con los nombres de usuarios siguientes.  
 --nombresDeUsuarios: Dada una red social valida -red- llama a la funcion proyectarNombres utilizando la lista de usuarios de red. 
@@ -401,30 +401,32 @@ cadenaDeAmigos (x:xs) red | relacionadosDirecto x (head xs) red == True = cadena
 ----------------- Fin Predicados Antu-----------------
 
 -- Predicados Santi
-
---Función: empiezaCon, dada una lista, devuelve su primer elemento.
-empiezaCon :: [t] -> t
-empiezaCon (x:xs) = x
-
---Test
---Caso de prueba --[(1,"Santi"),(2,"Antu")]--, --["a","b","c"]--, --[1,2,3]--
-
---Función: terminaCon, dada una lista, devuelve otra lista con su último elemento.
-terminaCon :: [t] -> [t]
-terminaCon [x] = [x]
-terminaCon (x:xs) = terminaCon xs
+empiezaCon :: (Eq t) => [t] -> t -> Bool
+empiezaCon [] e = False
+empiezaCon (x:xs) e | x == e = True
+                    | otherwise = False
 
 --Test
---Caso de prueba --[(1,"Santi"),(2,"Antu")]--, --["a","b","c"]--, --[1,2,3]--
+--Caso válido: empiezaCon [2,3,4] 2
+--Caso falso: empiezaCon [2,3,4] 3
 
---Función: sinRepetidos, dada una lista con o sin repetidos, devuelve la lista sin repetidos.
-
-sinRepetidos :: (Eq t) => [t] -> [t]
-sinRepetidos [] = []
-sinRepetidos (x:xs) | pertenece x xs = sinRepetidos xs
-                    | not (pertenece x xs) =  x : sinRepetidos xs
+terminaCon :: (Eq t) => [t] -> t -> Bool
+terminaCon [] e = False
+terminaCon (x:xs) e | longitud (x:xs) == 1 && x == e = True
+                    | longitud (x:xs) > 1 = terminaCon xs e
+                    | otherwise = False
 
 --Test
+--Caso válido: empiezaCon [2,3,4] 4
+--Caso falso: empiezaCon [2,3,4] 3
 
+sinRepetidos :: (Eq t) => [t] -> Bool
+sinRepetidos [] = True
+sinRepetidos (x:xs) | pertenece x xs = False
+                    | not (pertenece x xs) =  sinRepetidos xs
+
+--Test
+--Caso válido: sinRepetidos [1,2,3,]
+--Caso falso: sinRepetidos [1,2,3,3]  
 
 ----------------- Fin Predicados Santi -----------------
