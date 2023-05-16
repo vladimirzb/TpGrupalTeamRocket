@@ -38,15 +38,17 @@ likesDePublicacion (_, _, us) = us
 -- Ejercicios
 
 --Hecha por Santi
--- Función: nombresDeUsuario, dada una red social, devuelve una lista con los nombres de usuario de todos los usuarios en la red.
--- Función: proyectarNombres, dada una lista de usuarios, devuelve una lista con los nombres de usuarios correspondientes.
-
+-- Función: nombresDeUsuario, dada una red social, devuelve una lista con los nombres de usuario de la red.
+-- Función: proyectarNombres, dada una lista de usuarios, devuelve una lista con los nombres de usuarios y sin repetidos.
 proyectarNombres :: [Usuario] ->  [String] 
-proyectarNombres [] = []
-proyectarNombres (x:xs) | sinRepetidos (x:xs) = [nombreDeUsuario x] ++ proyectarNombres xs
+proyectarNombres users = sinRepetidos(proyectarNombresAux users)
+
+proyectarNombresAux :: [Usuario] ->  [String] 
+proyectarNombresAux [] = []
+proyectarNombresAux (x:xs) = [nombreDeUsuario x] ++ proyectarNombresAux xs
 
 nombresDeUsuarios :: RedSocial -> [String]
-nombresDeUsuarios red | redSocialValida red = proyectarNombres (usuarios red) 
+nombresDeUsuarios red = proyectarNombres (usuarios red)  
 
 --proyectarNombres: Dada una lista de usuarios -users-, creo una lista con el nombre de usuario del primer elemento de users y lo voy concatenando con los nombres de usuarios siguientes.  
 --nombresDeUsuarios: Dada una red social valida -red- llama a la funcion proyectarNombres utilizando la lista de usuarios de red. 
@@ -117,14 +119,9 @@ usuarioConMasAmigosAux red (x:xs) | cantidadDeAmigos red x > cantidadDeAmigos re
 --Hecha por Santi
 
 --Función: estaRobertoCarlos, dada una red social válida, decide si existe un usuario con más de un millón de amigos en ella.
---Función: estaRobertoCarlosAux, dada una red social y una lista de usuarios, decide si uno de los usuarios tiene más de un millón de amigos en esa red.
 estaRobertoCarlos :: RedSocial -> Bool
-estaRobertoCarlos red | redSocialValida red = estaRobertoCarlosAux red (usuarios red)
-
-estaRobertoCarlosAux :: RedSocial -> [Usuario] -> Bool
-estaRobertoCarlosAux red [] = False
-estaRobertoCarlosAux red (x:xs) | cantidadDeAmigos red x > 1000000 = True
-                                | otherwise = estaRobertoCarlosAux red xs
+estaRobertoCarlos red | cantidadDeAmigos red (usuarioConMasAmigos (red)) > 1000000 = True 
+                      | otherwise = False
 
 --Test de la cátedra: aprobado.
 --Faltan test extras.
@@ -405,14 +402,14 @@ cadenaDeAmigos (x:xs) red | relacionadosDirecto x (head xs) red == True = cadena
 
 -- Predicados Santi
 
---Función que dada una lista, devuelve su primer elemento.
+--Función: empiezaCon, dada una lista, devuelve su primer elemento.
 empiezaCon :: [t] -> t
 empiezaCon (x:xs) = x
 
 --Test
 --Caso de prueba --[(1,"Santi"),(2,"Antu")]--, --["a","b","c"]--, --[1,2,3]--
 
---Función que dada una lista, devuelve otra lista con su último elemento.
+--Función: terminaCon, dada una lista, devuelve otra lista con su último elemento.
 terminaCon :: [t] -> [t]
 terminaCon [x] = [x]
 terminaCon (x:xs) = terminaCon xs
@@ -420,15 +417,14 @@ terminaCon (x:xs) = terminaCon xs
 --Test
 --Caso de prueba --[(1,"Santi"),(2,"Antu")]--, --["a","b","c"]--, --[1,2,3]--
 
---Función que decide si una función tiene repetidos o no.
+--Función: sinRepetidos, dada una lista con o sin repetidos, devuelve la lista sin repetidos.
 
-sinRepetidos :: (Eq t) => [t] -> Bool
-sinRepetidos [] = True
-sinRepetidos (x:xs) | pertenece x xs == True = False
-                    | pertenece x xs == False = sinRepetidos xs
+sinRepetidos :: (Eq t) => [t] -> [t]
+sinRepetidos [] = []
+sinRepetidos (x:xs) | pertenece x xs = sinRepetidos xs
+                    | not (pertenece x xs) =  x : sinRepetidos xs
 
 --Test
---Casos válidos --[(1,"Santi"),(2,"Antu")]--, --["a","b","c"]--, --[1,2,3]--
---Casos falsos --[(1,"Santi"),(2,"Antu"),(2,"Antu")]--, --["a","b","a"]--, --[2,2,3]--
+
 
 ----------------- Fin Predicados Santi -----------------

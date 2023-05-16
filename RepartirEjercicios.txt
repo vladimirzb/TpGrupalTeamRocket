@@ -69,7 +69,7 @@ OK - Ej 8
 OK - Ej 9
 
 Antu
-Ej 4
+OK - Ej 4
 OK - Ej 6
 
 Santi
