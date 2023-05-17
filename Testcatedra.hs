@@ -6,7 +6,7 @@ main = runTestTT tests
 --Vladi: Vamos a hacer una secuencia de test para cada ejercicios y luegos vamos a poner estas secuencias en el main para que corran todos los test para todos los ejercios
 tests = test [
    
-    " nombresDeUsuarios 1" ~: (nombresDeUsuarios redA) ~?= ["Juan","Natalia","Pedro","Mariela"],
+    testsSuiteNombresDeUsuarios,
 
     testsSuiteAmigosDe,
 
@@ -29,10 +29,130 @@ tests = test [
  ]
 --Comentario Vladi: Ya prepare todo para que funcionen los suit cases
 
+------------------------------------Test de Santi: nombresDeUsuarios--------------------------------------------------
+{-Paso 1: Descomponer la solución informática en unidades funcionales
+En este caso, tenemos dos unidades funcionales:
+  nombresDeUsuarios
+  proyectarNombres
+Paso 2: Elegir una unidad funcional
+La primer unidad funcional a testear será:
+  proyectarNombres (debido a que nombresDeUsuarios depende ella)
+Paso 3: Identificar factores
+Los factores en este caso son los parámetros del problema:
+  us: [Usuario]
+Paso 4: Determinar categorías
+Para cada parámetro, determinamos las siguientes características:
+  us:
+    Tiene usuarios?
+Paso 5: Determinar elecciones
+Para cada categoría, determinamos sus elecciones o choices:
+  us:
+    Tiene usuarios?
+      -Tiene 0
+      -Tiene 1
+      -Tiene 5 con nombres de usuario sin repetir
+      -Tiene 5 con nombres de usuarios repetidos
+Paso 6: Clasificar las elecciones
+Consideraremos las siguientes clasificaciones:
+  us:
+    Tiene usuarios? 
+      -Tiene 0, tipo único
+      -Tiene 1, tipo único
+      -Tiene 5 (sin repetidos), tipo único
+      -Tiene 5 (con repetidos), tipo único
+Paso 7: Armar los casos de test
+Caso 1: Lista sin usuarios. Resultado esperado: Lista vacía.
+Caso 2: Lista con 1 usuario. Resultado esperado: Lista con el único nombre de usuario.
+Caso 3: Lista con 5 usuarios, sin repetidos. Resultado esperado: Lista con los nombres de usuario.
+Caso 4: Lista con 5 usuarios, con repetidos. Resultado esperado: Lista con los nombres de usuario sin repetidos.
+-}
+--Defino los usuarios:
+proyectarNombres_usuario1 = (1,"Santi")
+proyectarNombres_usuario2 = (2,"Vladi")
+proyectarNombres_usuario3 = (3,"Dani")
+proyectarNombres_usuario4 = (4,"Antú")
+proyectarNombres_usuario5 = (5,"DiCaprio")
+proyectarNombres_usuario6 = (6,"DiCaprio")
+proyectarNombres_usuario7 = (7,"Vladi")
+
+
+--Defino las listas de usuarios:
+proyectarNombres_lista_usuarios1 = []
+proyectarNombres_lista_usuarios2 = [(3,"Dani")]
+proyectarNombres_lista_usuarios3 = [(1,"Santi"), (2,"Vladi"), (3,"Dani"), (4,"Antu"), (5,"DiCaprio")]
+proyectarNombres_lista_usuarios4 = [(5,"DiCaprio"), (7,"Vladi"), (2, "Vladi"), (4,"Antu"), (6,"DiCaprio")]
+
+testsSuiteProyectarNombres = test [
+    "proyectarNombres - Caso 1: Lista sin usuarios" ~: (proyectarNombres proyectarNombres_lista_usuarios1) ~?= [],
+    "proyectarNombres - Caso 2: Lista con un usuario" ~: (proyectarNombres proyectarNombres_lista_usuarios2) ~?= ["Dani"],
+    "proyectarNombres - Caso 3: Lista con cinco usuarios, sin repetidos" ~: (proyectarNombres proyectarNombres_lista_usuarios3) ~?= ["Santi", "Vladi", "Dani", "Antu", "DiCaprio"],
+    "proyectarNombres - Caso 4: Lista con cinco usuarios, con repetidos" ~: (proyectarNombres proyectarNombres_lista_usuarios4) ~?= ["Vladi", "Antu", "DiCaprio"]
+  ]
+
+{-Paso 8: Terminé de testear ProyectarNombres, vuelvo al paso 2.
+Paso 2: Paso 2: Elegir una unidad funcional
+La segunda unidad funcional a testear será:
+  nombresDeUsuarios
+Paso 3: Identificar factores
+Los factores en este caso son los parámetros del problema:
+  red: RedSocial
+Paso 4: Determinar categorías
+Para cada parámetro, determinamos las siguientes características:
+  red:
+    Tiene usuarios?
+Paso 5: Determinar elecciones
+Para cada categoría, determinamos sus elecciones o choices:
+  red:
+    Tiene usuarios?
+      -Tiene 0
+      -Tiene 1
+      -Tiene 5 con nombres de usuario sin repetir
+      -Tiene 5 con nombres de usuarios repetidos
+Paso 6: Clasificar las elecciones
+Consideraremos las siguientes clasificaciones:
+  red:
+    Tiene usuarios? 
+      -Tiene 0, tipo único
+      -Tiene 1, tipo único
+      -Tiene 5 (sin repetidos), tipo único
+      -Tiene 5 (con repetidos), tipo único
+Paso 7: Armar los casos de test
+Caso 1: Red sin usuarios. Resultado esperado: Lista vacía.
+Caso 2: Red con 1 usuario. Resultado esperado: Lista con el nombre de usuario del usuario.
+Caso 3: Red con 5 usuarios, sin repetidos. Resultado esperado: Lista con los nombres de usuario de los usuarios.
+Caso 4: Red con 5 usuarios, con repetidos. Resultado esperado: Lista con los nombres de usuarios sin repetidos.
+-}
+
+--Defino los usuarios:
+nombresDeUsuarios_usuario1 = (1,"Santi")
+nombresDeUsuarios_usuario2 = (2,"Vladi")
+nombresDeUsuarios_usuario3 = (3,"Dani")
+nombresDeUsuarios_usuario4 = (4,"Antú")
+nombresDeUsuarios_usuario5 = (5,"DiCaprio")
+nombresDeUsuarios_usuario6 = (6,"DiCaprio")
+nombresDeUsuarios_usuario7 = (7,"Vladi")
+
+
+--Defino las redes:
+nombresDeUsuarios_red1 = ([],[],[])
+nombresDeUsuarios_red2 = ([(3,"Dani")],[],[])
+nombresDeUsuarios_red3 = ([(1,"Santi"), (2,"Vladi"), (3,"Dani"), (4,"Antu"), (5,"DiCaprio")], [], [])
+nombresDeUsuarios_red4 = ([(5,"DiCaprio"), (7,"Vladi"), (2, "Vladi"), (4,"Antu"), (6,"DiCaprio")], [], [])
+
+testsSuiteNombresDeUsuarios = test [
+    "nombresDeUsuarios - Caso 0" ~: (nombresDeUsuarios redA) ~?= ["Juan","Natalia","Pedro","Mariela"], --Test de la cátedra
+    "nombresDeUsuarios - Caso 1: Red sin usuarios" ~: (nombresDeUsuarios nombresDeUsuarios_red1) ~?= [],
+    "nombresDeUsuarios - Caso 2: Red con un usuario" ~: (nombresDeUsuarios nombresDeUsuarios_red2) ~?= ["Dani"],
+    "nombresDeUsuarios - Caso 3: Red con cinco usuarios, sin repetidos" ~: (nombresDeUsuarios nombresDeUsuarios_red3) ~?= ["Santi", "Vladi", "Dani", "Antu", "DiCaprio"],
+    "nombresDeUsuarios - Caso 4: Red con cinco usuarios, con repetidos" ~: (nombresDeUsuarios nombresDeUsuarios_red4) ~?= ["Vladi", "Antu", "DiCaprio"]
+  ]
+------------------------------------Fin Test de Santi: nombresDeUsuarios--------------------------------------------------
+
+
 ------------------------------------Test de Santi: estaRobertoCarlos--------------------------------------------------
 {-Paso 1: Descomponer la solución informática en unidades funcionales
 En este caso, tenemos una única unidad funcional:
-estaRobertoCarlos
+  estaRobertoCarlos
 Paso 2: Elegir una unidad funcional
 La unidad funcional a testear será:
   estaRobertoCarlos
@@ -70,12 +190,12 @@ Consideraremos las siguientes clasificaciones:
           -12 relaciones de diferentes usuarios
           -11 relaciones del mismo usuario, una de otro usuario
 Paso 7: Armar los casos de test
-Caso 1: Red sin usuarios.
-Caso 2: Red con 2 usuarios.
-Caso 3: Red con 12 usuarios, con 0 relaciones.
-Caso 4: Red con 12 usuarios, con 2 relaciones.
-Caso 5: Red con 12 usuarios, con 12 relaciones de diferentes usuarios.
-Caso 6: Red con 12 usuarios, con 12 relaciones y 11 realciones del mismo usuario.
+Caso 1: Red sin usuarios. Resultado esperado: False.
+Caso 2: Red con 2 usuarios. Resultado esperado: False.
+Caso 3: Red con 12 usuarios, con 0 relaciones. Resultado esperado: False.
+Caso 4: Red con 12 usuarios, con 2 relaciones. Resultado esperado: False.
+Caso 5: Red con 12 usuarios, con 12 relaciones de diferentes usuarios. Resultado esperado: False.
+Caso 6: Red con 12 usuarios, con 12 relaciones y 11 realciones del mismo usuario. Resultado esperado: True.
 -}
 
 --e_r_c es abreviación de estaRobertoCarlos
@@ -83,7 +203,7 @@ Caso 6: Red con 12 usuarios, con 12 relaciones y 11 realciones del mismo usuario
 e_r_c_usuario1 = (1,"Santi")
 e_r_c_usuario2 = (2,"Vladi")
 e_r_c_usuario3 = (3,"Dani")
-e_r_c_usuario4 = (4,"Vladi")
+e_r_c_usuario4 = (4,"Antú")
 e_r_c_usuario5 = (5,"Santi")
 e_r_c_usuario6 = (6,"Roberto Carlos")
 e_r_c_usuario7 = (7,"Messi")
@@ -145,18 +265,18 @@ estaRobertoCarlos_red_6 =
 
      [e_r_c_relacion_6_1, e_r_c_relacion_6_2, e_r_c_relacion_6_3, e_r_c_relacion_6_4,
       e_r_c_relacion_6_5, e_r_c_relacion_6_7, e_r_c_relacion_6_8, e_r_c_relacion_6_9,
-      e_r_c_relacion_6_10, e_r_c_relacion_6_11, e_r_c_relacion_6_12, e_r_c_relacion_10_12],
+      e_r_c_relacion_6_10, e_r_c_relacion_6_11, e_r_c_relacion_6_12],
 
       []) 
 
 testsSuiteEstaRobertoCarlos = test [
-    "estaRobertoCarlos - Caso 0" ~: (estaRobertoCarlos redA) ~?= False, --Test de la catedra
+    "estaRobertoCarlos - Caso 0" ~: (estaRobertoCarlos redA) ~?= False, --Test de la cátedra
     "estaRobertoCarlos - Caso 1: Red sin usuarios" ~: (estaRobertoCarlos estaRobertoCarlos_red_1) ~?= False,
     "estaRobertoCarlos - Caso 2: Red con dos usuarios" ~: (estaRobertoCarlos estaRobertoCarlos_red_2) ~?= False,
     "estaRobertoCarlos - Caso 3: Red con doce usuarios, cero relaciones" ~: (estaRobertoCarlos estaRobertoCarlos_red_3) ~?= False,
     "estaRobertoCarlos - Caso 4: Red con doce usuarios, dos relaciones" ~: (estaRobertoCarlos estaRobertoCarlos_red_4) ~?= False,
     "estaRobertoCarlos - Caso 5: Red con doce usuarios, doce relaciones de diferentes usuarios" ~: (estaRobertoCarlos estaRobertoCarlos_red_5) ~?= False,
-    "estaRobertoCarlos - Caso 6: Red con doce usuarios, doce relaciones del mismo usuario" ~: (estaRobertoCarlos estaRobertoCarlos_red_6) ~?= True
+    "estaRobertoCarlos - Caso 6: Red con doce usuarios, once relaciones del mismo usuario" ~: (estaRobertoCarlos estaRobertoCarlos_red_6) ~?= True
  ]
 
 ------------------------------------Fin Test de Santi: estaRobertoCarlos--------------------------------------------------
@@ -305,8 +425,8 @@ cantidadDeAmigos_red6 = ([], [], []) -- Red sin el usuario que se prueba
 
 
 testsSuiteCantidadDeAmigos  = test [
-    " cantidadDeAmigos 1" ~: (cantidadDeAmigos redA usuario1) ~?= 2, --Test de la catedra
-   "cantidadDeAmigos - Caso 1: Red con relaciones, usuario con dos relaciones" ~: (cantidadDeAmigos cantidadDeAmigos_red1 cantidadDeAmigos_usuario1) ~?= 2,
+    "cantidadDeAmigos 1" ~: (cantidadDeAmigos redA usuario1) ~?= 2, --Test de la catedra
+    "cantidadDeAmigos - Caso 1: Red con relaciones, usuario con dos relaciones" ~: (cantidadDeAmigos cantidadDeAmigos_red1 cantidadDeAmigos_usuario1) ~?= 2,
     "cantidadDeAmigos - Caso 2: Red sin relaciones, usuario sin relaciones" ~: (cantidadDeAmigos cantidadDeAmigos_red2 cantidadDeAmigos_usuario2) ~?= 0,
     "cantidadDeAmigos - Caso 3: Red con una relacion, usuario con una relacion" ~: (cantidadDeAmigos cantidadDeAmigos_red3 cantidadDeAmigos_usuario2) ~?= 1,
     "cantidadDeAmigos - Caso 4: Red con tres relaciones, usuario con tres relaciones" ~: (cantidadDeAmigos cantidadDeAmigos_red4 cantidadDeAmigos_usuario1) ~?= 3,
