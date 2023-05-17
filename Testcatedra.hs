@@ -1,4 +1,4 @@
--- Vladi: Va a tirar error la primera vez que lo ejecutes y despues copia este codigo :set -package bse y luego volver a loadear el archivo para que funcione y correr main
+-- Vladi: Va a tirar error la primera vez que lo ejecutes y despues copia este codigo :set -package base y luego volver a loadear el archivo para que funcione y correr main
 import Test.HUnit
 import Solucion
 
