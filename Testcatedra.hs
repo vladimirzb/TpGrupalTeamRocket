@@ -808,7 +808,6 @@ testsSuitePublicacionesDe = test [
 -- tieneUnSeguidorFiel ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", [(1, "Dani"), (2, "Antu"), (4, "Vladi")]), ((3, "Santi"), "Publicacion 2", [(3, "Santi")]), ((3, "Santi"), "Publicacion 3", [(2, "Antu"), (3, "Santi")])]) (3, "Santi")
 
 -- tieneUnSeguidorFiel ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", []), ((3, "Santi"), "Publicacion 2", []), ((3, "Santi"), "Publicacion 3", [])]) (3, "Santi")
- ]
 
 -- tieneUnSeguidorFiel ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], []) (3, "Santi")
 --CASO V
@@ -882,12 +881,12 @@ publicacionesQueLeGustanA_red2 = (publicacionesQueLeGustanA_usuarios,[],[publica
 publicacionesQueLeGustanA_red3 = (publicacionesQueLeGustanA_usuarios,[],[publicacionesQueLeGustanA_publicacion4,publicacionesQueLeGustanA_publicacion2,publicacionesQueLeGustanA_publicacion3])
 
 testsSuitepublicacionesQueLeGustanA = test [ 
-     " publicacionesQueLeGustanA 1" ~: (publicacionesQueLeGustanA redA usuario1) ~?= [publicacion2_2, publicacion4_1],
+     " publicacionesQueLeGustanA 1" ~: publicacionesQueLeGustanA redA usuario1 ~?= [publicacion2_2, publicacion4_1],
      "Caso 1 La red no contiene Publicaciones : " ~: publicacionesQueLeGustanA publicacionesQueLeGustanA_red1 publicacionesQueLeGustanA_usuario1 ~?=  [],
-     "Caso 2 El usuario dio like a publicaciones : " ~: publicacionesQueLeGustanA publicacionesQueLeGustanA_red2 publicacionesQueLeGustanA_usuario1 ~?= [publicacionesQueLeGustanA_publicacion1,publicacionesQueLeGustanA_publicacion3]
+     "Caso 2 El usuario dio like a publicaciones : " ~: publicacionesQueLeGustanA publicacionesQueLeGustanA_red2 publicacionesQueLeGustanA_usuario1 ~?= [publicacionesQueLeGustanA_publicacion1,publicacionesQueLeGustanA_publicacion3],
      "Caso 3 Otro usuario dio like a publicacion : " ~: publicacionesQueLeGustanA publicacionesQueLeGustanA_red2 publicacionesQueLeGustanA_usuario4 ~?= [publicacionesQueLeGustanA_publicacion1],
      "Caso 4 El usuario no dio likes : " ~: publicacionesQueLeGustanA publicacionesQueLeGustanA_red3 publicacionesQueLeGustanA_usuario4 ~?= []
- ]
+  ]
 
 expectAny actual expected = elem actual expected ~? ("expected any of: " ++ show expected ++ "\n but got: " ++ show actual)
 
