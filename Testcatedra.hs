@@ -12,11 +12,11 @@ tests = test [
 
     testsSuiteCantidadDeAmigos,
 
-    " usuarioConMasAmigos 1" ~: expectAny (usuarioConMasAmigos redA) [usuario2, usuario4],
+    testSuiteUsuarioConMasAmigos,
 
     testsSuiteEstaRobertoCarlos,
 
-    " publicacionesDe 1" ~: (publicacionesDe redA usuario2) ~?= [publicacion2_1, publicacion2_2],
+    testsSuitepublicacionesDe,
 
     " publicacionesQueLeGustanA 1" ~: (publicacionesQueLeGustanA redA usuario1) ~?= [publicacion2_2, publicacion4_1],
 
@@ -743,6 +743,81 @@ testsSuiteexisteSecuenciaDeAmigose = test [
         "Caso 13" ~: existeSecuenciaDeAmigos red_croacia_compleja modric kalinic ~?= True,
         "Caso 14" ~: existeSecuenciaDeAmigos red_brasil neymar coutinho ~?= True
  ]
+
+-------------------------------------------Tests usuarioConMasAmigos----------------------------------------------------------
+--Definimos Usuarios
+
+usuarioConMasAmigos_usuario1 = (1,"Dani")
+usuarioConMasAmigos_usuario2 = (2,"Antu")
+usuarioConMasAmigos_usuario3 = (3, "Santi")
+usuarioConMasAmigos_usuario4 = (4,"Vladi")
+
+--Definimos Relaciones
+usuarioConMasAmigos_relacion1 = (usuarioConMasAmigos_usuario1,usuarioConMasAmigos_usuario2)
+usuarioConMasAmigos_relacion2 = (usuarioConMasAmigos_usuario2,usuarioConMasAmigos_usuario3)
+usuarioConMasAmigos_relacion3 = (usuarioConMasAmigos_usuario1,usuarioConMasAmigos_usuario4)
+
+--Definimos Redes (no consideramos las publicaciones ya que no son reelevantes)
+usuarioConMasAmigos_usuarios = [usuarioConMasAmigos_usuario1,usuarioConMasAmigos_usuario2,usuarioConMasAmigos_usuario3,usuarioConMasAmigos_usuario4]
+
+usuarioConMasAmigos_red1_relacion1 = []
+usuarioConMasAmigos_red2_relacion2 = [usuarioConMasAmigos_relacion1,usuarioConMasAmigos_relacion2]
+usuarioConMasAmigos_red3_relacion3 = [usuarioConMasAmigos_relacion1,usuarioConMasAmigos_relacion2,usuarioConMasAmigos_relacion3]
+
+
+usuarioConMasAmigos_red1 = [usuarioConMasAmigos_usuarios,usuarioConMasAmigos_red1_relacion1,[]]
+usuarioConMasAmigos_red2 = [usuarioConMasAmigos_usuarios,usuarioConMasAmigos_red2_relacion2,[]]
+usuarioConMasAmigos_red3 = [usuarioConMasAmigos_usuarios,usuarioConMasAmigos_red3_relacion3,[]]
+
+testsSuiteusuarioConMasAmigos = test [
+        " usuarioConMasAmigos 1" ~: expectAny (usuarioConMasAmigos redA) [usuario2, usuario4], 
+        "Caso 1 : Red sin relaciones " ~: usuarioConMasAmigos usuarioConMasAmigos_red1 ~?= usuarioConMasAmigos_usuario4, --Devuelve el último usuario porque la cantidad de amigos de todos es igual (0) entonces itera hasta llegar al ultimo
+        "Caso 2 : Red con alguna relacion " ~: usuarioConMasAmigos usuarioConMasAmigos_red2 ~?= usuarioConMasAmigos_usuario2,
+        "Caso 3 : Red con más relaciónes " ~: usuarioConMasAmigos usuarioConMasAmigos_red3 ~?= usuarioConMasAmigos_usuario1
+        
+ ]
+
+
+
+--------------------------------------------Test publicacionesDe-------------------------------------------------------------
+-- publicacionesDe ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", []), ((2, "Antu"), "Publicacion 2", []), ((3, "Santi"), "Publicacion 3", [])]) (3, "Santi")
+-- publicacionesDe ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", []), ((2, "Antu"), "Publicacion 2", []), ((3, "Santi"), "Publicacion 3", [])]) (2, "Antu")
+-- publicacionesDe ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", []), ((2, "Antu"), "Publicacion 2", []), ((3, "Santi"), "Publicacion 3", [])]) (1, "Dani")
+-- publicacionesDe ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], []) (1, "Dani")
+
+--Definimos usuarios
+
+publicacionesDe_usuario1 = (1,"Dani")
+publicacionesDe_usuario2 = (2,"Antu")
+publicacionesDe_usuario3 = (3, "Santi")
+
+
+--Definimos Publicaciones (no definimos me gusta porque no son reelevantes)
+
+publicacionesDe_publicacion1 = (publicacionesDe_usuario3,"Publicacion 1",[])
+publicacionesDe_publicacion2 = (publicacionesDe_usuario2,"Publicacion 2",[])
+publicacionesDe_publicacion3 = (publicacionesDe_usuario3,"Publicacion 3",[])
+
+
+--Definimos Redes (No definimos relaciones porque no son reelevantes)
+publicacionesDe_usuarios = [publicacionesDe_usuario1, publicacionesDe_usuario2, publicacionesDe_usuario3]
+
+publicacionesDe_red1 = (publicacionesDe_usuarios,[],[])
+publicacionesDe_red2 = (publicacionesDe_usuarios,[],[publicacionesDe_publicacion1,publicacionesDe_publicacion2,publicacionesDe_publicacion3])
+
+testsSuitepublicacionesDe = test [
+      " publicacionesDe 1" ~: (publicacionesDe redA usuario2) ~?= [publicacion2_1, publicacion2_2]
+      "Caso 1 Red sin publicaciónes : " ~: (publicacionesDe publicacionesDe_red1 publicacionesDe_usuario1) ~?= [],
+      "Caso 2 Usuario con una publicación : " ~: (publicacionesDe publicacionesDe_red2 publicacionesDe_usuario2) ~?= [publicacionesDe_publicacion2],
+      "Caso 3 Usuario con dos publicaciónes : " ~: (publicacionesDe publicacionesDe_red2 publicacionesDe_usuario3) ~?= [publicacionesDe_publicacion1, publicacionesDe_publicacion3],
+      "Caso 4 Usuario sin publcaciónes : " ~: (publicacionesDe publicacionesDe_red2 publicacionesDe_usuario1) ~?= [] 
+
+
+]
+
+
+----------------------------------------------------------
+ 
 
 expectAny actual expected = elem actual expected ~? ("expected any of: " ++ show expected ++ "\n but got: " ++ show actual)
 
