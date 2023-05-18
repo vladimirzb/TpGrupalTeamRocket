@@ -919,8 +919,7 @@ lesGustanLasMismasPublicaciones_publicacion7 = (lesGustanLasMismasPublicaciones_
 --Definimos Redes (No definimos relaciones porque no son reelevantes)
 lesGustanLasMismasPublicaciones_usuarios = [lesGustanLasMismasPublicaciones_usuario1,lesGustanLasMismasPublicaciones_usuario2,lesGustanLasMismasPublicaciones_usuario3,lesGustanLasMismasPublicaciones_usuario4]
 
-lesGustanLasMismasPublicaciones_red1 = (lesGustanLasMismasPublicaciones_usuarios,[],[lesGustanLasMismasPublicaciones_publicacion2,lesGustanLasMismasPublicaciones_publicacion3])
-lesGustanLasMismasPublicaciones_red2 = (lesGustanLasMismasPublicaciones_usuarios,[],[]) --Caso False Vladi Dani les gustan distintas
+lesGustanLasMismasPublicaciones_red1 = (lesGustanLasMismasPublicaciones_usuarios,[],[lesGustanLasMismasPublicaciones_publicacion2,lesGustanLasMismasPublicaciones_publicacion3]) --Caso False Vladi Dani les gustan distintas
 lesGustanLasMismasPublicaciones_red3 = (lesGustanLasMismasPublicaciones_usuarios,[],[lesGustanLasMismasPublicaciones_publicacion1,lesGustanLasMismasPublicaciones_publicacion2,lesGustanLasMismasPublicaciones_publicacion3]) --Caso False Vladi Dani les gusta una igual pero otras no en simultaneo
 lesGustanLasMismasPublicaciones_red4 = (lesGustanLasMismasPublicaciones_usuarios,[],[lesGustanLasMismasPublicaciones_publicacion5,lesGustanLasMismasPublicaciones_publicacion6]) -- Caso verdadero porque no hay likes Dani Vladi
 lesGustanLasMismasPublicaciones_red5 = (lesGustanLasMismasPublicaciones_usuarios,[],[]) --Caso verdadero porque no hay publicaciones, por ende les gustan a ambos 0 Dani Vladi
@@ -928,7 +927,7 @@ lesGustanLasMismasPublicaciones_red6 = (lesGustanLasMismasPublicaciones_usuarios
 
 testSuitelesGustanLasMismasPublicaciones = test [
     " lesGustanLasMismasPublicaciones 2" ~: (lesGustanLasMismasPublicaciones redB usuario1 usuario3) ~?= True,
-    "Caso 1 Les gustan distintas : " ~: lesGustanLasMismasPublicaciones lesGustanLasMismasPublicaciones_red2 lesGustanLasMismasPublicaciones_usuario1 lesGustanLasMismasPublicaciones_usuario1 ~?= False,
+    "Caso 1 Les gustan distintas : " ~: lesGustanLasMismasPublicaciones lesGustanLasMismasPublicaciones_red1 lesGustanLasMismasPublicaciones_usuario1 lesGustanLasMismasPublicaciones_usuario4 ~?= False,
     "Caso 2 Les gusta una igual pero no todas : " ~: lesGustanLasMismasPublicaciones lesGustanLasMismasPublicaciones_red3 lesGustanLasMismasPublicaciones_usuario1 lesGustanLasMismasPublicaciones_usuario4 ~?= False,
     "Caso 3 Publicaciones sin like : " ~: lesGustanLasMismasPublicaciones lesGustanLasMismasPublicaciones_red4 lesGustanLasMismasPublicaciones_usuario1 lesGustanLasMismasPublicaciones_usuario4 ~?= True,
     "Caso 4 No hay publicaciones : " ~: lesGustanLasMismasPublicaciones lesGustanLasMismasPublicaciones_red5 lesGustanLasMismasPublicaciones_usuario1 lesGustanLasMismasPublicaciones_usuario4 ~?= True,
