@@ -20,8 +20,8 @@ tests = test [
 
     testsSuitepublicacionesQueLeGustanA,
     
-    " lesGustanLasMismasPublicaciones 2" ~: (lesGustanLasMismasPublicaciones redB usuario1 usuario3) ~?= True,
-
+    lesGustanLasMismasPublicaciones,
+    
     testsSuiteTieneUnSeguidorFiel,
     
     testsSuiteexisteSecuenciaDeAmigose
