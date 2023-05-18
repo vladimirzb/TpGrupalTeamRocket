@@ -730,18 +730,18 @@ red_brasil =
   )
 testsSuiteexisteSecuenciaDeAmigose = test [
         " existeSecuenciaDeAmigos 1" ~: (existeSecuenciaDeAmigos redA usuario1 usuario3) ~?= True, 
-        "Caso 3" ~: existeSecuenciaDeAmigos red_sin_conexiones vladimir juan ~?= False,
-        "Caso 4" ~: existeSecuenciaDeAmigos red_con_multiples_conexiones vladimir lucas ~?= False,
-        "Caso 5" ~: existeSecuenciaDeAmigos red_con_conexion_directa vladimir juan ~?= True,
-        "Caso 6" ~: existeSecuenciaDeAmigos red_con_conexion_indirecta vladimir juan ~?= True,
-        "Caso 7" ~: existeSecuenciaDeAmigos red_con_conexion_directa vladimir vladimir ~?= True,
-        "Caso 8" ~: existeSecuenciaDeAmigos red_no_conectada vladimir diego ~?= False,
-        "Caso 9" ~: existeSecuenciaDeAmigos red_con_multiples_caminos vladimir juan ~?= True,
-        "Caso 10" ~: existeSecuenciaDeAmigos red_seleccion_argentina vladimir dimaria ~?= False,
-        "Caso 11" ~: existeSecuenciaDeAmigos red_francia mbappe griezmann ~?= True,
-        "Caso 12" ~: existeSecuenciaDeAmigos red_croacia modric barisic ~?= True,
-        "Caso 13" ~: existeSecuenciaDeAmigos red_croacia_compleja modric kalinic ~?= True,
-        "Caso 14" ~: existeSecuenciaDeAmigos red_brasil neymar coutinho ~?= True
+        "Caso 3 Red con usuarios y relaciones. Usuario1 con relaciones, Usuario2 sin relaciones." ~: existeSecuenciaDeAmigos red_sin_conexiones vladimir juan ~?= False,
+        "Caso 4: Red con usuarios y relaciones. Usuario1 con una relación, Usuario2 con una relación, pero no están conectados." ~: existeSecuenciaDeAmigos red_con_multiples_conexiones vladimir lucas ~?= False,
+        "Caso 5: Red con usuarios y relaciones. Usuario1 con una relación, Usuario2 con una relación, y están conectados directamente." ~: existeSecuenciaDeAmigos red_con_conexion_directa vladimir juan ~?= True,
+        "Caso 6: Red con usuarios y relaciones. Usuario1 con varias relaciones, Usuario2 con una relación, y están conectados a través de un amigo en común." ~: existeSecuenciaDeAmigos red_con_conexion_indirecta vladimir juan ~?= True,
+        "Caso 7: Red con usuarios y relaciones. Usuario1 y Usuario2 son la misma persona." ~: existeSecuenciaDeAmigos red_con_conexion_directa vladimir vladimir ~?= True,
+        "Caso 8: La red social es un grafo no conectado. No hay un camino entre el Usuario1 y Usuario2." ~: existeSecuenciaDeAmigos red_no_conectada vladimir diego ~?= False,
+        "Caso 9: Hay múltiples caminos posibles entre el Usuario1 y Usuario2." ~: existeSecuenciaDeAmigos red_con_multiples_caminos vladimir juan ~?= True,
+        "Caso 10: No existe un camino entre el Usuario1 y Usuario2." ~: existeSecuenciaDeAmigos red_seleccion_argentina vladimir dimaria ~?= False,
+        "Caso 11: Hay una secuencia de amigos de Mbappe a Griezmann, pero la red de amigos es no lineal y compleja." ~: existeSecuenciaDeAmigos red_francia mbappe griezmann ~?= True,
+        "Caso 12: La red social forma una estructura de árbol binario." ~: existeSecuenciaDeAmigos red_croacia modric barisic ~?= True,
+        "Caso 13: La red social forma una estructura de árbol más compleja con conexiones entre diferentes niveles" ~: existeSecuenciaDeAmigos red_croacia_compleja modric kalinic ~?= True,
+        "Caso 14: Arboles separados" ~: existeSecuenciaDeAmigos red_brasil neymar coutinho ~?= True
  ]
 
 -------------------------------------------Tests usuarioConMasAmigos----------------------------------------------------------
