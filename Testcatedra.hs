@@ -917,14 +917,14 @@ lesGustanLasMismasPublicaciones_publicacion6 = (lesGustanLasMismasPublicaciones_
 lesGustanLasMismasPublicaciones_publicacion7 = (lesGustanLasMismasPublicaciones_usuario3,"Publicacion 7",[lesGustanLasMismasPublicaciones_usuario2,lesGustanLasMismasPublicaciones_usuario3])
 
 --Definimos Redes (No definimos relaciones porque no son reelevantes)
-lesGustanLasMismasPublicaciones_usuarios = (lesGustanLasMismasPublicaciones_usuario1,lesGustanLasMismasPublicaciones_usuario2,lesGustanLasMismasPublicaciones_usuario3,lesGustanLasMismasPublicaciones_usuario4)
+lesGustanLasMismasPublicaciones_usuarios = [lesGustanLasMismasPublicaciones_usuario1,lesGustanLasMismasPublicaciones_usuario2,lesGustanLasMismasPublicaciones_usuario3,lesGustanLasMismasPublicaciones_usuario4]
 
 lesGustanLasMismasPublicaciones_red1 = (lesGustanLasMismasPublicaciones_usuarios,[],[lesGustanLasMismasPublicaciones_publicacion2,lesGustanLasMismasPublicaciones_publicacion3])
-lesGustanLasMismasPublicaciones_red2 = ([publicacionesQueLeGustanA_usuarios],[],[]) --Caso False Vladi Dani les gustan distintas
-lesGustanLasMismasPublicaciones_red3 = ([lesGustanLasMismasPublicaciones_usuarios],[],[lesGustanLasMismasPublicaciones_publicacion1,lesGustanLasMismasPublicaciones_publicacion2,lesGustanLasMismasPublicaciones_publicacion3]) --Caso False Vladi Dani les gusta una igual pero otras no en simultaneo
-lesGustanLasMismasPublicaciones_red4 = ([lesGustanLasMismasPublicaciones_usuarios],[],[lesGustanLasMismasPublicaciones_publicacion5,lesGustanLasMismasPublicaciones_publicacion6]) -- Caso verdadero porque no hay likes Dani Vladi
-lesGustanLasMismasPublicaciones_red5 = ([lesGustanLasMismasPublicaciones_usuarios],[],[]) --Caso verdadero porque no hay publicaciones, por ende les gustan a ambos 0 Dani Vladi
-lesGustanLasMismasPublicaciones_red6 = ([lesGustanLasMismasPublicaciones_usuarios],[],[lesGustanLasMismasPublicaciones_publicacion1,lesGustanLasMismasPublicaciones_publicacion7])--Caso verdadero Dani Vladi
+lesGustanLasMismasPublicaciones_red2 = (lesGustanLasMismasPublicaciones_usuarios,[],[]) --Caso False Vladi Dani les gustan distintas
+lesGustanLasMismasPublicaciones_red3 = (lesGustanLasMismasPublicaciones_usuarios,[],[lesGustanLasMismasPublicaciones_publicacion1,lesGustanLasMismasPublicaciones_publicacion2,lesGustanLasMismasPublicaciones_publicacion3]) --Caso False Vladi Dani les gusta una igual pero otras no en simultaneo
+lesGustanLasMismasPublicaciones_red4 = (lesGustanLasMismasPublicaciones_usuarios,[],[lesGustanLasMismasPublicaciones_publicacion5,lesGustanLasMismasPublicaciones_publicacion6]) -- Caso verdadero porque no hay likes Dani Vladi
+lesGustanLasMismasPublicaciones_red5 = (lesGustanLasMismasPublicaciones_usuarios,[],[]) --Caso verdadero porque no hay publicaciones, por ende les gustan a ambos 0 Dani Vladi
+lesGustanLasMismasPublicaciones_red6 = (lesGustanLasMismasPublicaciones_usuarios,[],[lesGustanLasMismasPublicaciones_publicacion1,lesGustanLasMismasPublicaciones_publicacion7])--Caso verdadero Dani Vladi
 
 testSuitelesGustanLasMismasPublicaciones = test [
     " lesGustanLasMismasPublicaciones 2" ~: (lesGustanLasMismasPublicaciones redB usuario1 usuario3) ~?= True,
