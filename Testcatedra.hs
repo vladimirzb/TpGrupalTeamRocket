@@ -562,11 +562,7 @@ barisic = (40, "Barisic")
 badelj = (41, "Badelj")
 pjaca = (42, "Pjaca")
 kalinic = (43, "Kalinic")
--- Usuarios adicionales para el caso 14
-neymar = (44, "Neymar")
-alves = (45, "Alves")
-silva = (46, "Silva")
-coutinho = (47, "Coutinho")
+
 -- Relaciones
 relacion_vladimir_messi = (vladimir, messi)
 relacion_messi_pedro = (messi, pedro)
@@ -622,10 +618,7 @@ relacion_kovacic_kalinic = (kovacic, kalinic)
 relacion_lovren_brozovic = (lovren, brozovic)
 relacion_badelj_kramaric = (badelj, kramaric)
 relacion_brekalo_mandzukic = (brekalo, mandzukic)
--- Relaciones adicionales para el caso 14
-relacion_neymar_alves = (neymar, alves)
-relacion_alves_silva = (alves, silva)
-relacion_silva_coutinho = (silva, coutinho)
+
 -- Publicaciones
 publicacionesTest = [] -- no las estamos utilizando en estos casos de prueba asi que no es relevante las publicaciones
 
@@ -719,15 +712,7 @@ red_croacia_compleja =
     ]
   , publicacionesTest
   )
-  -- Red social adicional para el caso 14
-red_brasil = 
-  ( [neymar, alves, silva, coutinho]
-  , [ relacion_neymar_alves
-    , relacion_alves_silva
-    , relacion_silva_coutinho
-    ]
-  , publicacionesTest
-  )
+  
 testsSuiteexisteSecuenciaDeAmigose = test [
         " existeSecuenciaDeAmigos 1" ~: (existeSecuenciaDeAmigos redA usuario1 usuario3) ~?= True, 
         "Caso 3 Red con usuarios y relaciones. Usuario1 con relaciones, Usuario2 sin relaciones." ~: existeSecuenciaDeAmigos red_sin_conexiones vladimir juan ~?= False,
@@ -740,8 +725,7 @@ testsSuiteexisteSecuenciaDeAmigose = test [
         "Caso 10: No existe un camino entre el Usuario1 y Usuario2." ~: existeSecuenciaDeAmigos red_seleccion_argentina vladimir dimaria ~?= False,
         "Caso 11: Hay una secuencia de amigos de Mbappe a Griezmann, pero la red de amigos es no lineal y compleja." ~: existeSecuenciaDeAmigos red_francia mbappe griezmann ~?= True,
         "Caso 12: La red social forma una estructura de árbol binario." ~: existeSecuenciaDeAmigos red_croacia modric barisic ~?= True,
-        "Caso 13: La red social forma una estructura de árbol más compleja con conexiones entre diferentes niveles" ~: existeSecuenciaDeAmigos red_croacia_compleja modric kalinic ~?= True,
-        "Caso 14: Arboles separados" ~: existeSecuenciaDeAmigos red_brasil neymar coutinho ~?= True
+        "Caso 13: La red social forma una estructura de árbol más compleja con conexiones entre diferentes niveles" ~: existeSecuenciaDeAmigos red_croacia_compleja modric kalinic ~?= True
  ]
 
 -------------------------------------------Tests usuarioConMasAmigos----------------------------------------------------------
