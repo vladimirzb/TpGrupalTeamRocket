@@ -20,8 +20,8 @@ tests = test [
 
     testsSuitepublicacionesQueLeGustanA,
     
-    lesGustanLasMismasPublicaciones,
-    
+    testSuitelesGustanLasMismasPublicaciones,
+
     testsSuiteTieneUnSeguidorFiel,
     
     testsSuiteexisteSecuenciaDeAmigose
@@ -926,7 +926,7 @@ lesGustanLasMismasPublicaciones_red4 = ([lesGustanLasMismasPublicaciones_usuario
 lesGustanLasMismasPublicaciones_red5 = ([lesGustanLasMismasPublicaciones_usuarios],[],[]) --Caso verdadero porque no hay publicaciones, por ende les gustan a ambos 0 Dani Vladi
 lesGustanLasMismasPublicaciones_red6 = ([lesGustanLasMismasPublicaciones_usuarios],[],[lesGustanLasMismasPublicaciones_publicacion1,lesGustanLasMismasPublicaciones_publicacion7])--Caso verdadero Dani Vladi
 
-lesGustanLasMismasPublicaciones = test [
+testSuitelesGustanLasMismasPublicaciones = test [
     " lesGustanLasMismasPublicaciones 2" ~: (lesGustanLasMismasPublicaciones redB usuario1 usuario3) ~?= True,
     "Caso 1 Les gustan distintas : " ~: lesGustanLasMismasPublicaciones lesGustanLasMismasPublicaciones_red2 lesGustanLasMismasPublicaciones_usuario1 lesGustanLasMismasPublicaciones_usuario1 ~?= False,
     "Caso 2 Les gusta una igual pero no todas : " ~: lesGustanLasMismasPublicaciones lesGustanLasMismasPublicaciones_red3 lesGustanLasMismasPublicaciones_usuario1 lesGustanLasMismasPublicaciones_usuario4 ~?= False,
