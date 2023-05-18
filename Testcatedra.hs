@@ -888,6 +888,55 @@ testsSuitepublicacionesQueLeGustanA = test [
      "Caso 4 El usuario no dio likes : " ~: publicacionesQueLeGustanA publicacionesQueLeGustanA_red3 publicacionesQueLeGustanA_usuario4 ~?= []
   ]
 
+---------------------------------------------------Test leGustanLasMismasPublicaciones---------------------------------------
+--- Funcion lesGustanLasMismasPublicaciones reutiliza el ejercicio publicacionesQueLeGustanA para traer el array de las publicaciones likeadas por ambos usuarios ingresados. Luego, usando mismosElementos chequeo que ambos array sean iguales, lo cual devolvería True. Caso contrario devuelve False
+-- CASOS QUE DAN FALSE
+-- lesGustanLasMismasPublicaciones ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", [(1, "Dani"), (2, "Antu"), (4, "Vladi")]), ((2, "Antu"), "Publicacion 2", [(2, "Antu"), (3, "Santi"), (4, "Vladi")]), ((3, "Santi"), "Publicacion 3", [(1, "Dani"), (2, "Antu"), (3, "Santi")])]) (1, "Dani") (4, "Vladi")
+-- lesGustanLasMismasPublicaciones ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", [(1, "Dani"), (2, "Antu"), (4, "Vladi")]), ((2, "Antu"), "Publicacion 2", [(2, "Antu"), (3, "Santi")]), ((3, "Santi"), "Publicacion 3", [(1, "Dani"), (2, "Antu"), (3, "Santi")])]) (1, "Dani") (4, "Vladi")
+-- CASO TRUE
+-- lesGustanLasMismasPublicaciones ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", []), ((2, "Antu"), "Publicacion 2", []), ((3, "Santi"), "Publicacion 3", [])]) (1, "Dani") (4, "Vladi")
+-- lesGustanLasMismasPublicaciones ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], []) (1, "Dani") (4, "Vladi")
+-- lesGustanLasMismasPublicaciones ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", [(1, "Dani"), (2, "Antu"), (4, "Vladi")]), ((2, "Antu"), "Publicacion 2", [(2, "Antu"), (3, "Santi")]), ((3, "Santi"), "Publicacion 3", [(2, "Antu"), (3, "Santi")])]) (1, "Dani") (4, "Vladi")
+-- Si no hay publicaciones siempre da true, porque los dos usuarios ingresados le dieron like a la misma cantidad de publicaciones: 0.
+-- Idem si ninguna publicación tiene likes.
+--No usamos tests con relaciones porque no son relevantes al funcionamiento del ejercicio.
+
+--Definimos usuarios
+lesGustanLasMismasPublicaciones_usuario1 = (1,"Dani")
+lesGustanLasMismasPublicaciones_usuario2 = (2,"Antu")
+lesGustanLasMismasPublicaciones_usuario3 = (3,"Santi")
+lesGustanLasMismasPublicaciones_usuario4 = (4,"Vladi")
+
+--Definimos publicaciones 
+lesGustanLasMismasPublicaciones_publicacion1 = (lesGustanLasMismasPublicaciones_usuario3,"Publicacion 1",[lesGustanLasMismasPublicaciones_usuario1,lesGustanLasMismasPublicaciones_usuario2,lesGustanLasMismasPublicaciones_usuario4])
+lesGustanLasMismasPublicaciones_publicacion2 = (lesGustanLasMismasPublicaciones_usuario2,"Publicacion 2",[lesGustanLasMismasPublicaciones_usuario3,lesGustanLasMismasPublicaciones_usuario2,lesGustanLasMismasPublicaciones_usuario4])
+lesGustanLasMismasPublicaciones_publicacion3 = (lesGustanLasMismasPublicaciones_usuario3,"Publicacion 3",[lesGustanLasMismasPublicaciones_usuario1,lesGustanLasMismasPublicaciones_usuario2,lesGustanLasMismasPublicaciones_usuario3])
+lesGustanLasMismasPublicaciones_publicacion4 = (lesGustanLasMismasPublicaciones_usuario4,"Publicacion 4",[lesGustanLasMismasPublicaciones_usuario1,lesGustanLasMismasPublicaciones_usuario2,lesGustanLasMismasPublicaciones_usuario4])
+lesGustanLasMismasPublicaciones_publicacion5 = (lesGustanLasMismasPublicaciones_usuario2,"Publicacion 5",[])
+lesGustanLasMismasPublicaciones_publicacion6 = (lesGustanLasMismasPublicaciones_usuario3,"Publicacion 6",[])
+lesGustanLasMismasPublicaciones_publicacion7 = (lesGustanLasMismasPublicaciones_usuario3,"Publicacion 7",[lesGustanLasMismasPublicaciones_usuario2,lesGustanLasMismasPublicaciones_usuario3])
+
+--Definimos Redes (No definimos relaciones porque no son reelevantes)
+lesGustanLasMismasPublicaciones_usuarios = (lesGustanLasMismasPublicaciones_usuario1,lesGustanLasMismasPublicaciones_usuario2,lesGustanLasMismasPublicaciones_usuario3,lesGustanLasMismasPublicaciones_usuario4)
+
+lesGustanLasMismasPublicaciones_red1 = (lesGustanLasMismasPublicaciones_usuarios,[],[lesGustanLasMismasPublicaciones_publicacion2,lesGustanLasMismasPublicaciones_publicacion3])
+lesGustanLasMismasPublicaciones_red2 = ([publicacionesQueLeGustanA_usuarios],[],[]) --Caso False Vladi Dani les gustan distintas
+lesGustanLasMismasPublicaciones_red3 = ([lesGustanLasMismasPublicaciones_usuarios],[],[lesGustanLasMismasPublicaciones_publicacion1,lesGustanLasMismasPublicaciones_publicacion2,lesGustanLasMismasPublicaciones_publicacion3]) --Caso False Vladi Dani les gusta una igual pero otras no en simultaneo
+lesGustanLasMismasPublicaciones_red4 = ([lesGustanLasMismasPublicaciones_usuarios],[],[lesGustanLasMismasPublicaciones_publicacion5,lesGustanLasMismasPublicaciones_publicacion6]) -- Caso verdadero porque no hay likes Dani Vladi
+lesGustanLasMismasPublicaciones_red5 = ([lesGustanLasMismasPublicaciones_usuarios],[],[]) --Caso verdadero porque no hay publicaciones, por ende les gustan a ambos 0 Dani Vladi
+lesGustanLasMismasPublicaciones_red6 = ([lesGustanLasMismasPublicaciones_usuarios],[],[lesGustanLasMismasPublicaciones_publicacion1,lesGustanLasMismasPublicaciones_publicacion7])--Caso verdadero Dani Vladi
+
+lesGustanLasMismasPublicaciones = test [
+    " lesGustanLasMismasPublicaciones 2" ~: (lesGustanLasMismasPublicaciones redB usuario1 usuario3) ~?= True,
+    "Caso 1 Les gustan distintas : " ~: lesGustanLasMismasPublicaciones lesGustanLasMismasPublicaciones_red2 lesGustanLasMismasPublicaciones_usuario1 lesGustanLasMismasPublicaciones_usuario1 ~?= False,
+    "Caso 2 Les gusta una igual pero no todas : " ~: lesGustanLasMismasPublicaciones lesGustanLasMismasPublicaciones_red3 lesGustanLasMismasPublicaciones_usuario1 lesGustanLasMismasPublicaciones_usuario4 ~?= False,
+    "Caso 3 Publicaciones sin like : " ~: lesGustanLasMismasPublicaciones lesGustanLasMismasPublicaciones_red4 lesGustanLasMismasPublicaciones_usuario1 lesGustanLasMismasPublicaciones_usuario4 ~?= True,
+    "Caso 4 No hay publicaciones : " ~: lesGustanLasMismasPublicaciones lesGustanLasMismasPublicaciones_red5 lesGustanLasMismasPublicaciones_usuario1 lesGustanLasMismasPublicaciones_usuario4 ~?= True,
+    "Caso 5 Les gustan las mismas publicaciones : " ~: lesGustanLasMismasPublicaciones lesGustanLasMismasPublicaciones_red6 lesGustanLasMismasPublicaciones_usuario1 lesGustanLasMismasPublicaciones_usuario4 ~?= True
+
+
+ ]
+
 expectAny actual expected = elem actual expected ~? ("expected any of: " ++ show expected ++ "\n but got: " ++ show actual)
 
 -- Ejemplos
