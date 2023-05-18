@@ -12,17 +12,17 @@ tests = test [
 
     testsSuiteCantidadDeAmigos,
 
-    testSuiteUsuarioConMasAmigos,
+    testsSuiteUsuarioConMasAmigos,
 
     testsSuiteEstaRobertoCarlos,
 
-    testsSuitepublicacionesDe,
+    testsSuitePublicacionesDe,
 
     " publicacionesQueLeGustanA 1" ~: (publicacionesQueLeGustanA redA usuario1) ~?= [publicacion2_2, publicacion4_1],
 
     " lesGustanLasMismasPublicaciones 2" ~: (lesGustanLasMismasPublicaciones redB usuario1 usuario3) ~?= True,
 
-    " tieneUnSeguidorFiel 1" ~: (tieneUnSeguidorFiel redA usuario1) ~?= True,
+    testsSuiteTieneUnSeguidorFiel,
     
     testsSuiteexisteSecuenciaDeAmigose
 
@@ -761,63 +761,95 @@ usuarioConMasAmigos_relacion3 = (usuarioConMasAmigos_usuario1,usuarioConMasAmigo
 usuarioConMasAmigos_usuarios = [usuarioConMasAmigos_usuario1,usuarioConMasAmigos_usuario2,usuarioConMasAmigos_usuario3,usuarioConMasAmigos_usuario4]
 
 usuarioConMasAmigos_red1_relacion1 = []
-usuarioConMasAmigos_red2_relacion2 = [usuarioConMasAmigos_relacion1,usuarioConMasAmigos_relacion2]
-usuarioConMasAmigos_red3_relacion3 = [usuarioConMasAmigos_relacion1,usuarioConMasAmigos_relacion2,usuarioConMasAmigos_relacion3]
+usuarioConMasAmigos_red2_relacion2 = [usuarioConMasAmigos_relacion1, usuarioConMasAmigos_relacion2]
+usuarioConMasAmigos_red3_relacion3 = [usuarioConMasAmigos_relacion1, usuarioConMasAmigos_relacion2,usuarioConMasAmigos_relacion3]
 
+usuarioConMasAmigos_red1 = (usuarioConMasAmigos_usuarios, usuarioConMasAmigos_red1_relacion1, [])
+usuarioConMasAmigos_red2 = (usuarioConMasAmigos_usuarios, usuarioConMasAmigos_red2_relacion2, [])
+usuarioConMasAmigos_red3 = (usuarioConMasAmigos_usuarios, usuarioConMasAmigos_red3_relacion3, [])
 
-usuarioConMasAmigos_red1 = [usuarioConMasAmigos_usuarios,usuarioConMasAmigos_red1_relacion1,[]]
-usuarioConMasAmigos_red2 = [usuarioConMasAmigos_usuarios,usuarioConMasAmigos_red2_relacion2,[]]
-usuarioConMasAmigos_red3 = [usuarioConMasAmigos_usuarios,usuarioConMasAmigos_red3_relacion3,[]]
-
-testsSuiteusuarioConMasAmigos = test [
-        " usuarioConMasAmigos 1" ~: expectAny (usuarioConMasAmigos redA) [usuario2, usuario4], 
-        "Caso 1 : Red sin relaciones " ~: usuarioConMasAmigos usuarioConMasAmigos_red1 ~?= usuarioConMasAmigos_usuario4, --Devuelve el último usuario porque la cantidad de amigos de todos es igual (0) entonces itera hasta llegar al ultimo
-        "Caso 2 : Red con alguna relacion " ~: usuarioConMasAmigos usuarioConMasAmigos_red2 ~?= usuarioConMasAmigos_usuario2,
-        "Caso 3 : Red con más relaciónes " ~: usuarioConMasAmigos usuarioConMasAmigos_red3 ~?= usuarioConMasAmigos_usuario1
+testsSuiteUsuarioConMasAmigos = test [
+  " usuarioConMasAmigos 1" ~: expectAny (usuarioConMasAmigos redA) [usuario2, usuario4], 
+  "Caso 1 : Red sin relaciones" ~: usuarioConMasAmigos usuarioConMasAmigos_red1 ~?= usuarioConMasAmigos_usuario4, --Devuelve el último usuario porque la cantidad de amigos de todos es igual (0) entonces itera hasta llegar al ultimo
+  "Caso 2 : Red con alguna relacion" ~: usuarioConMasAmigos usuarioConMasAmigos_red2 ~?= usuarioConMasAmigos_usuario2,
+  "Caso 3 : Red con mas relaciones" ~: usuarioConMasAmigos usuarioConMasAmigos_red3  ~?= usuarioConMasAmigos_usuario2 --Igual que en el caso 1, hay dos usuarios con la misma cantidad de amigos y por como itero, devuelvo el último.
         
  ]
 
-
-
 --------------------------------------------Test publicacionesDe-------------------------------------------------------------
--- publicacionesDe ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", []), ((2, "Antu"), "Publicacion 2", []), ((3, "Santi"), "Publicacion 3", [])]) (3, "Santi")
--- publicacionesDe ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", []), ((2, "Antu"), "Publicacion 2", []), ((3, "Santi"), "Publicacion 3", [])]) (2, "Antu")
--- publicacionesDe ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", []), ((2, "Antu"), "Publicacion 2", []), ((3, "Santi"), "Publicacion 3", [])]) (1, "Dani")
--- publicacionesDe ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], []) (1, "Dani")
-
---Definimos usuarios
-
+-- Definimos usuarios
 publicacionesDe_usuario1 = (1,"Dani")
 publicacionesDe_usuario2 = (2,"Antu")
 publicacionesDe_usuario3 = (3, "Santi")
 
-
 --Definimos Publicaciones (no definimos me gusta porque no son reelevantes)
-
 publicacionesDe_publicacion1 = (publicacionesDe_usuario3,"Publicacion 1",[])
 publicacionesDe_publicacion2 = (publicacionesDe_usuario2,"Publicacion 2",[])
 publicacionesDe_publicacion3 = (publicacionesDe_usuario3,"Publicacion 3",[])
 
-
 --Definimos Redes (No definimos relaciones porque no son reelevantes)
 publicacionesDe_usuarios = [publicacionesDe_usuario1, publicacionesDe_usuario2, publicacionesDe_usuario3]
 
+publicacionesDe_publicaciones_red2 = [publicacionesDe_publicacion1, publicacionesDe_publicacion2, publicacionesDe_publicacion3]
+
 publicacionesDe_red1 = (publicacionesDe_usuarios,[],[])
-publicacionesDe_red2 = (publicacionesDe_usuarios,[],[publicacionesDe_publicacion1,publicacionesDe_publicacion2,publicacionesDe_publicacion3])
+publicacionesDe_red2 = (publicacionesDe_usuarios,[],publicacionesDe_publicaciones_red2)
 
-testsSuitepublicacionesDe = test [
-      " publicacionesDe 1" ~: (publicacionesDe redA usuario2) ~?= [publicacion2_1, publicacion2_2]
-      "Caso 1 Red sin publicaciónes : " ~: (publicacionesDe publicacionesDe_red1 publicacionesDe_usuario1) ~?= [],
-      "Caso 2 Usuario con una publicación : " ~: (publicacionesDe publicacionesDe_red2 publicacionesDe_usuario2) ~?= [publicacionesDe_publicacion2],
-      "Caso 3 Usuario con dos publicaciónes : " ~: (publicacionesDe publicacionesDe_red2 publicacionesDe_usuario3) ~?= [publicacionesDe_publicacion1, publicacionesDe_publicacion3],
-      "Caso 4 Usuario sin publcaciónes : " ~: (publicacionesDe publicacionesDe_red2 publicacionesDe_usuario1) ~?= [] 
+testsSuitePublicacionesDe = test [
+  " publicacionesDe 1"                      ~: publicacionesDe redA usuario2                                 ~?= [publicacion2_1, publicacion2_2],
+  "Caso 1 Red sin publicaciónes : "         ~: publicacionesDe publicacionesDe_red1 publicacionesDe_usuario1 ~?= [],
+  "Caso 2 Usuario con una publicación : "   ~: publicacionesDe publicacionesDe_red2 publicacionesDe_usuario2 ~?= [publicacionesDe_publicacion2],
+  "Caso 3 Usuario con dos publicaciónes : " ~: publicacionesDe publicacionesDe_red2 publicacionesDe_usuario3 ~?= [publicacionesDe_publicacion1, publicacionesDe_publicacion3],
+  "Caso 4 Usuario sin publcaciónes : "      ~: publicacionesDe publicacionesDe_red2 publicacionesDe_usuario1 ~?= [] 
+  ]
 
+----------------------------------------------------------TEST SEGUIDOR FIEL---------------------------------------------------------------------------------------------------------
+ --CASO F
+-- tieneUnSeguidorFiel ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", [(1, "Dani"), (2, "Antu"), (4, "Vladi")]), ((3, "Santi"), "Publicacion 2", [(3, "Santi")]), ((3, "Santi"), "Publicacion 3", [(2, "Antu"), (3, "Santi")])]) (3, "Santi")
 
-]
+-- tieneUnSeguidorFiel ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", []), ((3, "Santi"), "Publicacion 2", []), ((3, "Santi"), "Publicacion 3", [])]) (3, "Santi")
 
+-- tieneUnSeguidorFiel ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], []) (3, "Santi")
+--CASO V
+-- tieneUnSeguidorFiel ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", [(1, "Dani"), (2, "Antu"), (4, "Vladi")]), ((3, "Santi"), "Publicacion 2", [(2, "Antu"), (3, "Santi")]), ((3, "Santi"), "Publicacion 3", [(2, "Antu"), (3, "Santi")])]) (3, "Santi")
+-- Idem si ninguna publicación tiene likes.
 
-----------------------------------------------------------
- 
+seguidorFiel_usuario1 = (1,"Dani")
+seguidorFiel_usuario2 = (2,"Antu")
+seguidorFiel_usuario3 = (3, "Santi")
+seguidorFiel_usuario4 = (4,"Vladi")
+
+-- Todas las publicaciones que usamos para testear son del usuario input porque el resto no son relevantes al funcionamiento del ejercicio.
+seguidorFiel_publicacion1_red1 = (seguidorFiel_usuario3, "Publicacion 1", [seguidorFiel_usuario1, seguidorFiel_usuario2, seguidorFiel_usuario4])
+seguidorFiel_publicacion2_red1 = (seguidorFiel_usuario3, "Publicacion 2", [seguidorFiel_usuario3])
+seguidorFiel_publicacion3_red1 = (seguidorFiel_usuario3, "Publicacion 3", [seguidorFiel_usuario2, seguidorFiel_usuario3])
+
+seguidorFiel_publicacion1_red2 = (seguidorFiel_usuario3, "Publicacion 1", [])
+seguidorFiel_publicacion2_red2 = (seguidorFiel_usuario3, "Publicacion 2", [])
+seguidorFiel_publicacion3_red2 = (seguidorFiel_usuario3, "Publicacion 3", [])
+
+seguidorFiel_publicacion1_red3 = (seguidorFiel_usuario3, "Publicacion 1", [seguidorFiel_usuario1, seguidorFiel_usuario2, seguidorFiel_usuario4])
+seguidorFiel_publicacion2_red3 = (seguidorFiel_usuario3, "Publicacion 2", [seguidorFiel_usuario2, seguidorFiel_usuario3])
+seguidorFiel_publicacion3_red3 = (seguidorFiel_usuario3, "Publicacion 3", [seguidorFiel_usuario2, seguidorFiel_usuario3])
+
+seguidorFiel_usuarios = [seguidorFiel_usuario1, seguidorFiel_usuario2, seguidorFiel_usuario3, seguidorFiel_usuario4]
+seguidorFiel_publicaciones_red1 = [seguidorFiel_publicacion1_red1, seguidorFiel_publicacion2_red1, seguidorFiel_publicacion3_red1]
+seguidorFiel_publicaciones_red2 = [seguidorFiel_publicacion1_red2, seguidorFiel_publicacion2_red2, seguidorFiel_publicacion3_red2]
+seguidorFiel_publicaciones_red3 = [seguidorFiel_publicacion1_red3, seguidorFiel_publicacion2_red3, seguidorFiel_publicacion3_red3]
+
+-- No usamos redes con relaciones porque no son relevantes al funcionamiento del ejercicio.
+seguidorFiel_red1 = (seguidorFiel_usuarios, [], seguidorFiel_publicaciones_red1)
+seguidorFiel_red2 = (seguidorFiel_usuarios, [], seguidorFiel_publicaciones_red2)
+seguidorFiel_red3 = (seguidorFiel_usuarios, [], seguidorFiel_publicaciones_red3)
+seguidorFiel_red4 = (seguidorFiel_usuarios, [], [])
+
+testsSuiteTieneUnSeguidorFiel = test [
+    " tieneUnSeguidorFiel 1"                ~: tieneUnSeguidorFiel redA usuario1                           ~?= True,
+    "SF Caso 1: No tiene SF : "             ~: tieneUnSeguidorFiel seguidorFiel_red1 seguidorFiel_usuario3 ~?= False,
+    "SF Caso 2: Publicaciones sin likes : " ~: tieneUnSeguidorFiel seguidorFiel_red2 seguidorFiel_usuario3 ~?= False,
+    "SF Caso 3: Tiene un SF : "             ~: tieneUnSeguidorFiel seguidorFiel_red3 seguidorFiel_usuario3 ~?= True,
+    "SF Caso 4: Red sin publicaciones : "   ~: tieneUnSeguidorFiel seguidorFiel_red4 seguidorFiel_usuario3 ~?= False 
+  ]
 
 expectAny actual expected = elem actual expected ~? ("expected any of: " ++ show expected ++ "\n but got: " ++ show actual)
 
