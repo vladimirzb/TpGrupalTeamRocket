@@ -18,8 +18,8 @@ tests = test [
 
     testsSuitePublicacionesDe,
 
-    " publicacionesQueLeGustanA 1" ~: (publicacionesQueLeGustanA redA usuario1) ~?= [publicacion2_2, publicacion4_1],
-
+    testsSuitepublicacionesQueLeGustanA,
+    
     " lesGustanLasMismasPublicaciones 2" ~: (lesGustanLasMismasPublicaciones redB usuario1 usuario3) ~?= True,
 
     testsSuiteTieneUnSeguidorFiel,
@@ -808,6 +808,7 @@ testsSuitePublicacionesDe = test [
 -- tieneUnSeguidorFiel ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", [(1, "Dani"), (2, "Antu"), (4, "Vladi")]), ((3, "Santi"), "Publicacion 2", [(3, "Santi")]), ((3, "Santi"), "Publicacion 3", [(2, "Antu"), (3, "Santi")])]) (3, "Santi")
 
 -- tieneUnSeguidorFiel ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", []), ((3, "Santi"), "Publicacion 2", []), ((3, "Santi"), "Publicacion 3", [])]) (3, "Santi")
+ ]
 
 -- tieneUnSeguidorFiel ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], []) (3, "Santi")
 --CASO V
@@ -850,6 +851,43 @@ testsSuiteTieneUnSeguidorFiel = test [
     "SF Caso 3: Tiene un SF : "             ~: tieneUnSeguidorFiel seguidorFiel_red3 seguidorFiel_usuario3 ~?= True,
     "SF Caso 4: Red sin publicaciones : "   ~: tieneUnSeguidorFiel seguidorFiel_red4 seguidorFiel_usuario3 ~?= False 
   ]
+----------------------------------------------------------Test publicacionesQueLeGustanA------------------------------------------------------
+
+-- Funcion publicacionesQueLeGustanA recibe una RedSocial y un Usuario y le pasa la lista de publicaciones de la red y el usuario a publicacionesConLikesDe
+-- Funcion publicacionesConLikesDe itera sobre las publicaciones y chequea si el usuario ingresado le dio like. En caso afirmativo, lo agrega a una lista, sino hace el chequeo con la publicación siguiente.
+-- publicacionesQueLeGustanA ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", [(1, "Dani"), (2, "Antu"), (4, "Vladi")]), ((2, "Antu"), "Publicacion 2", [(2, "Antu"), (3, "Santi")]), ((3, "Santi"), "Publicacion 3", [(1, "Dani"), (2, "Antu"), (3, "Santi")])]) (1, "Dani")
+-- publicacionesQueLeGustanA ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", [(1, "Dani"), (2, "Antu"), (4, "Vladi")]), ((2, "Antu"), "Publicacion 2", [(2, "Antu"), (3, "Santi")]), ((3, "Santi"), "Publicacion 3", [(1, "Dani"), (2, "Antu"), (3, "Santi")])]) (4, "Vladi")
+-- publicacionesQueLeGustanA ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", [(1, "Dani"), (2, "Antu")]), ((2, "Antu"), "Publicacion 2", [(2, "Antu"), (3, "Santi")]), ((3, "Santi"), "Publicacion 3", [(1, "Dani"), (2, "Antu"), (3, "Santi")])]) (4, "Vladi")
+-- publicacionesQueLeGustanA ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], []) (4, "Vladi")
+-- No usamos tests con relaciones porque no son relevantes al funcionamiento del ejercicio.
+
+--Definimos Usuarios
+publicacionesQueLeGustanA_usuario1 = (1,"Dani")
+publicacionesQueLeGustanA_usuario2 = (2,"Antu")
+publicacionesQueLeGustanA_usuario3 = (3,"Santi")
+publicacionesQueLeGustanA_usuario4 = (4,"Vladi")
+
+--Definimos Publicaciones
+publicacionesQueLeGustanA_publicacion1 = (publicacionesQueLeGustanA_usuario3,"Publicacion 1",[publicacionesQueLeGustanA_usuario1,publicacionesQueLeGustanA_usuario2,publicacionesQueLeGustanA_usuario4])
+publicacionesQueLeGustanA_publicacion2 = (publicacionesQueLeGustanA_usuario2,"Publicacion 2",[publicacionesQueLeGustanA_usuario2,publicacionesQueLeGustanA_usuario3])
+publicacionesQueLeGustanA_publicacion3 = (publicacionesQueLeGustanA_usuario3,"Publicacion 3",[publicacionesQueLeGustanA_usuario1,publicacionesQueLeGustanA_usuario2,publicacionesQueLeGustanA_usuario3])
+publicacionesQueLeGustanA_publicacion4 = (publicacionesQueLeGustanA_usuario3,"Publicacion 4",[publicacionesQueLeGustanA_usuario1,publicacionesQueLeGustanA_usuario2])
+
+--Definimos Redes (No definimos relaciones porque no son reelevantes)
+
+publicacionesQueLeGustanA_usuarios = [publicacionesQueLeGustanA_usuario1,publicacionesQueLeGustanA_usuario2,publicacionesQueLeGustanA_usuario3,publicacionesQueLeGustanA_usuario4]
+
+publicacionesQueLeGustanA_red1 = (publicacionesQueLeGustanA_usuarios,[],[])
+publicacionesQueLeGustanA_red2 = (publicacionesQueLeGustanA_usuarios,[],[publicacionesQueLeGustanA_publicacion1,publicacionesQueLeGustanA_publicacion2,publicacionesQueLeGustanA_publicacion3])
+publicacionesQueLeGustanA_red3 = (publicacionesQueLeGustanA_usuarios,[],[publicacionesQueLeGustanA_publicacion4,publicacionesQueLeGustanA_publicacion2,publicacionesQueLeGustanA_publicacion3])
+
+testsSuitepublicacionesQueLeGustanA = test [ 
+     " publicacionesQueLeGustanA 1" ~: (publicacionesQueLeGustanA redA usuario1) ~?= [publicacion2_2, publicacion4_1],
+     "Caso 1 La red no contiene Publicaciones : " ~: publicacionesQueLeGustanA publicacionesQueLeGustanA_red1 publicacionesQueLeGustanA_usuario1 ~?=  [],
+     "Caso 2 El usuario dio like a publicaciones : " ~: publicacionesQueLeGustanA publicacionesQueLeGustanA_red2 publicacionesQueLeGustanA_usuario1 ~?= [publicacionesQueLeGustanA_publicacion1,publicacionesQueLeGustanA_publicacion3]
+     "Caso 3 Otro usuario dio like a publicacion : " ~: publicacionesQueLeGustanA publicacionesQueLeGustanA_red2 publicacionesQueLeGustanA_usuario4 ~?= [publicacionesQueLeGustanA_publicacion1],
+     "Caso 4 El usuario no dio likes : " ~: publicacionesQueLeGustanA publicacionesQueLeGustanA_red3 publicacionesQueLeGustanA_usuario4 ~?= []
+ ]
 
 expectAny actual expected = elem actual expected ~? ("expected any of: " ++ show expected ++ "\n but got: " ++ show actual)
 
