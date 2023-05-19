@@ -400,7 +400,7 @@ red_francia =
   )
   -- Red social adicional para el caso 12
 red_croacia = 
-  ( [modric, rakitic, perisic, rebic, mandzukic, vida, lovren, brozovic, kovacic, kramaric, vrsaljko, jedvaj, brekalo, barisic]
+  ( [modric, rakitic, perisic, rebic, mandzukic, vida, lovren, brozovic, kovacic, kramaric, vrsaljko, jedvaj, brekalo, barisic, pjaca, kalinic]
   , [ relacion_modric_rakitic
     , relacion_modric_perisic
     , relacion_modric_badelj
@@ -415,9 +415,12 @@ red_croacia =
     , relacion_kovacic_jedvaj
     , relacion_kovacic_brekalo
     , relacion_vrsaljko_barisic
+    , relacion_mandzukic_pjaca
+    , relacion_kovacic_kalinic
     ]
   , publicacionesTest
   )
+
 -- Red social adicional para el caso 13
 red_croacia_compleja = 
   ( [modric, rakitic, perisic, rebic, mandzukic, vida, lovren, brozovic, kovacic, kramaric, vrsaljko, jedvaj, brekalo, barisic, badelj, pjaca, kalinic]
