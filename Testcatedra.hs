@@ -575,6 +575,8 @@ relacion_vladimir_maria = (vladimir, maria)
 relacion_maria_diego = (maria, diego)
 relacion_diego_pepe = (diego, pepe)
 relacion_pepe_juan = (pepe, juan)
+--Relacion para el ejercicio 7
+relacion_vladimir_vladimir = (vladimir, vladimir)
 
 -- Relaciones adicionales para el caso 10
 relacion_aguero_dybala = (aguero, dybala)
@@ -625,6 +627,7 @@ publicacionesTest = [] -- no las estamos utilizando en estos casos de prueba asi
 -- Redes Sociales
 red_sin_conexiones = ([vladimir, juan], [], publicacionesTest)
 red_con_conexion_directa = ([vladimir, juan], [relacion_vladimir_juan], publicacionesTest)
+red_elMismoUsuarioDosVeces = ([vladimir], [relacion_vladimir_vladimir], publicacionesTest)
 red_con_conexion_indirecta = ([vladimir, messi, juan], [relacion_vladimir_messi, relacion_messi_juan], publicacionesTest)
 red_con_multiples_conexiones = ([vladimir, messi, pedro, juan], [relacion_vladimir_messi, relacion_messi_pedro, relacion_lucas_juan], publicacionesTest)
 
@@ -719,7 +722,7 @@ testsSuiteexisteSecuenciaDeAmigose = test [
         "Caso 4: Red con usuarios y relaciones. Usuario1 con una relación, Usuario2 con una relación, pero no están conectados." ~: existeSecuenciaDeAmigos red_con_multiples_conexiones vladimir lucas ~?= False,
         "Caso 5: Red con usuarios y relaciones. Usuario1 con una relación, Usuario2 con una relación, y están conectados directamente." ~: existeSecuenciaDeAmigos red_con_conexion_directa vladimir juan ~?= True,
         "Caso 6: Red con usuarios y relaciones. Usuario1 con varias relaciones, Usuario2 con una relación, y están conectados a través de un amigo en común." ~: existeSecuenciaDeAmigos red_con_conexion_indirecta vladimir juan ~?= True,
-        "Caso 7: Red con usuarios y relaciones. Usuario1 y Usuario2 son la misma persona." ~: existeSecuenciaDeAmigos red_con_conexion_directa vladimir vladimir ~?= True,
+        "Caso 7: Red con usuarios y relaciones. Usuario1 y Usuario2 son la misma persona." ~: existeSecuenciaDeAmigos red_elMismoUsuarioDosVeces vladimir vladimir ~?= True,
         "Caso 8: La red social es un grafo no conectado. No hay un camino entre el Usuario1 y Usuario2." ~: existeSecuenciaDeAmigos red_no_conectada vladimir diego ~?= False,
         "Caso 9: Hay múltiples caminos posibles entre el Usuario1 y Usuario2." ~: existeSecuenciaDeAmigos red_con_multiples_caminos vladimir juan ~?= True,
         "Caso 10: No existe un camino entre el Usuario1 y Usuario2." ~: existeSecuenciaDeAmigos red_seleccion_argentina vladimir dimaria ~?= False,
