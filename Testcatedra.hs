@@ -1,4 +1,3 @@
--- Vladi: Va a tirar error la primera vez que lo ejecutes y despues copia este codigo :set -package base y luego volver a loadear el archivo para que funcione y correr main
 import Test.HUnit
 import Solucion
 
@@ -27,45 +26,9 @@ tests = test [
     testsSuiteexisteSecuenciaDeAmigose
 
  ]
---Comentario Vladi: Ya prepare todo para que funcionen los suit cases
 
 ------------------------------------Test de Santi: nombresDeUsuarios--------------------------------------------------
-{-Paso 1: Descomponer la solución informática en unidades funcionales
-En este caso, tenemos dos unidades funcionales:
-  nombresDeUsuarios
-  proyectarNombres
-Paso 2: Elegir una unidad funcional
-La primer unidad funcional a testear será:
-  proyectarNombres (debido a que nombresDeUsuarios depende ella)
-Paso 3: Identificar factores
-Los factores en este caso son los parámetros del problema:
-  us: [Usuario]
-Paso 4: Determinar categorías
-Para cada parámetro, determinamos las siguientes características:
-  us:
-    Tiene usuarios?
-Paso 5: Determinar elecciones
-Para cada categoría, determinamos sus elecciones o choices:
-  us:
-    Tiene usuarios?
-      -Tiene 0
-      -Tiene 1
-      -Tiene 5 con nombres de usuario sin repetir
-      -Tiene 5 con nombres de usuarios repetidos
-Paso 6: Clasificar las elecciones
-Consideraremos las siguientes clasificaciones:
-  us:
-    Tiene usuarios? 
-      -Tiene 0, tipo único
-      -Tiene 1, tipo único
-      -Tiene 5 (sin repetidos), tipo único
-      -Tiene 5 (con repetidos), tipo único
-Paso 7: Armar los casos de test
-Caso 1: Lista sin usuarios. Resultado esperado: Lista vacía.
-Caso 2: Lista con 1 usuario. Resultado esperado: Lista con el único nombre de usuario.
-Caso 3: Lista con 5 usuarios, sin repetidos. Resultado esperado: Lista con los nombres de usuario.
-Caso 4: Lista con 5 usuarios, con repetidos. Resultado esperado: Lista con los nombres de usuario sin repetidos.
--}
+
 --Defino los usuarios:
 proyectarNombres_usuario1 = (1,"Santi")
 proyectarNombres_usuario2 = (2,"Vladi")
@@ -89,39 +52,7 @@ testsSuiteProyectarNombres = test [
     "proyectarNombres - Caso 4: Lista con cinco usuarios, con repetidos" ~: (proyectarNombres proyectarNombres_lista_usuarios4) ~?= ["Vladi", "Antu", "DiCaprio"]
   ]
 
-{-Paso 8: Terminé de testear ProyectarNombres, vuelvo al paso 2.
-Paso 2: Paso 2: Elegir una unidad funcional
-La segunda unidad funcional a testear será:
-  nombresDeUsuarios
-Paso 3: Identificar factores
-Los factores en este caso son los parámetros del problema:
-  red: RedSocial
-Paso 4: Determinar categorías
-Para cada parámetro, determinamos las siguientes características:
-  red:
-    Tiene usuarios?
-Paso 5: Determinar elecciones
-Para cada categoría, determinamos sus elecciones o choices:
-  red:
-    Tiene usuarios?
-      -Tiene 0
-      -Tiene 1
-      -Tiene 5 con nombres de usuario sin repetir
-      -Tiene 5 con nombres de usuarios repetidos
-Paso 6: Clasificar las elecciones
-Consideraremos las siguientes clasificaciones:
-  red:
-    Tiene usuarios? 
-      -Tiene 0, tipo único
-      -Tiene 1, tipo único
-      -Tiene 5 (sin repetidos), tipo único
-      -Tiene 5 (con repetidos), tipo único
-Paso 7: Armar los casos de test
-Caso 1: Red sin usuarios. Resultado esperado: Lista vacía.
-Caso 2: Red con 1 usuario. Resultado esperado: Lista con el nombre de usuario del usuario.
-Caso 3: Red con 5 usuarios, sin repetidos. Resultado esperado: Lista con los nombres de usuario de los usuarios.
-Caso 4: Red con 5 usuarios, con repetidos. Resultado esperado: Lista con los nombres de usuarios sin repetidos.
--}
+
 
 --Defino los usuarios:
 nombresDeUsuarios_usuario1 = (1,"Santi")
@@ -150,53 +81,7 @@ testsSuiteNombresDeUsuarios = test [
 
 
 ------------------------------------Test de Santi: estaRobertoCarlos--------------------------------------------------
-{-Paso 1: Descomponer la solución informática en unidades funcionales
-En este caso, tenemos una única unidad funcional:
-  estaRobertoCarlos
-Paso 2: Elegir una unidad funcional
-La unidad funcional a testear será:
-  estaRobertoCarlos
-Paso 3: Identificar factores
-Los factores en este caso son los parámetros del problema:
-  red: RedSocial
-Paso 4: Determinar categorías
-Para cada parámetro, determinamos las siguientes características:
-  red:
-    Tiene usuarios?
-    Tiene relaciones?
-Paso 5: Determinar elecciones
-Para cada categoría, determinamos sus elecciones o choices:
-  red:
-    Tiene usuarios?
-      -Tiene 0
-      -Tiene 2
-      -Tiene 12
-    Tiene relaciones?
-      -Tiene 0
-      -Tiene 1
-      -Tiene 11
-Paso 6: Clasificar las elecciones
-Consideraremos las siguientes clasificaciones:
-  red:
-    Tiene usuarios? 
-      -Tiene 0, tipo único
-      -Tiene 2, tipo único
-      -Tiene 12, tipo combinable
-    Tiene relaciones?
-      -Tiene 0, tipo único
-      -Tiene 2, tipo único
-      -Tiene 12, tipo combinable
-        Entre quienes son la relaciones?
-          -12 relaciones de diferentes usuarios
-          -11 relaciones del mismo usuario, una de otro usuario
-Paso 7: Armar los casos de test
-Caso 1: Red sin usuarios. Resultado esperado: False.
-Caso 2: Red con 2 usuarios. Resultado esperado: False.
-Caso 3: Red con 12 usuarios, con 0 relaciones. Resultado esperado: False.
-Caso 4: Red con 12 usuarios, con 2 relaciones. Resultado esperado: False.
-Caso 5: Red con 12 usuarios, con 12 relaciones de diferentes usuarios. Resultado esperado: False.
-Caso 6: Red con 12 usuarios, con 12 relaciones y 11 realciones del mismo usuario. Resultado esperado: True.
--}
+
 
 --e_r_c es abreviación de estaRobertoCarlos
 --Defino los usuarios:
@@ -283,54 +168,7 @@ testsSuiteEstaRobertoCarlos = test [
 
 ------------------------------------Test de vladi: amigosDe--------------------------------------------------
 
-{- 
-Paso 1: Descomponer la solución informática en unidades funcionales
-En este caso, tenemos una única unidad funcional:
-    amigosDe
-Paso 2: Elegir una unidad funcional
-La unidad funcional a testear será:
-    amigosDe
-Paso 3: Identificar factores
-Los factores en este caso son los parámetros del problema:
-    red: RedSocial
-    u: Usuario
-Paso 4: Determinar categorías
-Para cada parámetro, determinamos las siguientes características:
-    red: 
-        Tiene usuarios?
-        Tiene relaciones?
-        Tiene publicaciones? (NO SON RELEVANTES PERO LO PONGO PORQUE HAY QUE PONERLO, NO LAS UTILIZO PARA NADA)
-    u: Usuario
-        Tiene relacion?
-        No tiene relacion?
-Paso 5: Determinar elecciones
-Para cada categoría, determinamos sus elecciones o choices:
-    red: 
-        Tiene usuarios? (Si,no)
-        Tiene relaciones?(Si,no) 
-    u: Usuario
-        Tiene relacion? (Si,no)
-            -Tiene 3
-            -Tiene 1
-            -Tiene 0
-Paso 6: Clasificar las elecciones
-Consideraremos las siguientes clasificaciones:
-    red: 
-        Tiene usuarios? (Si,no)
-        Tiene relaciones?(Si,no)
-    u: Usuario
-        Tiene relacion? (Si,no)
-            -Tiene 3
-            -Tiene 1
-            -Tiene 0
-Paso 7: Armar los casos de test
-Caso 1:Red con usuarios, sin relaciones, usuario sin relación.
-Caso 2:Red con usuarios, con relaciones, usuario sin relación.
-Caso 3:Red con usuarios, con relaciones, usuario con una relación.
-Caso 4:Red con usuarios, con relaciones, usuario con tres relaciones.
-Caso 5:Red sin usuarios, sin relaciones, usuario sin relación. (Este caso no es válido debido a que el usuario debe pertenecer a la red, pero lo menciono para completar las combinaciones)
 
--}
 --Definimos usuarios
 amigosDe_usuario1 = (1, "Vladimir")
 amigosDe_usuario2 = (2, "Lionel Messi")
@@ -356,56 +194,8 @@ testsSuiteAmigosDe = test [
 -------------------------------------Fin Test de vladi: amigosDe--------------------------------------------------
 
 ------------------------------------Test de vladi: cantidadDeAmigos--------------------------------------------------
-{-Paso 1: Descomponer la solución informática en unidades funcionales
-En este caso, tenemos una única unidad funcional:
-cantidadDeAmigos
-Paso 2: Elegir una unidad funcional
-La unidad funcional a testear será:
-cantidadDeAmigos
-Paso 3: Identificar factores
-Los factores en este caso son los parámetros del problema:
-red: RedSocial
-u: Usuario
-Paso 4: Determinar categorías
-Para cada parámetro, determinamos las siguientes características:
-red:
-Tiene usuarios?
-Tiene relaciones?
-u: Usuario
-Tiene relacion?
-No tiene relacion?
-Paso 5: Determinar elecciones
-Para cada categoría, determinamos sus elecciones o choices:
-red:
-Tiene usuarios? (Si, no)
-Tiene relaciones?(Si, no)
-u: Usuario
-Tiene relacion? (Si, no)
--Tiene 5
--Tiene 3
--Tiene 1
--Tiene 0
-Paso 6: Clasificar las elecciones
-Consideraremos las siguientes clasificaciones:
-red:
-Tiene usuarios? (Si, no)
-Tiene relaciones? (Si, no)
-u: Usuario
-Tiene relacion? (Si, no)
--Tiene 5
--Tiene 3
--Tiene 1
--Tiene 0
-Paso 7: Armar los casos de test
-Caso 1: Red con usuarios, sin relaciones, usuario sin relación.
-Caso 2: Red con usuarios, con relaciones, usuario sin relación.
-Caso 3: Red con usuarios, con relaciones, usuario con una relación.
-Caso 4: Red con usuarios, con relaciones, usuario con tres relaciones.
-Caso 5: Red con usuarios, con relaciones, usuario con cinco relaciones.
-Caso 6: Red sin usuarios, sin relaciones, usuario sin relación. (Este caso no es válido debido a que el usuario debe pertenecer a la red, pero se menciona para completar las combinaciones)
--}
 
-------------------------------------Fin Test de vladi: cantidadDeAmigos--------------------------------------------------
+
 --Definimos usuarios
 cantidadDeAmigos_usuario1 = (1, "Vladimir")
 cantidadDeAmigos_usuario2 = (2, "Lionel Messi")
@@ -432,6 +222,7 @@ testsSuiteCantidadDeAmigos  = test [
     "cantidadDeAmigos - Caso 5: Red con cinco relaciones, usuario con cinco relaciones" ~: (cantidadDeAmigos cantidadDeAmigos_red5 cantidadDeAmigos_usuario1) ~?= 5
  ]
 
+------------------------------------Fin Test de vladi: cantidadDeAmigos--------------------------------------------------
 
 
 -------------------------------Test de vladi: existeSecuenciaDeAmigos-----------------------------------------
