@@ -1,6 +1,4 @@
 module Solucion where
-----No importar librerias, no se puede
--- Completar con los datos del grupo
 -- Nombre de Grupo: Team Rocket
 -- Integrante 1: Daniel Bulacio, db2166419@gmail.com, 41561111
 -- Integrante 2: Antú Gonzalo Eyaralar, antuelbolson@gmail.com, 38431966
