@@ -226,83 +226,7 @@ testsSuiteCantidadDeAmigos  = test [
 
 
 -------------------------------Test de vladi: existeSecuenciaDeAmigos-----------------------------------------
-{-
-Paso 1: Descomponer la solución informática en unidades funcionales
-Tenemos varias unidades funcionales en este caso:
-- existeSecuenciaDeAmigos
-- esAmigoQueBuscamos
-- usuarioYaVisitado
 
-Paso 2: Elegir una unidad funcional
-La unidad funcional a testear será:
-- existeSecuenciaDeAmigos
-
-Paso 3: Identificar factores
-Los factores en este caso son los parámetros del problema:
-- red: RedSocial
-- u1: Usuario
-- u2: Usuario
-
-Paso 4: Determinar categorías
-Para cada parámetro, determinamos las siguientes características:
-- red:
-- Tiene usuarios?
-- Tiene relaciones?
-- u1: Usuario
-- Tiene relaciones?
-- u2: Usuario
-- Tiene relaciones?
-- Relación entre Usuario1 y Usuario2?
-
-Paso 5: Determinar elecciones
-Para cada categoría, determinamos sus elecciones:
-- red:
-- Tiene usuarios? (Si, no)
-- Tiene relaciones? (Si, no)
-- u1: Usuario
-- Tiene relaciones? (Si, no)
-- u2: Usuario
-- Tiene relaciones? (Si, no)
-- Relación entre Usuario1 y Usuario2? (Están conectados directamente, Están conectados a través de un amigo en común, No están conectados)
-
-Paso 6: Clasificar las elecciones
-Las clasificaciones son las mismas que las elecciones detalladas en el Paso 5.
-
-Paso 7: Armar los casos de test
-
-Caso 1: Esto no cumple con el requisito porque la red no es válida, ya que no tiene usuarios.
-Red sin usuarios, sin relaciones.
-Usuario1 y Usuario2 sin relaciones.
-Resultado esperado: False.
-Caso 2: Esto no cumple con el requisito ya que los usuarios no están en la red.
-Red con usuarios pero sin relaciones.
-Usuario1 y Usuario2 sin relaciones.
-Resultado esperado: False.
-Caso 3:False.
-Red con usuarios y relaciones.
-Usuario1 con relaciones, Usuario2 sin relaciones.
-Caso 4: False.
-Red con usuarios y relaciones.
-Usuario1 con una relación, Usuario2 con una relación, pero no están conectados.
-Caso 5:True.
-Red con usuarios y relaciones.
-Usuario1 con una relación, Usuario2 con una relación, y están conectados directamente. 
-Caso 6:True.
-Red con usuarios y relaciones.
-Usuario1 con varias relaciones, Usuario2 con una relación, y están conectados a través de un amigo en común.
-Caso 7: True.
-Red con usuarios y relaciones.
-Usuario1 y Usuario2 son la misma persona. 
-
-
----Casos extras que pense que son mas complicados de resolver
-Caso 8: La red social es un grafo no conectado. No hay un camino entre el Usuario1 y Usuario2.
-
-Caso 9: Hay múltiples caminos posibles entre el Usuario1 y Usuario2.
-Caso 10: False.
-Red con usuarios y relaciones.
-Usuario1 y Usuario2 están en la misma red, pero están en subgrafos separados, lo que significa que no hay un camino que conecte directamente a Usuario1 con Usuario2.
--}
 -- Usuarios
 vladimir = (1, "Vladimir")
 messi = (2, "Messi")
@@ -582,15 +506,7 @@ testsSuitePublicacionesDe = test [
   ]
 
 ----------------------------------------------------------TEST SEGUIDOR FIEL---------------------------------------------------------------------------------------------------------
- --CASO F
--- tieneUnSeguidorFiel ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", [(1, "Dani"), (2, "Antu"), (4, "Vladi")]), ((3, "Santi"), "Publicacion 2", [(3, "Santi")]), ((3, "Santi"), "Publicacion 3", [(2, "Antu"), (3, "Santi")])]) (3, "Santi")
 
--- tieneUnSeguidorFiel ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", []), ((3, "Santi"), "Publicacion 2", []), ((3, "Santi"), "Publicacion 3", [])]) (3, "Santi")
-
--- tieneUnSeguidorFiel ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], []) (3, "Santi")
---CASO V
--- tieneUnSeguidorFiel ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", [(1, "Dani"), (2, "Antu"), (4, "Vladi")]), ((3, "Santi"), "Publicacion 2", [(2, "Antu"), (3, "Santi")]), ((3, "Santi"), "Publicacion 3", [(2, "Antu"), (3, "Santi")])]) (3, "Santi")
--- Idem si ninguna publicación tiene likes.
 
 seguidorFiel_usuario1 = (1,"Dani")
 seguidorFiel_usuario2 = (2,"Antu")
@@ -630,13 +546,6 @@ testsSuiteTieneUnSeguidorFiel = test [
   ]
 ----------------------------------------------------------Test publicacionesQueLeGustanA------------------------------------------------------
 
--- Funcion publicacionesQueLeGustanA recibe una RedSocial y un Usuario y le pasa la lista de publicaciones de la red y el usuario a publicacionesConLikesDe
--- Funcion publicacionesConLikesDe itera sobre las publicaciones y chequea si el usuario ingresado le dio like. En caso afirmativo, lo agrega a una lista, sino hace el chequeo con la publicación siguiente.
--- publicacionesQueLeGustanA ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", [(1, "Dani"), (2, "Antu"), (4, "Vladi")]), ((2, "Antu"), "Publicacion 2", [(2, "Antu"), (3, "Santi")]), ((3, "Santi"), "Publicacion 3", [(1, "Dani"), (2, "Antu"), (3, "Santi")])]) (1, "Dani")
--- publicacionesQueLeGustanA ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", [(1, "Dani"), (2, "Antu"), (4, "Vladi")]), ((2, "Antu"), "Publicacion 2", [(2, "Antu"), (3, "Santi")]), ((3, "Santi"), "Publicacion 3", [(1, "Dani"), (2, "Antu"), (3, "Santi")])]) (4, "Vladi")
--- publicacionesQueLeGustanA ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", [(1, "Dani"), (2, "Antu")]), ((2, "Antu"), "Publicacion 2", [(2, "Antu"), (3, "Santi")]), ((3, "Santi"), "Publicacion 3", [(1, "Dani"), (2, "Antu"), (3, "Santi")])]) (4, "Vladi")
--- publicacionesQueLeGustanA ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], []) (4, "Vladi")
--- No usamos tests con relaciones porque no son relevantes al funcionamiento del ejercicio.
 
 --Definimos Usuarios
 publicacionesQueLeGustanA_usuario1 = (1,"Dani")
@@ -667,17 +576,7 @@ testsSuitepublicacionesQueLeGustanA = test [
   ]
 
 ---------------------------------------------------Test leGustanLasMismasPublicaciones---------------------------------------
---- Funcion lesGustanLasMismasPublicaciones reutiliza el ejercicio publicacionesQueLeGustanA para traer el array de las publicaciones likeadas por ambos usuarios ingresados. Luego, usando mismosElementos chequeo que ambos array sean iguales, lo cual devolvería True. Caso contrario devuelve False
--- CASOS QUE DAN FALSE
--- lesGustanLasMismasPublicaciones ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", [(1, "Dani"), (2, "Antu"), (4, "Vladi")]), ((2, "Antu"), "Publicacion 2", [(2, "Antu"), (3, "Santi"), (4, "Vladi")]), ((3, "Santi"), "Publicacion 3", [(1, "Dani"), (2, "Antu"), (3, "Santi")])]) (1, "Dani") (4, "Vladi")
--- lesGustanLasMismasPublicaciones ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", [(1, "Dani"), (2, "Antu"), (4, "Vladi")]), ((2, "Antu"), "Publicacion 2", [(2, "Antu"), (3, "Santi")]), ((3, "Santi"), "Publicacion 3", [(1, "Dani"), (2, "Antu"), (3, "Santi")])]) (1, "Dani") (4, "Vladi")
--- CASO TRUE
--- lesGustanLasMismasPublicaciones ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", []), ((2, "Antu"), "Publicacion 2", []), ((3, "Santi"), "Publicacion 3", [])]) (1, "Dani") (4, "Vladi")
--- lesGustanLasMismasPublicaciones ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], []) (1, "Dani") (4, "Vladi")
--- lesGustanLasMismasPublicaciones ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", [(1, "Dani"), (2, "Antu"), (4, "Vladi")]), ((2, "Antu"), "Publicacion 2", [(2, "Antu"), (3, "Santi")]), ((3, "Santi"), "Publicacion 3", [(2, "Antu"), (3, "Santi")])]) (1, "Dani") (4, "Vladi")
--- Si no hay publicaciones siempre da true, porque los dos usuarios ingresados le dieron like a la misma cantidad de publicaciones: 0.
--- Idem si ninguna publicación tiene likes.
---No usamos tests con relaciones porque no son relevantes al funcionamiento del ejercicio.
+
 
 --Definimos usuarios
 lesGustanLasMismasPublicaciones_usuario1 = (1,"Dani")
