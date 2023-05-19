@@ -673,6 +673,7 @@ red_croacia =
   ( [modric, rakitic, perisic, rebic, mandzukic, vida, lovren, brozovic, kovacic, kramaric, vrsaljko, jedvaj, brekalo, barisic]
   , [ relacion_modric_rakitic
     , relacion_modric_perisic
+    , relacion_modric_badelj
     , relacion_rakitic_rebic
     , relacion_rakitic_mandzukic
     , relacion_perisic_vida
