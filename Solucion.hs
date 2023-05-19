@@ -56,14 +56,10 @@ nombresDeUsuarios red = proyectarNombres (usuarios red)
 --proyectarNombres: Dada una lista de usuarios -users-, creo una lista con el nombre de usuario del primer elemento de users y lo voy concatenando con los nombres de usuarios siguientes. Luego, a esa lista le saco los repetidos.  
 --nombresDeUsuarios: Dada una red social valida -red- llama a la funcion proyectarNombres utilizando la lista de usuarios de red. 
 
---Test de la catedra: aprobado.
---Faltan tests extras.
 
 
 
 --Hecha por Vladimir
---Paso test de la catedra sin errores: Paso el test 
---Paso test extras: Pendiente
 -- AmigosDe: Dada la red y un usuario(x) devuelve una secuencia que contiene todos los amigos del usuario(x)
 --Estaba pensando lo siguiente con RedSocial consigo todas las relaciones, entonces primero busco en cuales relaciones aparece el usuario dado y luego las filtro y devuelvo esa secuencia de relaciones (que seria el usuario con su amigo en una tupla)
 
@@ -91,8 +87,6 @@ auxObtenerRelacionesConUsuario (r:rs) u
                                 | otherwise= auxObtenerRelacionesConUsuario rs u
                                     where usuarioEstaEnRelacion u (r1, r2) = u==r1 || u==r2
 --Hecha por Vladimir
---Paso test de la catedra sin errores: Paso el test 
---Paso test extras: Pendiente
 -- describir qué hace la función: Dada la redsocial y un usuario devuelvo la cantidad de amigos del usuario. Utilizo la funcion amigosDe para obtener directamente la secuencia con los amigos del usuario y con una funcion axuliar cuento los elementos de la secuencia
 cantidadDeAmigos :: RedSocial -> Usuario -> Int
 cantidadDeAmigos red u = cantidadDeAmigosAux (amigosDe red u)
@@ -108,9 +102,7 @@ cantidadDeAmigosAux (u:us)= cantidadDeAmigosAux(us) + 1
 -- Si el usuario cumple, lo devuelve. Sino, se repite el proceso con la la lista sin el primer usuario.
 
 -- Si la red social no tiene relaciones, se devuelve cualquier usuario, ya que todos tienen la misma cantidad de amigos: 0.
---([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [])
---([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [((1,"Dani"),(2,"Antu")), ((2,"Antu"),(3,"Santi"))], [])
---([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [((1,"Dani"),(2,"Antu")), ((2,"Antu"),(3,"Santi")), ((1,"Dani"),(4,"Vladi"))], [])
+
 usuarioConMasAmigos :: RedSocial -> Usuario
 usuarioConMasAmigos red = usuarioConMasAmigosAux red (usuarios red)
 
@@ -126,19 +118,12 @@ estaRobertoCarlos :: RedSocial -> Bool
 estaRobertoCarlos red | cantidadDeAmigos red (usuarioConMasAmigos (red)) > 10 {-Debería ir un millón, cambiado a 10 para poder testear-} = True  
                       | otherwise = False
 
---Test de la cátedra: aprobado.
---Faltan test extras.
+
 
         
                                     
 -- Funcion publicacionesDe extrae las publicaciones de la red y usa filtrarPublicacionesPorUsuario (para poder iterar sobre el array de publicaciones)
 -- Funcion filtrarPublicacionesPorUsuario agrega a una lista si la publicacion es del usuario,devuelve la lista.
--- Casos que deberían funcionar
--- publicacionesDe ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", []), ((2, "Antu"), "Publicacion 2", []), ((3, "Santi"), "Publicacion 3", [])]) (3, "Santi")
--- publicacionesDe ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", []), ((2, "Antu"), "Publicacion 2", []), ((3, "Santi"), "Publicacion 3", [])]) (2, "Antu")
--- publicacionesDe ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", []), ((2, "Antu"), "Publicacion 2", []), ((3, "Santi"), "Publicacion 3", [])]) (1, "Dani")
--- publicacionesDe ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], []) (1, "Dani")
---No usamos likes ni relaciones porque no son reelevantes para el test
 
 publicacionesDe :: RedSocial -> Usuario -> [Publicacion]
 publicacionesDe red user = filtrarPublicacionesPorUsuario (publicaciones red) user
@@ -150,11 +135,7 @@ filtrarPublicacionesPorUsuario (x:xs) u | u == usuarioDePublicacion x = x : filt
 
 -- Funcion publicacionesQueLeGustanA recibe una RedSocial y un Usuario y le pasa la lista de publicaciones de la red y el usuario a publicacionesConLikesDe
 -- Funcion publicacionesConLikesDe itera sobre las publicaciones y chequea si el usuario ingresado le dio like. En caso afirmativo, lo agrega a una lista, sino hace el chequeo con la publicación siguiente.
--- publicacionesQueLeGustanA ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", [(1, "Dani"), (2, "Antu"), (4, "Vladi")]), ((2, "Antu"), "Publicacion 2", [(2, "Antu"), (3, "Santi")]), ((3, "Santi"), "Publicacion 3", [(1, "Dani"), (2, "Antu"), (3, "Santi")])]) (1, "Dani")
--- publicacionesQueLeGustanA ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", [(1, "Dani"), (2, "Antu"), (4, "Vladi")]), ((2, "Antu"), "Publicacion 2", [(2, "Antu"), (3, "Santi")]), ((3, "Santi"), "Publicacion 3", [(1, "Dani"), (2, "Antu"), (3, "Santi")])]) (4, "Vladi")
--- publicacionesQueLeGustanA ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", [(1, "Dani"), (2, "Antu")]), ((2, "Antu"), "Publicacion 2", [(2, "Antu"), (3, "Santi")]), ((3, "Santi"), "Publicacion 3", [(1, "Dani"), (2, "Antu"), (3, "Santi")])]) (4, "Vladi")
--- publicacionesQueLeGustanA ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], []) (4, "Vladi")
---No usamos tests con relaciones porque no son relevantes al funcionamiento del ejercicio.
+
 publicacionesQueLeGustanA :: RedSocial -> Usuario -> [Publicacion]
 publicacionesQueLeGustanA red user = publicacionesConLikesDe (publicaciones red) user
 
@@ -164,16 +145,7 @@ publicacionesConLikesDe (x:xs) u | pertenece u (likesDePublicacion x) == True = 
                                            | otherwise = publicacionesConLikesDe xs u
 
 -- Funcion lesGustanLasMismasPublicaciones reutiliza el ejercicio publicacionesQueLeGustanA para traer el array de las publicaciones likeadas por ambos usuarios ingresados. Luego, usando mismosElementos chequeo que ambos array sean iguales, lo cual devolvería True. Caso contrario devuelve False
--- CASOS QUE DAN FALSE
--- lesGustanLasMismasPublicaciones ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", [(1, "Dani"), (2, "Antu"), (4, "Vladi")]), ((2, "Antu"), "Publicacion 2", [(2, "Antu"), (3, "Santi"), (4, "Vladi")]), ((3, "Santi"), "Publicacion 3", [(1, "Dani"), (2, "Antu"), (3, "Santi")])]) (1, "Dani") (4, "Vladi")
--- lesGustanLasMismasPublicaciones ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", [(1, "Dani"), (2, "Antu"), (4, "Vladi")]), ((2, "Antu"), "Publicacion 2", [(2, "Antu"), (3, "Santi")]), ((3, "Santi"), "Publicacion 3", [(1, "Dani"), (2, "Antu"), (3, "Santi")])]) (1, "Dani") (4, "Vladi")
--- CASO TRUE
--- lesGustanLasMismasPublicaciones ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", []), ((2, "Antu"), "Publicacion 2", []), ((3, "Santi"), "Publicacion 3", [])]) (1, "Dani") (4, "Vladi")
--- lesGustanLasMismasPublicaciones ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], []) (1, "Dani") (4, "Vladi")
--- lesGustanLasMismasPublicaciones ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [], [((3, "Santi"), "Publicacion 1", [(1, "Dani"), (2, "Antu"), (4, "Vladi")]), ((2, "Antu"), "Publicacion 2", [(2, "Antu"), (3, "Santi")]), ((3, "Santi"), "Publicacion 3", [(2, "Antu"), (3, "Santi")])]) (1, "Dani") (4, "Vladi")
--- Si no hay publicaciones siempre da true, porque los dos usuarios ingresados le dieron like a la misma cantidad de publicaciones: 0.
--- Idem si ninguna publicación tiene likes.
---No usamos tests con relaciones porque no son relevantes al funcionamiento del ejercicio.
+
 lesGustanLasMismasPublicaciones :: RedSocial -> Usuario -> Usuario -> Bool
 lesGustanLasMismasPublicaciones red u1 u2 = mismosElementos (publicacionesQueLeGustanA red u1) (publicacionesQueLeGustanA red u2)
 
@@ -238,12 +210,7 @@ mismosElementosAux [] _     = True
 mismosElementosAux (x:xs) ys | pertenece x ys == True = mismosElementosAux xs ys
                              | otherwise=False
 
-{- Inputs con lo que probe para que fijarme si devuelve los valores correctos El primer ejemplo todas las publicaciones estan la lista de usuarios, en el segundo no:
-usuariosDePublicacionSonUsuariosDeRed [(1, "Vladi"), (2, "Santi"), (3, "Antu")] [((1, "Vladi"), "Publicación 1", []), ((2, "Santi"), "Publicación 2", []), ((3, "Antu"), "Publicación 3", [])]
-usuariosDePublicacionSonUsuariosDeRed [(1, "Vladi"), (2, "Santi"), (3, "Antu")] [((1, "Vladi"), "Publicación 1", []), ((2, "Santi"), "Publicación 2", []), ((4, "Dani"), "Publicación 4", [])]
-usuariosDePublicacionSonUsuariosDeRed [(1, "Vladi"), (2, "Santi"), (3, "Antu"), (4, "Dani"), (5, "Eve")] [((1, "Vladi"), "Publicación 1", []), ((2, "Santi"), "Publicación 2", []), ((3, "Antu"), "Publicación 3", []), ((4, "Dani"), "Publicación 4", []), ((5, "Eve"), "Publicación 5", [])]
-usuariosDePublicacionSonUsuariosDeRed [(1, "Vladi"), (2, "Santi"), (3, "Antu"), (4, "Dani"), (5, "Eve")] [((1, "Vladi"), "Publicación 1", []), ((2, "Santi"), "Publicación 2", []), ((3, "Antu"), "Publicación 3", []), ((4, "Dani"), "Publicación 4", []), ((6, "Frank"), "Publicación 6", [])]
--}
+
 usuariosDePublicacionSonUsuariosDeRed :: [Usuario] ->[Publicacion] -> Bool 
 usuariosDePublicacionSonUsuariosDeRed _ [] = True
 usuariosDePublicacionSonUsuariosDeRed usuarios (pub:publicaciones) 
@@ -251,24 +218,14 @@ usuariosDePublicacionSonUsuariosDeRed usuarios (pub:publicaciones)
                         | otherwise = False 
 
 
---Desarmo la tupla para poder usar los usuarios
-{-Inputs de prueba
-Valor esperado true = usuariosDeRelacionValidos [(1, "Vladi"), (2, "Santi"), (3, "Antu"), (4, "Dani")] [((1, "Vladi"), (2, "Santi")), ((2, "Santi"), (3, "Antu")), ((3, "Antu"), (4, "Dani"))]
-Valor esperado false = usuariosDeRelacionValidos [(1, "Vladi"), (2, "Santi"), (3, "Antu"), (4, "Dani")] [((1, "Vladi"), (2, "Santi")), ((2, "Santi"), (3, "Antu")), ((3, "Antu"), (3, "Antu"))]
-Valor esperado false = usuariosDeRelacionValidos [(1, "Vladi"), (2, "Santi"), (3, "Antu"), (4, "Dani")] [((1, "Vladi"), (2, "Santi")), ((2, "Santi"), (3, "Antu")), ((5, "Extra"), (4, "Dani"))]
 
--}
 usuariosDeRelacionValidos :: [Usuario] -> [Relacion] -> Bool
 usuariosDeRelacionValidos _ [] = True
 usuariosDeRelacionValidos usuarios (((us1, us2):relaciones))
                         | pertenece us1 usuarios && pertenece us2 usuarios && us1/=us2 = usuariosDeRelacionValidos usuarios relaciones
                         | otherwise = False 
 
-{- inputs de prueba
-Valor esperado true = relacionesAsimetricas [((1, "A"), (2, "B")), ((2, "B"), (3, "C")), ((3, "C"), (4, "D"))]
-Valor esperado false = relacionesAsimetricas [((1, "A"), (2, "B")), ((2, "B"), (1, "A")), ((3, "C"), (4, "D"))]
 
--}
 relacionesAsimetricas :: [Relacion] -> Bool
 relacionesAsimetricas [] = True
 relacionesAsimetricas (((us1, us2):relaciones)) |  not (pertenece (us2,us1) relaciones) == True = relacionesAsimetricas relaciones 
@@ -299,7 +256,6 @@ longitud []     = 0
 longitud (x:xs) = 1 + longitud xs
 
 
--- aux ((1,"Dani"),(4,"Vladi")) [((1,"Dani"),(2,"Antu")), ((1,"Dani"),(3,"Fer"))]
 auxiliarRelacionesRepetidas :: Relacion -> [Relacion] -> Bool
 auxiliarRelacionesRepetidas (u1, u2) []     = True
 auxiliarRelacionesRepetidas (u1, u2) (x:xs) | x == (u1, u2) = False
@@ -310,39 +266,30 @@ noHayPublicacionesRepetidas []     = True
 noHayPublicacionesRepetidas (x:xs) | auxiliarPublicacionesRepetidas x xs == True = noHayPublicacionesRepetidas xs
                                    | otherwise = False
 
--- auxiliarPublicacionesRepetidas ((1, "Daniel"), "Hola", []) [((1, "Daniel"), "Hola", []), ((2, "Antu"), "estas", [])]
 auxiliarPublicacionesRepetidas :: Publicacion -> [Publicacion] -> Bool
 auxiliarPublicacionesRepetidas (p1, p2, _) [] = True
 auxiliarPublicacionesRepetidas pub (x:xs) | pub == x = False
                                           | otherwise = auxiliarPublicacionesRepetidas pub xs
 
--- Casos validos:
--- usuariosLikeValidos [(1,"Dani"),(2,"Antu"),(3, "Santi"),(4, "Vladi")] []
--- usuariosLikeValidos [(1,"Dani"),(2,"Antu"),(3, "Santi"),(4, "Vladi")] [((2,"Antu")),(3,"Santi")]
--- Casos falsos:
--- usuariosLikeValidos [(1,"Dani"),(2,"Antu"),(3, "Santi"),(4, "Vladi")] [(2,"Antu"),(4,"Santi")] 
+
 usuariosLikeValidos :: [Usuario] -> [Usuario] -> Bool
 usuariosLikeValidos users []     = True
 usuariosLikeValidos users (x:xs) | pertenece x users == True = usuariosLikeValidos users xs
                                  | otherwise = False
 
--- Caso valido: usuariosDeLikeDePublicacionSonUsuariosDeRed [(1, "Vladi"), (2, "Santi"), (3, "Antu"), (4, "Dani"), (5, "Eve")] [((1, "Vladi"), "Publicación 1", [(3, "Antu"), (4, "Dani"), (5, "Eve")]), ((2, "Santi"), "Publicación 2", [(1, "Vladi"), (2, "Santi"), (3, "Antu")]), ((3, "Antu"), "Publicación 3", [])]
--- Caso falso: usuariosDeLikeDePublicacionSonUsuariosDeRed [(1, "Vladi"), (2, "Santi"), (3, "Antu"), (4, "Dani"), (5, "Eve")] [((1, "Vladi"), "Publicación 1", [(3, "Antu"), (4, "Dani"), (5, "Eve")]), ((2, "Santi"), "Publicación 2", [(1, "Vladi"), (2, "Santi"), (3, "Antu")]), ((3, "Antu"), "Publicación 3", [(69, "bot")])]
+
 usuariosDeLikeDePublicacionSonUsuariosDeRed :: [Usuario] -> [Publicacion] -> Bool
 usuariosDeLikeDePublicacionSonUsuariosDeRed users []     = True
 usuariosDeLikeDePublicacionSonUsuariosDeRed users (x:xs) | usuariosLikeValidos users (likesDePublicacion x) == True = usuariosDeLikeDePublicacionSonUsuariosDeRed users xs
                                                          | otherwise = False
 
--- Casos validos: Cualquier caso valido de las funciones que utilizo
--- Casos falso: Cualquier caso invalido de las funciones que utilizo
+
 publicacionesValidas :: [Usuario] -> [Publicacion] -> Bool
 publicacionesValidas users pubs = usuariosDePublicacionSonUsuariosDeRed users pubs && usuariosDeLikeDePublicacionSonUsuariosDeRed users pubs && noHayPublicacionesRepetidas pubs
 
--- Falta testear
 relacionesValidas :: [Usuario] -> [Relacion] -> Bool
 relacionesValidas users rel = usuariosDeRelacionValidos users rel && relacionesAsimetricas rel && noHayRelacionesRepetidas rel
 
--- Falta testear
 redSocialValida :: RedSocial -> Bool
 redSocialValida red = usuariosValidos (usuarios red) && relacionesValidas (usuarios red) (relaciones red) && publicacionesValidas (usuarios red) (publicaciones red)
 
@@ -366,11 +313,6 @@ noHayRelacionesRepetidas (x:xs) | auxiliarRelacionesRepetidas x xs == True = noH
                                 | otherwise = False
 
 
---Test 
---Caso valido: (1,"Dani") (2,"Antu") ([(1,"Dani"),(2,"Antu"),(4,"Vladi")], [((1,"Dani"),(4,"Vladi")), ((1,"Dani"),(2,"Antu")), ((2,"Antu"),(4,"Vladi"))], [])
---Caso falso: (1,"Dani") (2,"Antu") ([(1,"Dani"),(2,"Antu"),(4,"Vladi")], [((1,"Dani"),(4,"Vladi")), ((2,"Antu"),(4,"Vladi"))], [])
-
-
 relacionadosDirecto :: Usuario -> Usuario -> RedSocial -> Bool
 relacionadosDirecto u1 u2 red = auxiliarRelacionadosDirecto u1 u2 (relaciones red)
                               
@@ -379,13 +321,6 @@ auxiliarRelacionadosDirecto :: Usuario -> Usuario -> [Relacion] -> Bool
 auxiliarRelacionadosDirecto u1 u2 []     = False
 auxiliarRelacionadosDirecto u1 u2 (x:xs) | (u1, u2) == x || (u2, u1) == x = True
                                          |  otherwise = auxiliarRelacionadosDirecto u1 u2 xs
-
-
---Test
--- Caso valido: [(1,"Dani"),(2,"Antu"),(3, "Santi")] ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [((1,"Dani"),(2,"Antu")), ((2,"Antu"),(3,"Santi"))], [])
--- Caso falso: [(1,"Dani"),(2,"Antu"),(3, "Santi")] ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [((1,"Dani"),(2,"Antu")), ((2,"Antu"),(4,"Vladi"))], []) 
--- Caso verdadero [(1,"Dani"),(2,"Antu"),(3, "Santi"),(4, "Vladi")] ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [((1,"Dani"),(2,"Antu")), ((2,"Antu"),(3,"Santi")), ((3,"Santi"),(4, "Vladi"))], [])
--- Caso falso: [(1,"Dani"),(2,"Antu"),(3, "Santi"),(4, "Vladi")] ([(1,"Dani"),(2,"Antu"),(3, "Santi"),(4,"Vladi")], [((1,"Dani"),(2,"Antu")), ((2,"Antu"),(3,"Santi")), ((1,"Dani"),(4, "Vladi"))], [])
 
 cadenaDeAmigos :: [Usuario] -> RedSocial -> Bool
 cadenaDeAmigos [x] red     = True
@@ -400,27 +335,16 @@ empiezaCon [] e = False
 empiezaCon (x:xs) e | x == e = True
                     | otherwise = False
 
---Test
---Caso válido: empiezaCon [2,3,4] 2
---Caso falso: empiezaCon [2,3,4] 3
-
 terminaCon :: (Eq t) => [t] -> t -> Bool
 terminaCon [] e = False
 terminaCon (x:xs) e | longitud (x:xs) == 1 && x == e = True
                     | longitud (x:xs) > 1 = terminaCon xs e
                     | otherwise = False
 
---Test
---Caso válido: empiezaCon [2,3,4] 4
---Caso falso: empiezaCon [2,3,4] 3
 
 sinRepetidos :: (Eq t) => [t] -> Bool
 sinRepetidos [] = True
 sinRepetidos (x:xs) | pertenece x xs = False
                     | not (pertenece x xs) =  sinRepetidos xs
-
---Test
---Caso válido: sinRepetidos [1,2,3,]
---Caso falso: sinRepetidos [1,2,3,3]  
 
 ----------------- Fin Predicados Santi -----------------
