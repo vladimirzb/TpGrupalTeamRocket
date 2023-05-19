@@ -27,7 +27,7 @@ tests = test [
 
  ]
 
-------------------------------------Test de Santi: nombresDeUsuarios--------------------------------------------------
+------------------------------------Test nombresDeUsuarios--------------------------------------------------
 
 --Defino los usuarios:
 proyectarNombres_usuario1 = (1,"Santi")
@@ -77,10 +77,10 @@ testsSuiteNombresDeUsuarios = test [
     "nombresDeUsuarios - Caso 3: Red con cinco usuarios, sin repetidos" ~: (nombresDeUsuarios nombresDeUsuarios_red3) ~?= ["Santi", "Vladi", "Dani", "Antu", "DiCaprio"],
     "nombresDeUsuarios - Caso 4: Red con cinco usuarios, con repetidos" ~: (nombresDeUsuarios nombresDeUsuarios_red4) ~?= ["Vladi", "Antu", "DiCaprio"]
   ]
-------------------------------------Fin Test de Santi: nombresDeUsuarios--------------------------------------------------
+------------------------------------Fin Test nombresDeUsuarios--------------------------------------------------
 
 
-------------------------------------Test de Santi: estaRobertoCarlos--------------------------------------------------
+------------------------------------Test estaRobertoCarlos--------------------------------------------------
 
 
 --e_r_c es abreviación de estaRobertoCarlos
@@ -164,9 +164,9 @@ testsSuiteEstaRobertoCarlos = test [
     "estaRobertoCarlos - Caso 6: Red con doce usuarios, once relaciones del mismo usuario" ~: (estaRobertoCarlos estaRobertoCarlos_red_6) ~?= True
  ]
 
-------------------------------------Fin Test de Santi: estaRobertoCarlos--------------------------------------------------
+------------------------------------Fin Test estaRobertoCarlos--------------------------------------------------
 
-------------------------------------Test de vladi: amigosDe--------------------------------------------------
+------------------------------------Test amigosDe--------------------------------------------------
 
 
 --Definimos usuarios
@@ -191,9 +191,9 @@ testsSuiteAmigosDe = test [
     "amigosDe - Caso 4: Red con tres relaciones, usuario con tres relaciones" ~: (amigosDe amigosDe_red4 amigosDe_usuario1) ~?= [amigosDe_usuario2, amigosDe_usuario3, amigosDe_usuario4],
     "amigosDe - Caso 5: Red sin usuario en prueba, usuario no existente en la red" ~: (amigosDe amigosDe_red5 amigosDe_usuario5) ~?= []
  ]
--------------------------------------Fin Test de vladi: amigosDe--------------------------------------------------
+-------------------------------------Fin Test amigosDe--------------------------------------------------
 
-------------------------------------Test de vladi: cantidadDeAmigos--------------------------------------------------
+------------------------------------Test de cantidadDeAmigos--------------------------------------------------
 
 
 --Definimos usuarios
@@ -222,10 +222,10 @@ testsSuiteCantidadDeAmigos  = test [
     "cantidadDeAmigos - Caso 5: Red con cinco relaciones, usuario con cinco relaciones" ~: (cantidadDeAmigos cantidadDeAmigos_red5 cantidadDeAmigos_usuario1) ~?= 5
  ]
 
-------------------------------------Fin Test de vladi: cantidadDeAmigos--------------------------------------------------
+------------------------------------Fin Test cantidadDeAmigos--------------------------------------------------
 
 
--------------------------------Test de vladi: existeSecuenciaDeAmigos-----------------------------------------
+-------------------------------Test existeSecuenciaDeAmigos-----------------------------------------
 
 -- Usuarios
 vladimir = (1, "Vladimir")

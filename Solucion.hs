@@ -33,9 +33,6 @@ usuarioDePublicacion (u, _, _) = u
 likesDePublicacion :: Publicacion -> [Usuario]
 likesDePublicacion (_, _, us) = us
 
--- Ejercicios
-
---Hecha por Santi
 -- Función: nombresDeUsuario, dada una red social, devuelve una lista con los nombres de usuario de la red.
 -- Función: proyectarNombres, dada una lista de usuarios, devuelve una lista con los nombres de usuarios y sin repetidos.
 proyectarNombres :: [Usuario] ->  [String] 
@@ -46,6 +43,8 @@ eliminaRepetidos [] = []
 eliminaRepetidos (x:xs) | pertenece x xs = eliminaRepetidos xs
                         | not(pertenece x xs) = x : eliminaRepetidos xs
 
+--proyectarNombres: Dada una lista de usuarios -users-, creo una lista con el nombre de usuario del primer elemento de users y lo voy concatenando con los nombres de usuarios siguientes. Luego, a esa lista le saco los repetidos.  
+--nombresDeUsuarios: Dada una red social valida -red- llama a la funcion proyectarNombres utilizando la lista de usuarios de red. 
 proyectarNombresAux :: [Usuario] ->  [String] 
 proyectarNombresAux [] = []
 proyectarNombresAux (x:xs) = nombreDeUsuario x : proyectarNombresAux xs
@@ -53,13 +52,6 @@ proyectarNombresAux (x:xs) = nombreDeUsuario x : proyectarNombresAux xs
 nombresDeUsuarios :: RedSocial -> [String]
 nombresDeUsuarios red = proyectarNombres (usuarios red)  
 
---proyectarNombres: Dada una lista de usuarios -users-, creo una lista con el nombre de usuario del primer elemento de users y lo voy concatenando con los nombres de usuarios siguientes. Luego, a esa lista le saco los repetidos.  
---nombresDeUsuarios: Dada una red social valida -red- llama a la funcion proyectarNombres utilizando la lista de usuarios de red. 
-
-
-
-
---Hecha por Vladimir
 -- AmigosDe: Dada la red y un usuario(x) devuelve una secuencia que contiene todos los amigos del usuario(x)
 --Estaba pensando lo siguiente con RedSocial consigo todas las relaciones, entonces primero busco en cuales relaciones aparece el usuario dado y luego las filtro y devuelvo esa secuencia de relaciones (que seria el usuario con su amigo en una tupla)
 
@@ -74,8 +66,6 @@ auxAmigosDe (r:rs) u
     |u == fst r = snd r : auxAmigosDe rs u 
     |u == snd r = fst r : auxAmigosDe rs u 
 
-
-
 ---Me armo una lista desde cero con las relaciones que esta el usuario
 obtenerRelacionesConUsuario :: RedSocial -> Usuario -> [Relacion]
 obtenerRelacionesConUsuario red u = auxObtenerRelacionesConUsuario (relaciones(red)) u
@@ -86,7 +76,7 @@ auxObtenerRelacionesConUsuario (r:rs) u
                                 | usuarioEstaEnRelacion u r = r : auxObtenerRelacionesConUsuario rs u
                                 | otherwise= auxObtenerRelacionesConUsuario rs u
                                     where usuarioEstaEnRelacion u (r1, r2) = u==r1 || u==r2
---Hecha por Vladimir
+
 -- describir qué hace la función: Dada la redsocial y un usuario devuelvo la cantidad de amigos del usuario. Utilizo la funcion amigosDe para obtener directamente la secuencia con los amigos del usuario y con una funcion axuliar cuento los elementos de la secuencia
 cantidadDeAmigos :: RedSocial -> Usuario -> Int
 cantidadDeAmigos red u = cantidadDeAmigosAux (amigosDe red u)
@@ -95,14 +85,12 @@ cantidadDeAmigosAux :: [Usuario] -> Int
 cantidadDeAmigosAux []  = 0
 cantidadDeAmigosAux (u:us)= cantidadDeAmigosAux(us) + 1
 
-
 -- Función usuarioConMasAmigos recibe una red válida y la pasa a usuarioConMasAmigosAux
 -- Funcion usuarioConMasAmigosAux recibe una red y un array de Usuarios de la red, itera con el primer usuario de la lista
 -- evaluando si tiene mayor o igual cantidad de amigos que el resto
 -- Si el usuario cumple, lo devuelve. Sino, se repite el proceso con la la lista sin el primer usuario.
 
 -- Si la red social no tiene relaciones, se devuelve cualquier usuario, ya que todos tienen la misma cantidad de amigos: 0.
-
 usuarioConMasAmigos :: RedSocial -> Usuario
 usuarioConMasAmigos red = usuarioConMasAmigosAux red (usuarios red)
 
@@ -111,20 +99,14 @@ usuarioConMasAmigosAux _ [x] = x
 usuarioConMasAmigosAux red (x:xs) | cantidadDeAmigos red x > cantidadDeAmigos red (head xs) = usuarioConMasAmigosAux red (x:(tail xs))
                                   | cantidadDeAmigos red x == cantidadDeAmigos red (head xs) = usuarioConMasAmigosAux red xs
                                   | otherwise = usuarioConMasAmigosAux red xs
---Hecha por Santi
 
 --Función: estaRobertoCarlos, dada una red social válida, decide si existe un usuario con más de un millón (cambiado a diez para poder testear) de amigos en ella.
 estaRobertoCarlos :: RedSocial -> Bool
 estaRobertoCarlos red | cantidadDeAmigos red (usuarioConMasAmigos (red)) > 10 {-Debería ir un millón, cambiado a 10 para poder testear-} = True  
                       | otherwise = False
 
-
-
-        
-                                    
 -- Funcion publicacionesDe extrae las publicaciones de la red y usa filtrarPublicacionesPorUsuario (para poder iterar sobre el array de publicaciones)
 -- Funcion filtrarPublicacionesPorUsuario agrega a una lista si la publicacion es del usuario,devuelve la lista.
-
 publicacionesDe :: RedSocial -> Usuario -> [Publicacion]
 publicacionesDe red user = filtrarPublicacionesPorUsuario (publicaciones red) user
 
@@ -135,7 +117,6 @@ filtrarPublicacionesPorUsuario (x:xs) u | u == usuarioDePublicacion x = x : filt
 
 -- Funcion publicacionesQueLeGustanA recibe una RedSocial y un Usuario y le pasa la lista de publicaciones de la red y el usuario a publicacionesConLikesDe
 -- Funcion publicacionesConLikesDe itera sobre las publicaciones y chequea si el usuario ingresado le dio like. En caso afirmativo, lo agrega a una lista, sino hace el chequeo con la publicación siguiente.
-
 publicacionesQueLeGustanA :: RedSocial -> Usuario -> [Publicacion]
 publicacionesQueLeGustanA red user = publicacionesConLikesDe (publicaciones red) user
 
@@ -145,7 +126,6 @@ publicacionesConLikesDe (x:xs) u | pertenece u (likesDePublicacion x) == True = 
                                            | otherwise = publicacionesConLikesDe xs u
 
 -- Funcion lesGustanLasMismasPublicaciones reutiliza el ejercicio publicacionesQueLeGustanA para traer el array de las publicaciones likeadas por ambos usuarios ingresados. Luego, usando mismosElementos chequeo que ambos array sean iguales, lo cual devolvería True. Caso contrario devuelve False
-
 lesGustanLasMismasPublicaciones :: RedSocial -> Usuario -> Usuario -> Bool
 lesGustanLasMismasPublicaciones red u1 u2 = mismosElementos (publicacionesQueLeGustanA red u1) (publicacionesQueLeGustanA red u2)
 
@@ -171,7 +151,6 @@ auxSFielLeDioLikeATodasLasPublicaciones u []     = True
 auxSFielLeDioLikeATodasLasPublicaciones u (x:xs) | pertenece u (likesDePublicacion x) == True = auxSFielLeDioLikeATodasLasPublicaciones u xs
                                                  | otherwise = False
 
---Hecho por Vladi
 -- describir: Dada la red social y dos usuarios devuelve verdadero si es posible trazar un camino entre amigos para ir de un usuario al otro
 --Lo intento pensar con BFS/DFS algoritmo
 --busco al u2
@@ -186,17 +165,13 @@ esAmigoQueBuscamos red u2 (u1:amigosU1) visitados | fst u2 == fst u1 = True
                                                   | usuarioYaVisitado u1 visitados = esAmigoQueBuscamos red u2 amigosU1 (u1:visitados)
                                                   | otherwise = esAmigoQueBuscamos red u2 (amigosDe red u1 ++ amigosU1) (u1:visitados)--Reviso los amigos de u1 y los agrego a una lista con todos los amigos de los usuarios
                                                   --En la ultima linea voy ampliando la profundidad, BFS
---comparo ids
---evita loop
+
 usuarioYaVisitado :: Usuario -> [Usuario] -> Bool
 usuarioYaVisitado _ [] = False
 usuarioYaVisitado usAChequear (usuarioVisitado:secuenciaUsuariosVisitados) 
     | fst usAChequear == fst usuarioVisitado = True
     | otherwise = usuarioYaVisitado usAChequear secuenciaUsuariosVisitados
 
---Predicados Auxiliares
-
----------- Comienzo Predicados Vladi-------------
 pertenece :: (Eq t) => t -> [t] -> Bool
 pertenece x [] = False
 pertenece x (y:ys) | x==y = True
@@ -210,14 +185,11 @@ mismosElementosAux [] _     = True
 mismosElementosAux (x:xs) ys | pertenece x ys == True = mismosElementosAux xs ys
                              | otherwise=False
 
-
 usuariosDePublicacionSonUsuariosDeRed :: [Usuario] ->[Publicacion] -> Bool 
 usuariosDePublicacionSonUsuariosDeRed _ [] = True
 usuariosDePublicacionSonUsuariosDeRed usuarios (pub:publicaciones) 
                         | pertenece (usuarioDePublicacion(pub)) usuarios  == True = usuariosDePublicacionSonUsuariosDeRed usuarios publicaciones
                         | otherwise = False 
-
-
 
 usuariosDeRelacionValidos :: [Usuario] -> [Relacion] -> Bool
 usuariosDeRelacionValidos _ [] = True
@@ -225,22 +197,16 @@ usuariosDeRelacionValidos usuarios (((us1, us2):relaciones))
                         | pertenece us1 usuarios && pertenece us2 usuarios && us1/=us2 = usuariosDeRelacionValidos usuarios relaciones
                         | otherwise = False 
 
-
 relacionesAsimetricas :: [Relacion] -> Bool
 relacionesAsimetricas [] = True
 relacionesAsimetricas (((us1, us2):relaciones)) |  not (pertenece (us2,us1) relaciones) == True = relacionesAsimetricas relaciones 
                                                 | otherwise = False
-
 
 sonDeLaRed :: RedSocial -> [Usuario] -> Bool
 sonDeLaRed _ [] = True
 sonDeLaRed red (u:us) | pertenece u (usuarios(red)) = sonDeLaRed red us
                       | otherwise = False
 
-
------------------ Fin Predicados Vladi-----------------
-
---Predicados Dani
 usuarioValido :: Usuario -> Bool
 usuarioValido u = (idDeUsuario u) > 0 && longitud (nombreDeUsuario u) > 0
 
@@ -249,12 +215,10 @@ usuariosValidos []     = True
 usuariosValidos (u:us) | noHayIdsRepetidos (u:us) == True && usuarioValido u == True = usuariosValidos us
                        | otherwise = False
 
-
 -- Función auxiliar para determinar la longitud de una sequencia.
 longitud :: [t] -> Integer
 longitud []     = 0
 longitud (x:xs) = 1 + longitud xs
-
 
 auxiliarRelacionesRepetidas :: Relacion -> [Relacion] -> Bool
 auxiliarRelacionesRepetidas (u1, u2) []     = True
@@ -271,18 +235,15 @@ auxiliarPublicacionesRepetidas (p1, p2, _) [] = True
 auxiliarPublicacionesRepetidas pub (x:xs) | pub == x = False
                                           | otherwise = auxiliarPublicacionesRepetidas pub xs
 
-
 usuariosLikeValidos :: [Usuario] -> [Usuario] -> Bool
 usuariosLikeValidos users []     = True
 usuariosLikeValidos users (x:xs) | pertenece x users == True = usuariosLikeValidos users xs
                                  | otherwise = False
 
-
 usuariosDeLikeDePublicacionSonUsuariosDeRed :: [Usuario] -> [Publicacion] -> Bool
 usuariosDeLikeDePublicacionSonUsuariosDeRed users []     = True
 usuariosDeLikeDePublicacionSonUsuariosDeRed users (x:xs) | usuariosLikeValidos users (likesDePublicacion x) == True = usuariosDeLikeDePublicacionSonUsuariosDeRed users xs
                                                          | otherwise = False
-
 
 publicacionesValidas :: [Usuario] -> [Publicacion] -> Bool
 publicacionesValidas users pubs = usuariosDePublicacionSonUsuariosDeRed users pubs && usuariosDeLikeDePublicacionSonUsuariosDeRed users pubs && noHayPublicacionesRepetidas pubs
@@ -292,10 +253,6 @@ relacionesValidas users rel = usuariosDeRelacionValidos users rel && relacionesA
 
 redSocialValida :: RedSocial -> Bool
 redSocialValida red = usuariosValidos (usuarios red) && relacionesValidas (usuarios red) (relaciones red) && publicacionesValidas (usuarios red) (publicaciones red)
-
------------------ Fin Predicados Dani-----------------
-
--- Predicados Antú
 
 noHayIdsRepetidos :: [Usuario] -> Bool
 noHayIdsRepetidos []     = True
@@ -312,10 +269,8 @@ noHayRelacionesRepetidas []     = True
 noHayRelacionesRepetidas (x:xs) | auxiliarRelacionesRepetidas x xs == True = noHayRelacionesRepetidas xs
                                 | otherwise = False
 
-
 relacionadosDirecto :: Usuario -> Usuario -> RedSocial -> Bool
 relacionadosDirecto u1 u2 red = auxiliarRelacionadosDirecto u1 u2 (relaciones red)
-                              
 
 auxiliarRelacionadosDirecto :: Usuario -> Usuario -> [Relacion] -> Bool
 auxiliarRelacionadosDirecto u1 u2 []     = False
@@ -327,9 +282,6 @@ cadenaDeAmigos [x] red     = True
 cadenaDeAmigos (x:xs) red | relacionadosDirecto x (head xs) red == True = cadenaDeAmigos xs red
                           | otherwise = False
                               
------------------ Fin Predicados Antu-----------------
-
--- Predicados Santi
 empiezaCon :: (Eq t) => [t] -> t -> Bool
 empiezaCon [] e = False
 empiezaCon (x:xs) e | x == e = True
@@ -341,10 +293,7 @@ terminaCon (x:xs) e | longitud (x:xs) == 1 && x == e = True
                     | longitud (x:xs) > 1 = terminaCon xs e
                     | otherwise = False
 
-
 sinRepetidos :: (Eq t) => [t] -> Bool
 sinRepetidos [] = True
 sinRepetidos (x:xs) | pertenece x xs = False
                     | not (pertenece x xs) =  sinRepetidos xs
-
------------------ Fin Predicados Santi -----------------
