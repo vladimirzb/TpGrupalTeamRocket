@@ -565,6 +565,7 @@ kalinic = (43, "Kalinic")
 
 -- Relaciones
 relacion_vladimir_messi = (vladimir, messi)
+relacion_vladimir_pedro = (vladimir, pedro)
 relacion_messi_pedro = (messi, pedro)
 relacion_vladimir_juan = (vladimir, juan)
 relacion_messi_juan = (messi, juan)
@@ -628,7 +629,7 @@ publicacionesTest = [] -- no las estamos utilizando en estos casos de prueba asi
 red_sin_conexiones = ([vladimir, juan], [], publicacionesTest)
 red_con_conexion_directa = ([vladimir, juan], [relacion_vladimir_juan], publicacionesTest)
 red_elMismoUsuarioDosVeces = ([vladimir], [relacion_vladimir_vladimir], publicacionesTest)
-red_con_conexion_indirecta = ([vladimir, messi, juan], [relacion_vladimir_messi, relacion_messi_juan], publicacionesTest)
+red_con_conexion_indirecta = ([vladimir, messi, juan], [relacion_vladimir_messi, relacion_vladimir_pedro, relacion_messi_juan], publicacionesTest)
 red_con_multiples_conexiones = ([vladimir, messi, pedro, juan], [relacion_vladimir_messi, relacion_messi_pedro, relacion_lucas_juan], publicacionesTest)
 
 -- Redes Sociales adicionales
