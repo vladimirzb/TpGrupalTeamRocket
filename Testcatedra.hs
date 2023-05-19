@@ -370,7 +370,6 @@ red_seleccion_argentina =
     , relacion_lucas_juan
     , relacion_maria_diego
     , relacion_diego_pepe
-    , relacion_pepe_juan
     , relacion_aguero_dybala
     , relacion_dybala_martinez
     , relacion_martinez_correa
@@ -383,6 +382,7 @@ red_seleccion_argentina =
     ]
   , publicacionesTest
   )
+
 -- Red social adicional para el caso 11
 red_francia = 
   ( [mbappe, pogba, kante, varane, giroud, lloris, dembele, griezmann]
