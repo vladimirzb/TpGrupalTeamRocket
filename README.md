@@ -9,8 +9,8 @@ Terminar todo para el jueves a la tarde, mucha suerte y fuerzas que se puede ヾ
 
 - [x] Vladi: Problemas hechos, test de la catedra pasaron con exitos, testsuite extras agreados y pasaron con exito y explicados 
 
-- [ ] Santi: Problemas hechos, test de la catedra pasaron con exitos, testsuite extras agreados y pasaron con exito y explicados 
+- [X] Santi: Problemas hechos, test de la catedra pasaron con exitos, testsuite extras agreados y pasaron con exito y explicados 
 
-- [ ] Antu: Problemas hechos, test de la catedra pasaron con exitos, testsuite extras agreados y pasaron con exito y explicados 
+- [X] Antu: Problemas hechos, test de la catedra pasaron con exitos, testsuite extras agreados y pasaron con exito y explicados 
 
-- [ ] Dani: Problemas hechos, test de la catedra pasaron con exitos, testsuite extras agreados y pasaron con exito y explicados 
+- [X] Dani: Problemas hechos, test de la catedra pasaron con exitos, testsuite extras agreados y pasaron con exito y explicados 

@@ -27,7 +27,7 @@ tests = test [
 
  ]
 
-------------------------------------Test nombresDeUsuarios--------------------------------------------------
+------------------------------------Test nombresDeUsuarios-----------------------------------------------------
 
 --Defino los usuarios:
 proyectarNombres_usuario1 = (1,"Santi")
@@ -80,7 +80,7 @@ testsSuiteNombresDeUsuarios = test [
 ------------------------------------Fin Test nombresDeUsuarios--------------------------------------------------
 
 
-------------------------------------Test estaRobertoCarlos--------------------------------------------------
+------------------------------------Test estaRobertoCarlos------------------------------------------------------
 
 
 --e_r_c es abreviación de estaRobertoCarlos
@@ -166,7 +166,7 @@ testsSuiteEstaRobertoCarlos = test [
 
 ------------------------------------Fin Test estaRobertoCarlos--------------------------------------------------
 
-------------------------------------Test amigosDe--------------------------------------------------
+----------------------------------------Test amigosDe----------------------------------------------------------
 
 
 --Definimos usuarios
@@ -191,9 +191,9 @@ testsSuiteAmigosDe = test [
     "amigosDe - Caso 4: Red con tres relaciones, usuario con tres relaciones" ~: (amigosDe amigosDe_red4 amigosDe_usuario1) ~?= [amigosDe_usuario2, amigosDe_usuario3, amigosDe_usuario4],
     "amigosDe - Caso 5: Red sin usuario en prueba, usuario no existente en la red" ~: (amigosDe amigosDe_red5 amigosDe_usuario5) ~?= []
  ]
--------------------------------------Fin Test amigosDe--------------------------------------------------
+-------------------------------------Fin Test amigosDe----------------------------------------------------------
 
-------------------------------------Test de cantidadDeAmigos--------------------------------------------------
+------------------------------------Test de cantidadDeAmigos----------------------------------------------------
 
 
 --Definimos usuarios
@@ -225,7 +225,7 @@ testsSuiteCantidadDeAmigos  = test [
 ------------------------------------Fin Test cantidadDeAmigos--------------------------------------------------
 
 
--------------------------------Test existeSecuenciaDeAmigos-----------------------------------------
+------------------------------------Test existeSecuenciaDeAmigos-----------------------------------------------
 
 -- Usuarios
 vladimir = (1, "Vladimir")
@@ -544,7 +544,7 @@ testsSuiteTieneUnSeguidorFiel = test [
     "SF Caso 3: Tiene un SF : "             ~: tieneUnSeguidorFiel seguidorFiel_red3 seguidorFiel_usuario3 ~?= True,
     "SF Caso 4: Red sin publicaciones : "   ~: tieneUnSeguidorFiel seguidorFiel_red4 seguidorFiel_usuario3 ~?= False 
   ]
-----------------------------------------------------------Test publicacionesQueLeGustanA------------------------------------------------------
+------------------------------------------Test publicacionesQueLeGustanA------------------------------------------------
 
 
 --Definimos Usuarios
@@ -575,7 +575,7 @@ testsSuitepublicacionesQueLeGustanA = test [
      "Caso 4 El usuario no dio likes : " ~: publicacionesQueLeGustanA publicacionesQueLeGustanA_red3 publicacionesQueLeGustanA_usuario4 ~?= []
   ]
 
----------------------------------------------------Test leGustanLasMismasPublicaciones---------------------------------------
+-----------------------------------------Test leGustanLasMismasPublicaciones---------------------------------------
 
 
 --Definimos usuarios
