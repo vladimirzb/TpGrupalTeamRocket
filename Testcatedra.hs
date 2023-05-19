@@ -276,7 +276,10 @@ barisic = (40, "Barisic")
 badelj = (41, "Badelj")
 pjaca = (42, "Pjaca")
 kalinic = (43, "Kalinic")
-
+--Usuarios adicionales para el caso 14
+acuna = (44, "Acuna")
+rodriguez = (45, "Rodriguez")
+pezzella = (46, "Pezzella")
 -- Relaciones
 relacion_vladimir_messi = (vladimir, messi)
 relacion_vladimir_pedro = (vladimir, pedro)
@@ -335,6 +338,16 @@ relacion_kovacic_kalinic = (kovacic, kalinic)
 relacion_lovren_brozovic = (lovren, brozovic)
 relacion_badelj_kramaric = (badelj, kramaric)
 relacion_brekalo_mandzukic = (brekalo, mandzukic)
+--Relaciones adicionales para el caso 14
+-- Relaciones del grupo 1
+relacion_messi_aguero = (messi, aguero)
+relacion_aguero_paredes = (aguero, paredes)
+relacion_dybala_paredes = (dybala, paredes)
+
+-- Relaciones del grupo 2
+relacion_otamendi_pereyra = (otamendi, pereyra)
+relacion_pereyra_dimaria = (pereyra, dimaria)
+relacion_tagliafico_dimaria = (tagliafico, dimaria)
 
 -- Publicaciones
 publicacionesTest = [] -- no las estamos utilizando en estos casos de prueba asi que no es relevante las publicaciones
@@ -430,7 +443,25 @@ red_croacia_compleja =
     ]
   , publicacionesTest
   )
-  
+-- Red social adicional para el caso 14
+redArgentinaCaso14 = 
+  ( [messi, aguero, dybala, martinez, paredes, otamendi, pezzella, tagliafico, acuna, rodriguez]
+  , [ (messi, aguero)
+    , (messi, dybala)
+    , (aguero, martinez)
+    , (aguero, paredes)
+    , (dybala, martinez)
+    , (dybala, paredes)
+    , (otamendi, pezzella)
+    , (otamendi, tagliafico)
+    , (pezzella, acuna)
+    , (pezzella, rodriguez)
+    , (tagliafico, acuna)
+    , (tagliafico, rodriguez)
+    ]
+  , []
+  )
+
 testsSuiteexisteSecuenciaDeAmigose = test [
         " existeSecuenciaDeAmigos 1" ~: (existeSecuenciaDeAmigos redA usuario1 usuario3) ~?= True, 
         "Caso 3 Red con usuarios y relaciones. Usuario1 con relaciones, Usuario2 sin relaciones." ~: existeSecuenciaDeAmigos red_sin_conexiones vladimir juan ~?= False,
@@ -443,7 +474,9 @@ testsSuiteexisteSecuenciaDeAmigose = test [
         "Caso 10: No existe un camino entre el Usuario1 y Usuario2." ~: existeSecuenciaDeAmigos red_seleccion_argentina vladimir dimaria ~?= False,
         "Caso 11: Hay una secuencia de amigos de Mbappe a Griezmann, pero la red de amigos es no lineal y compleja." ~: existeSecuenciaDeAmigos red_francia mbappe griezmann ~?= True,
         "Caso 12: La red social forma una estructura de árbol binario." ~: existeSecuenciaDeAmigos red_croacia modric barisic ~?= True,
-        "Caso 13: La red social forma una estructura de árbol más compleja con conexiones entre diferentes niveles" ~: existeSecuenciaDeAmigos red_croacia_compleja modric kalinic ~?= True
+        "Caso 13: La red social forma una estructura de árbol más compleja con conexiones entre diferentes niveles" ~: existeSecuenciaDeAmigos red_croacia_compleja modric kalinic ~?= True,
+        "Caso 14: La red social tiene dos componentes conectados separados" ~: existeSecuenciaDeAmigos redArgentinaCaso14 messi paredes ~?= True
+
  ]
 
 -------------------------------------------Tests usuarioConMasAmigos----------------------------------------------------------
