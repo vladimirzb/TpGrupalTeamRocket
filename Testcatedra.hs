@@ -633,11 +633,10 @@ red_no_conectada = ([vladimir, messi, maria, diego, pepe, juan], [relacion_vladi
 red_con_multiples_caminos = ([vladimir, messi, pedro, lucas, maria, diego, pepe, juan], [relacion_vladimir_messi, relacion_messi_pedro, relacion_lucas_juan, relacion_vladimir_maria, relacion_maria_diego, relacion_diego_pepe, relacion_pepe_juan], publicacionesTest)
 --Red social de la seleccion
 red_seleccion_argentina = 
-  ( [vladimir, messi, pedro, lucas, maria, diego, pepe, juan, aguero, dybala, martinez, correa, pereyra, papu, otamendi, tagliafico, paredes, dimaria]
+  ( [vladimir, messi, pedro, lucas, juan, maria, diego, pepe, aguero, dybala, martinez, correa, pereyra, papu, otamendi, tagliafico, paredes, dimaria]
   , [ relacion_vladimir_messi
     , relacion_messi_pedro
     , relacion_lucas_juan
-    , relacion_vladimir_maria
     , relacion_maria_diego
     , relacion_diego_pepe
     , relacion_pepe_juan
