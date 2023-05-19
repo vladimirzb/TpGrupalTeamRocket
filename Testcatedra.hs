@@ -407,7 +407,6 @@ Caso 6: Red sin usuarios, sin relaciones, usuario sin relación. (Este caso no e
 
 ------------------------------------Fin Test de vladi: cantidadDeAmigos--------------------------------------------------
 --Definimos usuarios
-cantidadDeAmigos_usuario1 :: (Integer, String)
 cantidadDeAmigos_usuario1 = (1, "Vladimir")
 cantidadDeAmigos_usuario2 = (2, "Lionel Messi")
 cantidadDeAmigos_usuario3 = (3, "Sergio Agüero")
